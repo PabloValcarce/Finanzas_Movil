@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 1,
     backgroundColor: '#fff',
-    
+
   },
   title: {
     fontSize: 20,
@@ -21,32 +21,30 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   table: {
-    minWidth: 300, 
+    minWidth: 300,
     width: '95%',
   },
   headerRow: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: AppStyles.table.backgroundColor,
+    paddingVertical: 10,
+    backgroundColor: '#f0f0f0',
   },
   header: {
     flex: 1,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingTop: 8,
-    paddingBottom: 8,
-    backgroundColor: '#f0f0f0',
   },
   row: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     paddingVertical: 10,
+    textAlign: 'center',
   },
   cell: {
     flex: 1,
-    textAlign: 'center',
-    padding: 4,
+    paddingVertical: 4,
+    paddingLeft: 5,
   },
   negative: {
     backgroundColor: '#f0c8a5',
@@ -60,6 +58,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 15,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+  },
+  subtitle: {
+    color: AppStyles.secondary.backgroundColor,
+    fontSize: 16,
+  },
+  select: {
+    marginTop: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10
+  }, checkboxContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginBottom: 15,
+    borderRadius: 8,
+  },
+  checkboxLabel: {
+    fontSize: 16,
+    color: AppStyles.secondary.backgroundColor,
+  }
 });
 
 export default styles;

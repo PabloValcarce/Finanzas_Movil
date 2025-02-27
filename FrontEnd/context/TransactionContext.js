@@ -70,11 +70,56 @@ export const TransactionProvider = ({ children }) => {
       setError('Error adding transaction');
     }
   };
+  const deleteTransaction = async (id) => {
+    try {
+      const access_token = await AsyncStorage.getItem('access_token');
+      if (!access_token) {
+        setError('Token not found');
+        return;
+      }
 
+      await api.delete(`/api/transactions/${id}`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
 
+      setTransactions((prevTransactions) =>
+        prevTransactions.filter((transaction) => transaction.id !== id)
+      );
+    } catch (error) {
+      console.error('Error deleting transaction:', error);
+      setError('Error deleting transaction');
+    }
+  };
+
+  const updateTransaction = async (id, updatedTransaction) => {
+    try {
+      const access_token = await AsyncStorage.getItem('access_token');
+      if (!access_token) {
+        setError('Token not found');
+        return;
+      }
+
+      await api.put(`/api/transactions/${id}`, updatedTransaction, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+
+      await loadTransactions();
+    } catch (error) {
+      console.error('Error updating transaction:', error);
+      setError('Error updating transaction');
+    }
+  };
 
   return (
-    <TransactionContext.Provider value={{ transactions, addTransaction, loadTransactions, loading, error }}>
+    <TransactionContext.Provider value={{ 
+      transactions, 
+      addTransaction, 
+      updateTransaction, 
+      deleteTransaction, 
+      loadTransactions, 
+      loading, 
+      error 
+    }}>
       {children}
     </TransactionContext.Provider>
   );
