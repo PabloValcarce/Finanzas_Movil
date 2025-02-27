@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import AppStyles from '../../styles/AppStyles';
+import { CheckBox } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   add: {
@@ -34,7 +35,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
     paddingHorizontal: 10,
+  },
+  checkboxContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginBottom: 15,
+    borderRadius: 8,
+  },
+  checkboxLabel: {
+    fontSize: 16,
+    color: AppStyles.secondary.backgroundColor,
   }
+
 
 });
 

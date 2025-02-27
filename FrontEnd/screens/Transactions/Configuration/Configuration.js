@@ -55,7 +55,6 @@ const Configuration = () => {
       <View style={styles.SettingsPage}>
         <View style={styles.CategoriesPerso}>
           <Text style={styles.title}>Categorías personalizadas</Text>
-
           <View style={styles.add}>
             <TextInput
               placeholder="Nueva categoría"

@@ -4,6 +4,10 @@ from app.middleware import token_required
 
 transactions = Blueprint('transactions', __name__)
 
+from datetime import datetime, timedelta
+
+from datetime import datetime, timedelta, timezone
+
 @transactions.route('/transactions', methods=['GET', 'POST'])
 @token_required
 def handle_transactions(current_user):
@@ -14,7 +18,9 @@ def handle_transactions(current_user):
             'description': transaction.description,
             'amount': transaction.amount,
             'date': transaction.date.isoformat() if transaction.date else None,
-            'categoria': transaction.categoria.nombre if transaction.categoria else None
+            'categoria': transaction.categoria.nombre if transaction.categoria else None,
+            'is_subscription': transaction.is_subscription,
+            'next_payment_date': transaction.next_payment_date.isoformat() if transaction.next_payment_date else None
         } for transaction in transactions])
 
     if request.method == 'POST':
@@ -24,7 +30,8 @@ def handle_transactions(current_user):
             return jsonify({'message': 'Description and amount are required'}), 400
 
         categoria_id = data.get('categoria_id')  # Obtener la categoría desde la solicitud
-        
+        is_subscription = data.get('is_subscription', False)  # Si no se pasa, se asume que no es suscripción
+
         # Buscar la categoría en las categorías (predeterminadas o del usuario)
         categoria = Categoria.query.get(categoria_id)
 
@@ -33,12 +40,20 @@ def handle_transactions(current_user):
         
         categoria_nombre = categoria.nombre  # Obtener el nombre de la categoría (ya sea predeterminada o personalizada)
 
+        # Calcular la próxima fecha de pago si es una suscripción
+        next_payment_date = None
+        if is_subscription:
+            today = datetime.now(timezone.utc)  # Obtener la fecha y hora actual en UTC
+            next_payment_date = today + timedelta(days=30)  # Sumar 30 días para el próximo pago
+
         # Crear la nueva transacción
         new_transaction = Transaction(
             description=data['description'],
             amount=data['amount'],
             user_id=current_user.id,
-            categoria_id=categoria.id  # Relación con la categoría
+            categoria_id=categoria.id,  # Relación con la categoría
+            is_subscription=is_subscription,  # Establecer si es una suscripción
+            next_payment_date=next_payment_date  # Asignar la próxima fecha de pago
         )
 
         db.session.add(new_transaction)
@@ -50,7 +65,9 @@ def handle_transactions(current_user):
             'amount': new_transaction.amount,
             'user_id': new_transaction.user_id,
             'date': new_transaction.date.isoformat() if new_transaction.date else None,
-            'categoria': categoria_nombre  # Devolver el nombre de la categoría (sea predeterminada o personalizada)
+            'categoria': categoria_nombre,
+            'is_subscription': new_transaction.is_subscription,
+            'next_payment_date': new_transaction.next_payment_date.isoformat() if new_transaction.next_payment_date else None
         }), 201
 
 
@@ -73,16 +90,27 @@ def update_transaction(current_user, id):
         if categoria:
             transaction.categoria = categoria
     
-    db.session.commit()
+    # Si se proporciona el estado de suscripción, actualizarlo
+    if 'is_subscription' in data:
+        transaction.is_subscription = data['is_subscription']
+        
+    # Si se proporciona la próxima fecha de pago, actualizarla
+    if 'next_payment_date' in data:
+        transaction.next_payment_date = data['next_payment_date']
     
+    db.session.commit()
+
     return jsonify({
         'id': transaction.id,
         'description': transaction.description,
         'amount': transaction.amount,
         'user_id': transaction.user_id,
         'date': transaction.date.isoformat() if transaction.date else None,
-        'categoria': transaction.categoria.nombre if transaction.categoria else None  # Incluir categoría
+        'categoria': transaction.categoria.nombre if transaction.categoria else None,
+        'is_subscription': transaction.is_subscription,  # Devolver el estado de suscripción
+        'next_payment_date': transaction.next_payment_date.isoformat() if transaction.next_payment_date else None  # Devolver la próxima fecha de pago
     })
+
 
 @transactions.route('/transactions/<int:id>', methods=['DELETE'])
 @token_required

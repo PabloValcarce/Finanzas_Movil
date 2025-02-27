@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Text, ActivityIndicator, Switch } from 'react-native';
 import Dialog from 'react-native-dialog';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useTransactions } from '../../context/TransactionContext';
@@ -14,6 +14,7 @@ const AddTransactionLogic = ({ userId }) => {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [categoryId, setCategoryId] = useState('');
+    const [isSubscription, setIsSubscription] = useState(false);  // 🔥 Estado para el checkbox
     const [isLoading, setIsLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -28,20 +29,20 @@ const AddTransactionLogic = ({ userId }) => {
             amount,
             user_id: userId,
             categoria_id: categoryId,
+            is_subscription: isSubscription,  // 🔥 Agregamos el campo al objeto
         };
 
         try {
             console.log(newTransaction);
             await addTransaction(newTransaction);
 
-            // Mostrar mensaje de éxito
             setSuccessMessage("✅ Transacción añadida con éxito!");
 
-            // Resetear formulario después de un pequeño tiempo
             setTimeout(() => {
                 setDescription('');
                 setAmount('');
                 setCategoryId('');
+                setIsSubscription(false);  // 🔥 Resetear checkbox
                 setIsDialogVisible(false);
                 setSuccessMessage('');
             }, 1500);
@@ -88,6 +89,17 @@ const AddTransactionLogic = ({ userId }) => {
                             keyboardType="numeric"
                             placeholder="Cantidad"
                         />
+                        <View style={styles.checkboxContainer}>
+                            <Text style={styles.checkboxLabel}>Es una suscripción mensual </Text>
+
+                            <Switch
+                                value={isSubscription}
+                                onValueChange={setIsSubscription}
+                                trackColor={{ false: "#ccc", true: "#00A6B8" }} // Color del fondo cuando está en on y off
+                                thumbColor={isSubscription ? "#007B8F" : "#f4f3f4"} // Color del "thumb" o círculo del switch
+                                ios_backgroundColor="#3e3e3e" // Fondo del Switch en iOS
+                            />
+                        </View>
 
                         <Text style={styles.subtitle}>Categoría</Text>
                         <Dropdown
@@ -102,6 +114,8 @@ const AddTransactionLogic = ({ userId }) => {
                             onChange={item => setCategoryId(item.value)}
                             style={styles.select}
                         />
+
+
                         <View style={styles.buttonContainer}>
                             <Dialog.Button label="Cancelar" onPress={() => setIsDialogVisible(false)} />
                             {isLoading ? (
