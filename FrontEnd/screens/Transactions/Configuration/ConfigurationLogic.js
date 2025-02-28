@@ -11,17 +11,32 @@ const useConfigurationLogic = () => {
     } = useCategories();  
 
     const [nuevaCategoria, setNuevaCategoria] = useState('');
+    const [selectedIcon, setSelectedIcon] = useState('smile');
 
     useEffect(() => {
         loadPersonalizedCategories();  
     }, []);  
+    useEffect(() => {
+        console.log('selectedIcon actualizado:', selectedIcon);
+      }, [selectedIcon]);
 
     const agregarCategoria = async () => {
         if (!nuevaCategoria.trim()) return;  
-        await addPersonalizedCategory(nuevaCategoria);
-        setNuevaCategoria('');
-        loadPersonalizedCategories();
+    
+        console.log('Agregando categoría', nuevaCategoria, selectedIcon);
+    
+        try {
+            await addPersonalizedCategory(nuevaCategoria, selectedIcon);
+            await loadPersonalizedCategories();  
+    
+            // Solo resetear después de que todo se haya completado
+            setNuevaCategoria('');
+            setSelectedIcon('smile');
+        } catch (error) {
+            console.error('Error al agregar categoría:', error);
+        }
     };
+    
 
     const eliminarCategoria = async(categoriaId) => {
         await removePersonalizedCategory(categoriaId);  
@@ -32,6 +47,8 @@ const useConfigurationLogic = () => {
         categorias: categoriesPerso,  // Usamos las categorías desde el contexto
         nuevaCategoria,
         setNuevaCategoria,
+        setSelectedIcon,
+        selectedIcon,
         agregarCategoria,
         eliminarCategoria,
         loading  // Usamos el estado de carga desde el contexto

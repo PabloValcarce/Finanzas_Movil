@@ -10,7 +10,7 @@ category_routes = Blueprint('categories', __name__)
 def get_categorias_default():
     try:
         categorias_por_defecto = Categoria.query.filter_by(user_id=None).all()  # user_id == NULL
-        categorias_formateadas = [{'id': cat.id, 'nombre': cat.nombre} for cat in categorias_por_defecto]
+        categorias_formateadas = [{'id': cat.id, 'nombre': cat.nombre, 'icono': cat.icono} for cat in categorias_por_defecto]
         
         return jsonify({'categorias': categorias_formateadas}), 200
     except Exception as e:
@@ -26,7 +26,7 @@ def get_categorias_combinadas(user_id):
         categorias_personalizadas = Categoria.query.filter_by(user_id=user_id).all()  # categorías personalizadas por user_id
 
         categorias_formateadas = [
-            {'id': cat.id, 'nombre': cat.nombre} for cat in categorias_por_defecto + categorias_personalizadas
+            {'id': cat.id, 'nombre': cat.nombre, 'icono': cat.icono} for cat in categorias_por_defecto + categorias_personalizadas
         ]
         
         return jsonify({'categorias': categorias_formateadas}), 200
@@ -40,7 +40,7 @@ def get_categorias_combinadas(user_id):
 def get_categorias_personalizadas(user_id):
     try:
         categorias_personalizadas = Categoria.query.filter_by(user_id=user_id).all()  # categorías personalizadas por user_id
-        categorias_formateadas = [{'id': cat.id, 'nombre': cat.nombre} for cat in categorias_personalizadas]
+        categorias_formateadas = [{'id': cat.id, 'nombre': cat.nombre, 'icono': cat.icono} for cat in categorias_personalizadas]
         
         return jsonify({'categorias': categorias_formateadas}), 200
     except Exception as e:
@@ -58,10 +58,12 @@ def add_categoria_personalizada():
             return jsonify({'message': 'El nombre de la categoría es requerido'}), 400
         
         user_id = data.get('user_id', None)  # Si no se proporciona user_id, será NULL (por defecto)
-        
+        icono = data.get('icono', None)  # El icono puede ser opcional
+
         nueva_categoria = Categoria(
             nombre=data['nombre'],
-            user_id=user_id,  # Si es NULL, es por defecto; si tiene valor, es personalizada
+            user_id=user_id,
+            icono=icono
         )
         
         db.session.add(nueva_categoria)
@@ -71,6 +73,7 @@ def add_categoria_personalizada():
             'id': nueva_categoria.id,
             'nombre': nueva_categoria.nombre,
             'user_id': nueva_categoria.user_id,
+            'icono': nueva_categoria.icono
         }), 201  
     except Exception as e:
         print(f"❌ Error en add_categoria_personalizada: {str(e)}")

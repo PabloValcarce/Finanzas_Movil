@@ -8,10 +8,11 @@ import {
   ActivityIndicator
 } from 'react-native';
 import Dialog from 'react-native-dialog';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './Configuration.styles';
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
 import useConfigurationLogic from './ConfigurationLogic';
+import IconSelector from '../../../components/IconSelector/IconSelector';
 
 const Configuration = () => {
   const {
@@ -20,11 +21,14 @@ const Configuration = () => {
     setNuevaCategoria,
     agregarCategoria,
     eliminarCategoria,
-    loading
+    loading,
+    selectedIcon,
+    setSelectedIcon
   } = useConfigurationLogic();
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isIconModalVisible, setIsIconModalVisible] = useState(false);
 
   if (loading) {
     return (
@@ -49,31 +53,60 @@ const Configuration = () => {
     setSelectedCategory(null);
   };
 
+  // Abre el modal para seleccionar un ícono (IconSelector)
+  const openIconModal = () => {
+    setIsIconModalVisible(true);
+  };
+
+  // Modifica la función de agregar categoría para incluir el ícono
+  const handleAddCategory = () => {
+    if (nuevaCategoria.trim() !== '') {
+      agregarCategoria(nuevaCategoria, selectedIcon);
+      setNuevaCategoria('');
+      setSelectedIcon('smile'); // Reinicia el ícono seleccionado
+    }
+  };
+
   return (
     <View style={styles.container}>
       <NavBarTransaction />
       <View style={styles.SettingsPage}>
         <View style={styles.CategoriesPerso}>
           <Text style={styles.title}>Categorías personalizadas</Text>
+
           <View style={styles.add}>
+            {/* Botón para abrir el modal de selección de íconos */}
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={openIconModal}
+            >
+              <Icon name={selectedIcon} size={24} color="#144468" />
+            </TouchableOpacity>
+            
+            {/* Campo de texto para ingresar la nueva categoría */}
             <TextInput
               placeholder="Nueva categoría"
               value={nuevaCategoria}
               onChangeText={setNuevaCategoria}
               style={styles.input}
             />
+            
+            {/* Botón para agregar la categoría */}
             <TouchableOpacity
               style={styles.addCategoryButton}
-              onPress={agregarCategoria}
+              onPress={handleAddCategory}
             >
               <Icon name="plus" size={20} color="#144468" />
             </TouchableOpacity>
           </View>
+
+          {/* Lista de categorías personalizadas */}
           <View style={styles.listContainer}>
             <ScrollView>
               {categorias?.map((item) => (
                 <View key={item.id.toString()} style={styles.categoryItem}>
-                  <Text style={styles.categoryText}>{item.nombre}</Text>
+                  <Icon name={item.icono} size={20} color="#144468" />
+                  <Text style={styles.categoryText}>{' ' + item.nombre}</Text>
                   <TouchableOpacity
                     style={styles.deleteIcon}
                     onPress={() => showConfirmationDialog(item)}
@@ -87,7 +120,7 @@ const Configuration = () => {
         </View>
       </View>
 
-      {/* Diálogo de confirmación */}
+      {/* Diálogo de confirmación para eliminar categoría */}
       <Dialog.Container visible={isDialogVisible}>
         <Dialog.Title>Confirmar eliminación</Dialog.Title>
         <Dialog.Description>
@@ -100,6 +133,12 @@ const Configuration = () => {
         <Dialog.Button label="Cancelar" onPress={() => setIsDialogVisible(false)} />
         <Dialog.Button label="Eliminar" onPress={handleConfirmDelete} />
       </Dialog.Container>
+
+      <IconSelector
+        visible={isIconModalVisible}
+        onClose={() => setIsIconModalVisible(false)}
+        onSelect={(icon) => setSelectedIcon(icon)} 
+      />
     </View>
   );
 };

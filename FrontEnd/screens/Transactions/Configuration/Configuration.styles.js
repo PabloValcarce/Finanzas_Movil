@@ -33,10 +33,9 @@ export default StyleSheet.create({
 
     add: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
     input: {
-        width: '80%',
+        width: '70%',
         borderWidth: 1.5,
         borderColor: '#ccc',
         padding: 10,
@@ -83,5 +82,8 @@ export default StyleSheet.create({
         padding: 6, 
         borderRadius: 8, 
         backgroundColor: '#e74c3c', 
+    },
+    iconButton: {
+        padding: 10,
     },
 });

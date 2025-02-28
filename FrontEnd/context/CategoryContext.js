@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState,useEffect, use } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
@@ -13,14 +13,12 @@ export const useCategories = () => {
     return context;
 };
 
-
 export const CategoryProvider = ({ children }) => {
     const [categories, setCategories] = useState([]);
     const [categoriesDefault, setCategoriesDefault] = useState([]);
     const [categoriesPerso, setCategoriesPerso] = useState([]);
     const [userId, setUserId] = useState(null);
     const [loading, setLoading] = useState(false);
-
 
     useEffect(() => {
         fetchUserId();
@@ -63,7 +61,7 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await api.get(`/api/get-categorias-combinadas/${userId}`);
-            setCategories(response.data.categorias);
+            setCategories(response.data.categorias); 
         } catch (error) {
             console.error('Error al cargar las categorías combinadas:', error);
         } finally {
@@ -77,7 +75,7 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await api.get(`/api/get-categorias-personalizadas/${userId}`);
-            setCategoriesPerso(response.data.categorias);
+            setCategoriesPerso(response.data.categorias); 
         } catch (error) {
             console.error('Error al cargar las categorías personalizadas:', error);
         } finally {
@@ -85,14 +83,15 @@ export const CategoryProvider = ({ children }) => {
         }
     };
 
-    // Agregar una categoría personalizada
-    const addPersonalizedCategory = async (categoryName) => {
+    // Agregar una categoría personalizada con icono
+    const addPersonalizedCategory = async (categoryName, icono) => {
         if (!userId || !categoryName.trim()) return;
         setLoading(true);
         try {
             const response = await api.post('/api/add-categoria-personalizada', {
                 nombre: categoryName,
-                user_id: userId
+                user_id: userId,
+                icono: icono  // Asegúrate de enviar el icono
             });
             setCategories(prevCategories => [...prevCategories, response.data]);
         } catch (error) {

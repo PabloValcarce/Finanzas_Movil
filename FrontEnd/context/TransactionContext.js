@@ -14,6 +14,7 @@ export const TransactionProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { checkToken } = useAuth();
+  const [totalSubscriptionExpense, setTotalSubscriptionExpense] = useState(0);
 
   useEffect(() => {
     loadTransactions();
@@ -109,6 +110,29 @@ export const TransactionProvider = ({ children }) => {
       setError('Error updating transaction');
     }
   };
+  const loadSuscriptions = async () => {
+    try {
+        setLoading(true);
+        setError(null);
+
+        const access_token = await AsyncStorage.getItem('access_token');
+        if (!access_token) {
+            setError('Token not found');
+            return;
+        }
+
+        const response = await api.get('/api/subscriptions', {
+            headers: { Authorization: `Bearer ${access_token}` },
+        });
+
+        setTotalSubscriptionExpense(response.data.total_subscription_expense);
+    } catch (error) {
+        console.error("Failed to load subscriptions:", error);
+        setError("Failed to load subscriptions");
+    } finally {
+        setLoading(false);
+    }
+};
 
   return (
     <TransactionContext.Provider value={{ 
@@ -117,6 +141,8 @@ export const TransactionProvider = ({ children }) => {
       updateTransaction, 
       deleteTransaction, 
       loadTransactions, 
+      loadSuscriptions,
+      totalSubscriptionExpense,
       loading, 
       error 
     }}>

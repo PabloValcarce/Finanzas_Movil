@@ -124,3 +124,19 @@ def delete_transaction(current_user, id):
     db.session.commit()
 
     return jsonify({'message': 'Transaction deleted'})
+
+@transactions.route('/subscriptions', methods=['GET'])
+@token_required
+def get_monthly_subscription_total(current_user):
+    # Obtener la fecha actual y el inicio del mes
+    now = datetime.now(timezone.utc)
+    start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    # Filtrar transacciones que sean suscripción y estén dentro del mes actual
+    total = db.session.query(db.func.sum(Transaction.amount)).filter(
+        Transaction.user_id == current_user.id,
+        Transaction.is_subscription == True,
+        Transaction.date >= start_of_month
+    ).scalar() or 0  # Si no hay transacciones, retorna 0
+
+    return jsonify({'total_subscription_expense': total})

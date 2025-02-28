@@ -1,22 +1,23 @@
 import useAuth from "../../../utils/useAuth";
+import { useEffect } from "react";
+import { useTransactions } from "../../../context/TransactionContext";
 
 const useTransactionHomeLogic = () => {
 
   const { checkToken } = useAuth();
-
-
+  const { loading  ,loadSuscriptions, totalSubscriptionExpense } = useTransactions();
 
   const verifyToken = async () => {
-    await checkToken();  // Verificamos el token cuando la pantalla se carga
+    await checkToken();  
   };
 
   useEffect(() => {
-    // Llamamos a checkToken al montar la pantalla
     verifyToken();
+    loadSuscriptions();
   }, []);
 
 
-  return { /* tu lógica y valores */ };
+  return { loading,totalSubscriptionExpense };
 };
 
 export default useTransactionHomeLogic; // Exportación por defecto
