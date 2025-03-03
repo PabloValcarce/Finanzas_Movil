@@ -33,7 +33,6 @@ const AddTransactionLogic = ({ userId }) => {
         };
 
         try {
-            console.log(newTransaction);
             await addTransaction(newTransaction);
 
             setSuccessMessage("✅ Transacción añadida con éxito!");

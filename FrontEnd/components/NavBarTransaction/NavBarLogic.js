@@ -31,11 +31,9 @@ export const useNavBarLogic = () => {
 
     const handleLogout = async () => {
         try {
-            console.log("🚪 Cerrando sesión...");
             await AsyncStorage.removeItem('access_token');
 
             const tokenAfterLogout = await AsyncStorage.getItem('access_token'); // Verificar si se eliminó
-            console.log("🔍 Token después de logout:", tokenAfterLogout); // Debería ser `null` o `undefined`
 
             navigation.reset({
                 index: 0,

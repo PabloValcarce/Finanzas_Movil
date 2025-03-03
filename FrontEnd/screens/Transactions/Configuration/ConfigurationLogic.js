@@ -16,15 +16,8 @@ const useConfigurationLogic = () => {
     useEffect(() => {
         loadPersonalizedCategories();  
     }, []);  
-    useEffect(() => {
-        console.log('selectedIcon actualizado:', selectedIcon);
-      }, [selectedIcon]);
-
     const agregarCategoria = async () => {
         if (!nuevaCategoria.trim()) return;  
-    
-        console.log('Agregando categoría', nuevaCategoria, selectedIcon);
-    
         try {
             await addPersonalizedCategory(nuevaCategoria, selectedIcon);
             await loadPersonalizedCategories();  

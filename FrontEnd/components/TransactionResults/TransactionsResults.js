@@ -25,7 +25,6 @@ const TransactionsResults = () => {
   }, []);
 
   const handleEdit = (transaction) => {
-    console.log(transaction);
     setSelectedTransaction(transaction);
     setDescription(transaction.description);
     setAmount(transaction.amount.toString());
@@ -36,7 +35,6 @@ const TransactionsResults = () => {
     setCategoryId(category ? category.id : '');  
 
     setIsEditDialogVisible(true);
-    console.log('Category ID:', categoryId);
   };
 
 

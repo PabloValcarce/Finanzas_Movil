@@ -23,16 +23,14 @@ export const CategoryProvider = ({ children }) => {
     useEffect(() => {
         fetchUserId();
     }, []);
-    
+
     // Obtener userId desde el token
     const fetchUserId = async () => {
         try {
             const access_token = await AsyncStorage.getItem('access_token');
-            console.log(access_token); 
             if (access_token) {
                 const decoded = jwtDecode(access_token);
                 setUserId(decoded.user_id);
-                console.log("User ID:", decoded.user_id);
             } else {
                 setUserId(null);
             }
@@ -41,6 +39,13 @@ export const CategoryProvider = ({ children }) => {
             setUserId(null);
         }
     };
+    useEffect(() => {
+        if (userId !== null) {
+            loadDefaultCategories();
+            loadCombinedCategories();
+            loadPersonalizedCategories();
+        }
+    }, [userId]);
 
     // Cargar categorías por defecto
     const loadDefaultCategories = async () => {
@@ -61,7 +66,7 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await api.get(`/api/get-categorias-combinadas/${userId}`);
-            setCategories(response.data.categorias); 
+            setCategories(response.data.categorias);
         } catch (error) {
             console.error('Error al cargar las categorías combinadas:', error);
         } finally {
@@ -75,7 +80,7 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await api.get(`/api/get-categorias-personalizadas/${userId}`);
-            setCategoriesPerso(response.data.categorias); 
+            setCategoriesPerso(response.data.categorias);
         } catch (error) {
             console.error('Error al cargar las categorías personalizadas:', error);
         } finally {

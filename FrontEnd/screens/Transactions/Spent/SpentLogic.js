@@ -28,6 +28,7 @@ const SpentLogic = (dateRange) => {
     filterTransactionsByDate();
   }, [dateRange, transactions]);
 
+
   return { filteredTransactions };
 };
 
