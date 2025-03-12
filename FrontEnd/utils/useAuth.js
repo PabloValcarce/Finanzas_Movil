@@ -32,7 +32,7 @@ const useAuth = () => {
         navigateToDashboard();
       }
     } catch (error) {
-      console.log('Error al verificar el token:', error);
+      console.error('Error al verificar el token:', error);
     }
   };
 
@@ -131,7 +131,7 @@ const useAuth = () => {
         }
       }
     } catch (error) {
-      console.log("Fallo en autenticación", error);
+      console.error("Fallo en autenticación", error);
     } finally {
       setIsLoading(false);
     }
@@ -172,7 +172,7 @@ const useAuth = () => {
     handleBiometricAuth,
     isLoading,
     checkToken,
-    verifyBiometricLogin, // Verificación biométrica al inicio
+    verifyBiometricLogin, 
   };
 };
 

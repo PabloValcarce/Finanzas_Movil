@@ -5,7 +5,7 @@ import { useTransactions } from "../../../context/TransactionContext";
 const useTransactionHomeLogic = () => {
 
   const { checkToken } = useAuth();
-  const { loading  ,loadSuscriptions, totalSubscriptionExpense } = useTransactions();
+  const { loading  ,loadSuscriptions,loadTransactions, totalSubscriptionExpense } = useTransactions();
 
   const verifyToken = async () => {
     await checkToken();  
@@ -13,6 +13,7 @@ const useTransactionHomeLogic = () => {
 
   useEffect(() => {
     verifyToken();
+    loadTransactions();
     loadSuscriptions();
   }, []);
 

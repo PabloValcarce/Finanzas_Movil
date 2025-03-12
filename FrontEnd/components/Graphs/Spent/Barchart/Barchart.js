@@ -6,8 +6,6 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 
 function SpentBarChart({ transactions }) {
   const { categories, loading } = useCategories();
-  console.log("categories", categories);
-  console.log("transactions", transactions);
   
   
 

@@ -1,14 +1,44 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
-    savingSummaryTitle: {
-        color: '#1F5A7A', // Reemplaza con tu variable de color primario
-        marginBottom: 10,
-        fontSize: 20,
+const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 22,
         fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 15
     },
-    savingSummaryText: {
+    card: {
+        width: '90%',
+        padding: 15,
+        borderRadius: 10,
+        marginVertical: 5,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        elevation: 5
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 5,
+        color: 'white'
+    },
+    value: {
         fontSize: 18,
-        color: '#F5A167', // Reemplaza con tu variable de color de botón
+        fontWeight: '600',
+        color: 'white',
+        marginTop: 5
     },
+    containerMontly:{
+        marginTop: 50,
+    }
+
 });
+
+export default styles;

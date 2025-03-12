@@ -71,17 +71,23 @@ const AddTransactionLogic = ({ userId }) => {
                 <Dialog.Title style={styles.title}>Añadir transacción</Dialog.Title>
 
                 {successMessage ? (
-                    <Text style={styles.successMessage}>{successMessage}</Text>
+                    <Text style={styles.successMessage}>
+                        {successMessage}
+                    </Text>
                 ) : (
                     <>
-                        <Text style={styles.subtitle}>Descripción</Text>
+                        <Text style={styles.subtitle}>
+                            Descripción
+                        </Text>
                         <Dialog.Input
                             value={description}
                             onChangeText={setDescription}
                             placeholder="Descripción"
                         />
 
-                        <Text style={styles.subtitle}>Cantidad</Text>
+                        <Text style={styles.subtitle}>
+                            Cantidad
+                        </Text>
                         <Dialog.Input
                             value={amount}
                             onChangeText={setAmount}
@@ -89,7 +95,9 @@ const AddTransactionLogic = ({ userId }) => {
                             placeholder="Cantidad"
                         />
                         <View style={styles.checkboxContainer}>
-                            <Text style={styles.checkboxLabel}>Es una suscripción mensual </Text>
+                            <Text style={styles.checkboxLabel}>
+                                Es una suscripción mensual 
+                            </Text>
 
                             <Switch
                                 value={isSubscription}
@@ -100,7 +108,9 @@ const AddTransactionLogic = ({ userId }) => {
                             />
                         </View>
 
-                        <Text style={styles.subtitle}>Categoría</Text>
+                        <Text style={styles.subtitle}>
+                            Categoría
+                        </Text>
                         <Dropdown
                             data={categories.map(category => ({
                                 label: category.nombre,
