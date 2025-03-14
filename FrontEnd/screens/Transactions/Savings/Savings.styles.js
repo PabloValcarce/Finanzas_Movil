@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   savingsPage: {
     flex: 1,
-    padding: 30,
   },
-  savingsContent: {
+  savingsPageContent: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginTop: 100,
+    padding:30,
+
   },
   label: {
     fontWeight: 'bold',
@@ -25,9 +25,8 @@ export default StyleSheet.create({
   savingsData: {
     backgroundColor: 'white',
     borderRadius: 10,
-    padding: 30,
     marginTop: 30,
-    marginBottom: 50,
+    marginBottom: 10,
   },
   savingsGraphs: {
     flexDirection: 'column',
@@ -40,5 +39,7 @@ export default StyleSheet.create({
   },
   savingsCircularChart: {
     alignItems: 'center',
-  }
+  },
+
+  
 });

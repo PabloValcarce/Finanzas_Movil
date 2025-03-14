@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 
+const { width } = Dimensions.get('screen');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -13,25 +15,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  card: {
-    width: 150,
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#d0eaff',
-    borderRadius: 10,
-    marginHorizontal: 10,
-  },
-  cardLabel: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  cardValue: {
-    fontSize: 16,
-  },
-  contentContainer: {
-    paddingHorizontal:10,
-  },
+  contentContainer:{
+    width:width*12
+  }
+
 });
 
 export default styles;

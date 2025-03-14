@@ -19,33 +19,32 @@ function Savings() {
       </View>
     );
   }
-
   return (
-    <View style={styles.savingsPage}>
+    <ScrollView style={styles.savingsPage}>
       <NavBarTransaction />
-      <View style={styles.dateFilter}>
-        <View style={styles.headDatePicker}>
-          <Text style={styles.label}>Filtro entre fechas:</Text>
+      <View style={styles.savingsPageContent}>
+        <View style={styles.dateFilter}>
+          <View style={styles.headDatePicker}>
+            <Text style={styles.label}>Filtro entre fechas:</Text>
+          </View>
+          <DateRangePicker
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
+            onDateRangeChange={setDateRange}
+            onReset={handleResetDates}
+          />
         </View>
-        <DateRangePicker
-          startDate={dateRange.startDate}
-          endDate={dateRange.endDate}
-          onDateRangeChange={setDateRange}
-          onReset={handleResetDates}
-        />
-      </View>
-      <ScrollView contentContainerStyle={styles.savingsData}>
-        <SavingsSummary transactions={filteredTransactions} />
-        <View style={styles.savingsGraphs}>
-          <View style={styles.savingsCircularChart}>
-            <SavingsCircularChart transactions={transactions} />
+        <View style={styles.savingsData}>
+          <SavingsSummary transactions={filteredTransactions} />
+          <View style={styles.savingsGraphs}>
+            <View style={styles.savingsCircularChart}>
+              <SavingsCircularChart transactions={transactions} />
+            </View>
           </View>
         </View>
-        <View style={styles.cards}>
-          <SavingsCards monthlySavings={monthlySummary} />
-        </View>
-      </ScrollView>
-    </View>
+      </View>
+      <SavingsCards monthlySavings={monthlySummary} />
+    </ScrollView>
   );
 }
 
