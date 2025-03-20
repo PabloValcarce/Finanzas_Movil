@@ -10,35 +10,41 @@ import { useCategories } from '../../../context/CategoryContext';
 
 function TransactionsList() {
   const { filteredTransactions, dateRange, setDateRange, handleResetDates, loading } = useTransactions();
-  const {userId} = useCategories();
+  const { userId } = useCategories();
 
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />; // Indicador de carga
   }
   return (
-    <View style={styles.container}>
+    <ScrollView >
       <NavBarTransaction />
-      <View style={styles.head}>
-        <View style={styles.headDatePicker}>
-          <Text style={styles.label}>Filtro entre fechas:</Text>
+      <View style={styles.TransactionListContent}>
+        <View style={styles.head}>
+          <View style={styles.headDatePicker}>
+            <Text style={styles.label}>Filtro entre fechas:</Text>
+          </View>
+          <View style={styles.headFilterAdd}>
+            <DateRangePicker
+              startDate={dateRange.startDate}
+              endDate={dateRange.endDate}
+              onDateRangeChange={setDateRange}
+              onReset={handleResetDates}
+            />
+            <AddTransaction userId={userId} />
+          </View>
         </View>
-        <View style={styles.headFilterAdd}>
-          <DateRangePicker
-            startDate={dateRange.startDate}
-            endDate={dateRange.endDate}
-            onDateRangeChange={setDateRange}
-            onReset={handleResetDates}
-          />
-          <AddTransaction userId={userId} />
-        </View>
+        <ScrollView
+          contentContainerStyle={styles.TransactionList}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          <View style={styles.transactionsResults}>
+            <TransactionsResults transactions={filteredTransactions} />
+          </View>
+        </ScrollView>
       </View>
-      <ScrollView contentContainerStyle={styles.listContent}>
-        <View style={styles.transactionsResults}>
-          <TransactionsResults transactions={filteredTransactions} />
-        </View>
-      </ScrollView>
-    </View>
+    </ScrollView>
   );
 }
 

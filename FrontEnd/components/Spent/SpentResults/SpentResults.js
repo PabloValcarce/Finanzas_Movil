@@ -31,8 +31,9 @@ const SpentResults = ({ expenses }) => {
             <FlatList
               data={formattedExpenses}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => {
-                const backgroundColor =  "#E0E0E0";
+              renderItem={({ item, index }) => {
+                // Determinar el color de fondo dependiendo del índice (par o impar)
+                const backgroundColor = index % 2 === 0 ? "#E0E0E0" : "#F5F5F5"; // Alternar entre dos colores
 
                 return (
                   <View style={[styles.row, { backgroundColor }]}>

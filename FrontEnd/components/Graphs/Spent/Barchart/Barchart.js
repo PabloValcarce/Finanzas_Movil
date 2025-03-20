@@ -1,59 +1,50 @@
-import React, {  useMemo } from "react";
+import React, { useMemo } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
-import { Svg, Rect, Text as SvgText, Line } from "react-native-svg";
+import { Svg, Rect, Text as SvgText } from "react-native-svg";
 import { useCategories } from "../../../../context/CategoryContext";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 function SpentBarChart({ transactions }) {
   const { categories, loading } = useCategories();
-  
-  
 
-  // Si está cargando, mostrar el indicador de carga
-  if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />;
-  }
-
-  // Verificar si las categorías están disponibles
-  if (!categories || categories.length === 0) {
-    return <Text style={{ textAlign: "center", margin: 20 }}>No se han cargado categorías</Text>;
-  }
+  // Asegurar que useMemo se ejecuta antes de cualquier return
   const data = useMemo(() => {
+    if (!categories || categories.length === 0) {
+      return { labels: [], values: [] };
+    }
+
     const categoryTotals = transactions.reduce((acc, transaction) => {
       const { categoria, amount } = transaction;
 
-      // Validar que categories no sea undefined ni vacío
-      if (!categories || categories.length === 0) {
-        console.error("No categories available");
-        return acc;
-      }
-
       if (amount < 0) {
-        // Buscar la categoría usando el nombre y obtener el icono
         const category = categories.find(cat => cat.nombre === categoria);
-
         if (category) {
-          // Usamos el icono de la categoría
           acc[category.icono] = (acc[category.icono] || 0) + Math.abs(amount);
         }
       }
       return acc;
     }, {});
 
-    const labels = Object.keys(categoryTotals);  // Los iconos como etiquetas
-    const values = Object.values(categoryTotals);
-
-    return { labels, values };
+    return {
+      labels: Object.keys(categoryTotals),
+      values: Object.values(categoryTotals),
+    };
   }, [transactions, categories]);
 
+  // Mostrar indicador de carga si sigue cargando
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />;
+  }
+
+  // Mostrar mensaje si no hay datos disponibles
   if (data.values.length === 0) {
     return <Text style={{ textAlign: "center", margin: 20 }}>No hay datos</Text>;
   }
 
+  // Configuración del gráfico
   const maxValue = Math.max(...data.values);
   const barWidth = 40;
   const barSpacing = 10;
-  const minChartWidth = 300;
   const chartWidth = data.labels.length * (barWidth + barSpacing) + 40;
   const chartHeight = 200;
 
@@ -63,15 +54,10 @@ function SpentBarChart({ transactions }) {
         Gastos por categoría
       </Text>
       <Svg width={chartWidth} height={chartHeight + 40} viewBox={`0 0 ${chartWidth} ${chartHeight + 50}`}>
-        {/* Eje X */}
-        <Line x1="30" y1={chartHeight} x2={chartWidth - 10} y2={chartHeight} stroke="black" strokeWidth="2" />
-        {/* Eje Y */}
-        <Line x1="30" y1="10" x2="30" y2={chartHeight} stroke="black" strokeWidth="2" />
-
         {data.labels.map((iconName, index) => {
           const barHeight = (data.values[index] / maxValue) * (chartHeight - 50);
-          const xPosition = 40 + index * (barWidth + barSpacing);
-          const barColor = "#87CEFA"; // Si no hay color, usa azul por defecto
+          const xPosition = 10 + index * (barWidth + barSpacing);
+          const barColor = "#87CEFA"; // Azul por defecto
 
           return (
             <React.Fragment key={index}>
@@ -99,19 +85,18 @@ function SpentBarChart({ transactions }) {
             </React.Fragment>
           );
         })}
-      </Svg>
-      
-      {/* Colocar los íconos debajo de las barras */}
+      </Svg>  
+      {/* Íconos debajo de las barras */}
       <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10 }}>
         {data.labels.map((iconName, index) => {
-          const xPosition = 40 + index * (barWidth + barSpacing);
+          const xPosition = 12.5 + index * (barWidth + barSpacing);
           return (
             <View
               key={index}
               style={{
                 position: "absolute",
                 left: xPosition + barWidth / 2 - 10,
-                bottom: 30, // Coloca el ícono debajo de la barra
+                bottom: 30, // Ícono debajo de la barra
               }}
             >
               <Icon name={iconName} size={20} color="#000" />

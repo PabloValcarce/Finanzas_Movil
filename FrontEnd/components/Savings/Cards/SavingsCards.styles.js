@@ -14,9 +14,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-  },
-  contentContainer:{
-    width:width*12
   }
 
 });

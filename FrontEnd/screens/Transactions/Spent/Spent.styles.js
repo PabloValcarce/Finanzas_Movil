@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   spentPage: {
-    padding: 20,
     flex: 1,
   },
-  spentContent: {
+  spentPageContent: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginTop: 100,
+    padding:30,
   },
   label: {
     fontWeight: 'bold',
@@ -27,12 +26,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
-    marginBottom: 50,
+    marginBottom: 10,
   },
   spentGraphs: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 20,
+    marginTop: 20,
   },
   spentList: {
     backgroundColor: 'white',

@@ -20,29 +20,41 @@ function SpentPage() {
   };
 
   return (
-    <View style={styles.spentPage}>
+    <ScrollView >
       <NavBarTransaction />
-      <View style={styles.dateFilter}>
-        <View style={styles.headDatePicker}>
-          <Text style={styles.label}>Filtro entre fechas:</Text>
+      <View style={styles.spentPageContent}>
+        <View style={styles.dateFilter}>
+          <View style={styles.headDatePicker}>
+            <Text style={styles.label}>Filtro entre fechas:</Text>
+          </View>
+          <DateRangePicker
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
+            onDateRangeChange={setDateRange}
+            onReset={handleResetDates}
+          />
         </View>
-        <DateRangePicker
-          startDate={dateRange.startDate}
-          endDate={dateRange.endDate}
-          onDateRangeChange={setDateRange}
-          onReset={handleResetDates}
-        />
+        <View style={styles.spentData}>
+          <SpentSummary transactions={filteredTransactions} />
+
+          <ScrollView
+            contentContainerStyle={styles.spentGraphs}
+            horizontal={true}  // Esto permitirá desplazamiento horizontal si el gráfico es ancho
+            showsHorizontalScrollIndicator={false}  // Si no quieres mostrar la barra de desplazamiento
+          >
+            <SpentBarChart transactions={filteredTransactions} />
+          </ScrollView>
+
+          <ScrollView
+            contentContainerStyle={styles.spentList}
+            horizontal={true}  // Esto permitirá desplazamiento horizontal si el gráfico es ancho
+            showsHorizontalScrollIndicator={false}  // Si no quieres mostrar la barra de desplazamiento
+          >
+            <SpentResults expenses={filteredTransactions} />
+          </ScrollView>
+        </View>
       </View>
-      <ScrollView vertical contentContainerStyle={styles.spentData}>
-        <SpentSummary transactions={filteredTransactions} />
-        <View style={styles.spentGraphs}>
-          <SpentBarChart transactions={filteredTransactions} />
-        </View>
-        <View style={styles.spentList}>
-          <SpentResults expenses={filteredTransactions} />
-        </View>
-      </ScrollView>
-    </View >
+    </ScrollView >
   );
 }
 

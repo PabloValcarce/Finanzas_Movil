@@ -2,12 +2,7 @@ import { StyleSheet } from 'react-native';
 import AppStyles from '../../styles/AppStyles';
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20,
-    paddingHorizontal: 1,
-    backgroundColor: '#fff',
 
-  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -22,7 +17,6 @@ const styles = StyleSheet.create({
   },
   table: {
     minWidth: 300,
-    width: '95%',
   },
   headerRow: {
     flexDirection: 'row',
@@ -43,8 +37,8 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
-    paddingVertical: 4,
-    paddingLeft: 5,
+    textAlign: 'center',
+    width:120,
   },
   negative: {
     backgroundColor: '#f0c8a5',

@@ -33,8 +33,9 @@ def month_summary(user_id):
                 .join(Transaction, Transaction.categoria_id == Categoria.id)
                 .filter(Transaction.user_id == user_id)
                 .filter(func.to_char(Transaction.date, 'YYYY-MM') == mes)
+                .filter(Transaction.amount < 0)  # Filtrar solo los gastos (amount negativo)
                 .group_by(Categoria.id)
-                .order_by(func.sum(Transaction.amount).desc())
+                .order_by(func.sum(Transaction.amount).asc())
                 .first()
             )
 

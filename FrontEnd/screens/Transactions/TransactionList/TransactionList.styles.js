@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 5,
   },
   head: {
     flexDirection: 'column',
@@ -12,6 +12,12 @@ export const styles = StyleSheet.create({
     marginTop: 100,
     marginBottom:30,
     zIndex: 10,
+  },
+  TransactionListContent:{
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding:15,
+
   },
   headDatePicker: {
     flexDirection: 'column',
@@ -35,4 +41,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  TransactionList:{
+    padding:30,
+    backgroundColor:'white',
+  }
 });

@@ -32,7 +32,7 @@ const TransactionsResults = () => {
 
     const category = categories.find(c => c.nombre === transaction.categoria);
 
-    setCategoryId(category ? category.id : '');  
+    setCategoryId(category ? category.id : '');
 
     setIsEditDialogVisible(true);
   };
@@ -116,7 +116,10 @@ const TransactionsResults = () => {
               <Text style={styles.header}>Cantidad</Text>
               <Text style={styles.header}>Acciones</Text>
             </View>
-            <FlatList data={transactions} renderItem={renderItem} keyExtractor={(item) => item.id.toString()} />
+            <FlatList
+              data={transactions}
+              keyExtractor={(item) => item.id.toString()} 
+              renderItem={renderItem}/>
           </View>
         </ScrollView>
       ) : (
