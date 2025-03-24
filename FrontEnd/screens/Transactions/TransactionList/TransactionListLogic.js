@@ -27,10 +27,6 @@ export const useTransactions = () => {
   useEffect(() => {
     loadTransactions();
   }, [loadTransactions]);
-  
-  
-  
-
   // Normalizar fechas al formato adecuado para comparar
   const normalizeDate = (date) => {
     if (!date) return null;

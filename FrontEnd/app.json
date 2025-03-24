@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "FrontEnd",
+    "name": "Financial App",
     "slug": "FrontEnd",
+    "privacy": "public",
+    "platforms": ["android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,11 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.FrontEnd"
     },
-    "entryPoint": "./App.js",
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "868ee0f0-c8b7-43fd-8582-4ed04c4718a5" 
+      }
+    }
   }
 }

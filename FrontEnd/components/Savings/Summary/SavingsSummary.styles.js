@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        elevation: 5
+        elevation: 5,
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     },
     label: {
         fontSize: 16,

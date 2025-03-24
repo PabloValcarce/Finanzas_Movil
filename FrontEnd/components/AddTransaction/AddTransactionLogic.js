@@ -84,7 +84,6 @@ const AddTransactionLogic = ({ userId }) => {
                             onChangeText={setDescription}
                             placeholder="Descripción"
                         />
-
                         <Text style={styles.subtitle}>
                             Cantidad
                         </Text>
@@ -98,7 +97,6 @@ const AddTransactionLogic = ({ userId }) => {
                             <Text style={styles.checkboxLabel}>
                                 Es una suscripción mensual 
                             </Text>
-
                             <Switch
                                 value={isSubscription}
                                 onValueChange={setIsSubscription}
@@ -139,5 +137,4 @@ const AddTransactionLogic = ({ userId }) => {
         </View>
     );
 };
-
 export default AddTransactionLogic;

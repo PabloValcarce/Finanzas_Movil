@@ -11,6 +11,8 @@ import Settings from './screens/Transactions/Configuration/Configuration';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
+  console.warn("AppNavigator");
+  
   return (
     <NavigationContainer>
       <AppContextProvider>
