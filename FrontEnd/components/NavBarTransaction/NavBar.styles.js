@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
         width: width,
         height: 50,
         position: 'absolute',
-        top: 30,
         left: 0,
         zIndex: 1000,
     },

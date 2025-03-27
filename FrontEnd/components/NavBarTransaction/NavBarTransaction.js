@@ -33,12 +33,6 @@ const NavBarTransaction = () => {
           <TouchableOpacity onPress={() => navigation.navigate('List')}>
             <Text style={styles.menuItem}>Transacciones</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Investment')}>
-            <Text style={styles.menuItem}>Inversión</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Statistics')}>
-            <Text style={styles.menuItem}>Estadísticas</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
             <Text style={styles.menuItem}>Configuración</Text>
           </TouchableOpacity>
