@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { styles } from './DateRangePicker.styles';
-import DateRangePickerLogic from './DateRangePickerLogic'; // Importamos la lógica
+import { useTheme } from '../../context/ThemeContext'; // Importamos el contexto de tema
+import { styles } from './DateRangePicker.styles'; // Estilos dinámicos
+import DateRangePickerLogic from './DateRangePickerLogic'; // Lógica del selector de fecha
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange }) => {
@@ -12,6 +13,9 @@ const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange }
     initialEndDate,
     onDateRangeChange
   );
+
+  const { isDark } = useTheme(); // Obtener el estado del tema (oscuro o claro)
+  const dynamicStyles = styles(isDark); // Aplicar estilos dinámicos
 
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
@@ -36,20 +40,20 @@ const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange }
   };
 
   return (
-    <View style={styles.datePickerContainer}>
+    <View style={dynamicStyles.datePickerContainer}>
       <View>
-        <TouchableOpacity style={styles.datePicker} onPress={showStartDate}>
-          <Text>{startDate ? startDate.toLocaleDateString() : 'INICIO'}</Text>
+        <TouchableOpacity style={dynamicStyles.datePicker} onPress={showStartDate}>
+          <Text style={dynamicStyles.dateText}>{startDate ? startDate.toLocaleDateString() : 'INICIO'}</Text>
         </TouchableOpacity>
       </View>
 
       <View>
-        <TouchableOpacity style={styles.datePicker} onPress={showEndDate}>
-          <Text>{endDate ? endDate.toLocaleDateString() : 'FIN'}</Text>
+        <TouchableOpacity style={dynamicStyles.datePicker} onPress={showEndDate}>
+          <Text style={dynamicStyles.dateText}>{endDate ? endDate.toLocaleDateString() : 'FIN'}</Text>
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
+      <TouchableOpacity style={dynamicStyles.resetButton} onPress={handleReset}>
         <FontAwesomeIcon icon={faRotateRight} size={27} />
       </TouchableOpacity>
 

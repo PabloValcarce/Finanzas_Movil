@@ -2,50 +2,51 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons';
 import { useNavBarLogic } from './NavBarLogic';
-import styles from './NavBar.styles';
+import { styles } from './NavBar.styles'; // 👈 igual que en Settings
+import { useTheme } from '../../context/ThemeContext';
 
 const NavBarTransaction = () => {
-  const {  handleLogout } = useNavBarLogic();
+  const { handleLogout } = useNavBarLogic();
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
+  const { isDark } = useTheme();
+  const dynamicStyles = styles(isDark); // 👈 igual que en Settings
 
-  // Define toggleMenu inside NavBarTransaction
-  const toggleMenu = () => {
-    setMenuVisible((prevState) => !prevState);
-  };
+  const toggleMenu = () => setMenuVisible((prev) => !prev);
 
   return (
-    <View style={styles.navbar}>
+    <View style={dynamicStyles.navbar}>
       <TouchableOpacity onPress={() => navigation.navigate('Transactions')}>
-        <Text style={styles.brand}>Finanzas</Text>
+        <Text style={dynamicStyles.brand}>Finanzas</Text>
       </TouchableOpacity>
 
       {menuVisible && (
-        <View style={[styles.menu, menuVisible && styles.menuOpen]}>
+        <View style={[dynamicStyles.menu, dynamicStyles.menuOpen]}>
           <TouchableOpacity onPress={() => navigation.navigate('Savings')}>
-            <Text style={styles.menuItem}>Ahorro</Text>
+            <Text style={dynamicStyles.menuItem}>Ahorro</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Spent')}>
-            <Text style={styles.menuItem}>Gastos</Text>
+            <Text style={dynamicStyles.menuItem}>Gastos</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('List')}>
-            <Text style={styles.menuItem}>Transacciones</Text>
+            <Text style={dynamicStyles.menuItem}>Transacciones</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-            <Text style={styles.menuItem}>Configuración</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={dynamicStyles.menuItemContainer}>
+            <Text style={dynamicStyles.menuItem}>Configuración</Text>
+            <FontAwesomeIcon icon={faCog} size={20} color={dynamicStyles.icon.color} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-            <FontAwesomeIcon icon={faSignOutAlt} size={20} color="#fff" />
+          <TouchableOpacity onPress={handleLogout} style={dynamicStyles.logoutButton}>
+            <FontAwesomeIcon icon={faSignOutAlt} size={20} color={dynamicStyles.icon.color} />
           </TouchableOpacity>
         </View>
       )}
 
-      <TouchableOpacity onPress={toggleMenu} style={styles.hamburger}>
-        <View style={styles.bar}></View>
-        <View style={styles.bar}></View>
-        <View style={styles.bar}></View>
+      <TouchableOpacity onPress={toggleMenu} style={dynamicStyles.hamburger}>
+        <View style={dynamicStyles.bar}></View>
+        <View style={dynamicStyles.bar}></View>
+        <View style={dynamicStyles.bar}></View>
       </TouchableOpacity>
     </View>
   );

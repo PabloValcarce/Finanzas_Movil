@@ -1,34 +1,36 @@
 import { StyleSheet } from 'react-native';
+import { useTheme } from '../context/ThemeContext';
+import { lightColors, darkColors } from './colors'; // Colores para modo claro y oscuro
 
-// Definir colores de manera explícita
-const colors = {
-  primary: '#144468',
-  secondary: '#4682B4',
-  tableBackground:'#ddd',
-  tertiary: '#87CEFA',
-  button: '#FF4500',
-  buttonHover: '#f0c8a5',
-  text: 'white',
-};
+export default function useAppStyles() {
+  const { isDark } = useTheme(); // Obtenemos si el tema actual es oscuro o claro
+  const colors = isDark ? darkColors : lightColors; // Elegimos los colores según el tema
 
-export default StyleSheet.create({
-  // Estilo global para la aplicación
-  secondary: {
-    flex: 1,
-    backgroundColor: colors.secondary, // Usamos el color definido
-  },
-  primary:{
-    backgroundColor: colors.primary,
-  },
-  // Estilos para texto
-  text: {
-    color: colors.text,
-    fontFamily: 'Fenix-Regular', // Asegúrate de cargar la fuente más adelante
-    fontSize: 16,
-  },
-  table:{
-    backgroundColor:colors.tableBackground,
-  }
-
-  
-});
+  return StyleSheet.create({
+    // Estilo para contenedores y fondos
+    secondary: {
+      flex: 1,
+      backgroundColor: colors.secondary, // Usamos el color correspondiente
+    },
+    primary: {
+      backgroundColor: colors.primary,
+    },
+    text: {
+      color: colors.text,  // El color de texto depende del tema
+      fontFamily: 'Fenix-Regular', // Asegúrate de que esta fuente esté disponible
+      fontSize: 16,
+    },
+    table: {
+      backgroundColor: colors.tableBackground, // Color de fondo de la tabla según el tema
+    },
+    background: {
+      backgroundColor: colors.background, // Color de fondo de la aplicación
+    },
+    button: {
+      backgroundColor: colors.button, // El color de los botones
+    },
+    buttonHover: {
+      backgroundColor: colors.buttonHover, // Hover button color
+    },
+  });
+}

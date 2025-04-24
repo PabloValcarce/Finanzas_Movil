@@ -5,27 +5,29 @@ import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
+import { useTheme } from '../../../context/ThemeContext'; 
 import styles from './Savings.styles';
 import SavingsCards from '../../../components/Savings/Cards/SavingsCards';
 
 function Savings() {
   const { dateRange, setDateRange, filteredTransactions, handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
+  const { isDark } = useTheme();  
+  const dynamicStyles = styles(isDark);
 
-  // Mostrar ActivityIndicator mientras loading es verdadero
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
+      <View style={dynamicStyles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
   return (
-    <ScrollView style={styles.savingsPage}>
+    <ScrollView style={dynamicStyles.savingsPage}>
       <NavBarTransaction />
-      <View style={styles.savingsPageContent}>
-        <View style={styles.dateFilter}>
-          <View style={styles.headDatePicker}>
-            <Text style={styles.label}>Filtro entre fechas:</Text>
+      <View style={dynamicStyles.savingsPageContent}>
+        <View style={dynamicStyles.dateFilter}>
+          <View style={dynamicStyles.headDatePicker}>
+            <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
           </View>
           <DateRangePicker
             startDate={dateRange.startDate}
@@ -34,10 +36,10 @@ function Savings() {
             onReset={handleResetDates}
           />
         </View>
-        <View style={styles.savingsData}>
+        <View style={dynamicStyles.savingsData}>
           <SavingsSummary transactions={filteredTransactions} />
-          <View style={styles.savingsGraphs}>
-            <View style={styles.savingsCircularChart}>
+          <View style={dynamicStyles.savingsGraphs}>
+            <View style={dynamicStyles.savingsCircularChart}>
               <SavingsCircularChart transactions={transactions} />
             </View>
           </View>

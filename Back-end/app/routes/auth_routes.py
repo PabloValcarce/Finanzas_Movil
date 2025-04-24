@@ -130,4 +130,3 @@ def refresh_token():
         return jsonify({"message": "Refresh token has expired!"}), 401
     except jwt.InvalidTokenError:
         return jsonify({"message": "Invalid refresh token!"}), 401
-

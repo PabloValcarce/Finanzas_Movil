@@ -5,7 +5,8 @@ import Dialog from 'react-native-dialog';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useTransactions } from '../../context/TransactionContext';
 import { useCategories } from '../../context/CategoryContext';
-import styles from './TransactionsResults.styles';
+import { useTheme } from '../../context/ThemeContext'; // Contexto para obtener el tema
+import styles from './TransactionsResults.styles'; // Usamos los estilos adaptados al tema
 
 const TransactionsResults = () => {
   const { transactions, updateTransaction, deleteTransaction } = useTransactions();
@@ -20,6 +21,9 @@ const TransactionsResults = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
+  const { isDark } = useTheme(); // Obtenemos el estado de isDark desde el contexto del tema
+  const dynamicStyles = styles(isDark); // Usamos los estilos adaptados al tema
+
   useEffect(() => {
     loadCombinedCategories();
   }, []);
@@ -31,12 +35,10 @@ const TransactionsResults = () => {
     setIsSubscription(Boolean(transaction.is_subscription));
 
     const category = categories.find(c => c.nombre === transaction.categoria);
-
     setCategoryId(category ? category.id : '');
 
     setIsEditDialogVisible(true);
   };
-
 
   const handleUpdateTransaction = async () => {
     setIsLoading(true);
@@ -84,19 +86,19 @@ const TransactionsResults = () => {
   };
 
   const renderItem = ({ item }) => {
-    const rowClass = item.amount < 0 ? styles.negative : styles.positive;
+    const rowClass = item.amount < 0 ? dynamicStyles.negative : dynamicStyles.positive;
 
     return (
-      <View style={[styles.row, rowClass]}>
-        <Text style={styles.cell}>{item.description}</Text>
-        <Text style={styles.cell}>{item.categoria}</Text>
-        <Text style={styles.cell}>{item.amount.toFixed(2)} €</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.editButton} onPress={() => handleEdit(item)}>
+      <View style={[dynamicStyles.row, rowClass]}>
+        <Text style={dynamicStyles.cell}>{item.description}</Text>
+        <Text style={dynamicStyles.cell}>{item.categoria}</Text>
+        <Text style={dynamicStyles.cell}>{item.amount.toFixed(2)} €</Text>
+        <View style={dynamicStyles.buttonContainer}>
+          <TouchableOpacity style={dynamicStyles.editButton} onPress={() => handleEdit(item)}>
             <MaterialIcons name="edit" size={24} color="#007B8F" />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.deleteButton} onPress={() => showDeleteDialog(item)}>
+          <TouchableOpacity style={dynamicStyles.deleteButton} onPress={() => showDeleteDialog(item)}>
             <MaterialIcons name="delete" size={24} color="#FF3B30" />
           </TouchableOpacity>
         </View>
@@ -105,25 +107,26 @@ const TransactionsResults = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Transacciones</Text>
+    <View style={dynamicStyles.container}>
+      <Text style={dynamicStyles.title}>Transacciones</Text>
       {transactions.length > 0 ? (
-        <ScrollView horizontal contentContainerStyle={styles.tableWrapper}>
-          <View style={styles.table}>
-            <View style={styles.headerRow}>
-              <Text style={styles.header}>Descripción</Text>
-              <Text style={styles.header}>Categoría</Text>
-              <Text style={styles.header}>Cantidad</Text>
-              <Text style={styles.header}>Acciones</Text>
+        <ScrollView horizontal contentContainerStyle={dynamicStyles.tableWrapper}>
+          <View style={dynamicStyles.table}>
+            <View style={dynamicStyles.headerRow}>
+              <Text style={dynamicStyles.header}>Descripción</Text>
+              <Text style={dynamicStyles.header}>Categoría</Text>
+              <Text style={dynamicStyles.header}>Cantidad</Text>
+              <Text style={dynamicStyles.header}>Acciones</Text>
             </View>
             <FlatList
               data={transactions}
               keyExtractor={(item) => item.id.toString()} 
-              renderItem={renderItem}/>
+              renderItem={renderItem}
+            />
           </View>
         </ScrollView>
       ) : (
-        <Text style={styles.noExpenses}>No hay transacciones disponibles en este rango de fechas.</Text>
+        <Text style={dynamicStyles.noExpenses}>No hay transacciones disponibles en este rango de fechas.</Text>
       )}
 
       {/* Dialogo de eliminación */}
@@ -142,35 +145,35 @@ const TransactionsResults = () => {
         <Dialog.Title>Modificar Transacción</Dialog.Title>
 
         {successMessage ? (
-          <Text style={styles.successMessage}>{successMessage}</Text>
+          <Text style={dynamicStyles.successMessage}>{successMessage}</Text>
         ) : (
           <>
-            <Text style={styles.subtitle}>Descripción</Text>
+            <Text style={dynamicStyles.subtitle}>Descripción</Text>
             <Dialog.Input
               value={description}
               onChangeText={setDescription}
               placeholder="Descripción"
             />
 
-            <Text style={styles.subtitle}>Cantidad</Text>
+            <Text style={dynamicStyles.subtitle}>Cantidad</Text>
             <Dialog.Input
               value={amount}
               onChangeText={setAmount}
               keyboardType="numeric"
               placeholder="Cantidad"
             />
-            <View style={styles.checkboxContainer}>
-              <Text style={styles.checkboxLabel}>Es una suscripción mensual </Text>
+            <View style={dynamicStyles.checkboxContainer}>
+              <Text style={dynamicStyles.checkboxLabel}>Es una suscripción mensual </Text>
               <Switch
                 value={isSubscription}
                 onValueChange={setIsSubscription}
-                trackColor={{ false: "#ccc", true: "#00A6B8" }} // Color del fondo cuando está en on y off
-                thumbColor={isSubscription ? "#007B8F" : "#f4f3f4"} // Color del "thumb" o círculo del switch
-                ios_backgroundColor="#3e3e3e" // Fondo del Switch en iOS
+                trackColor={{ false: "#ccc", true: "#00A6B8" }} 
+                thumbColor={isSubscription ? "#007B8F" : "#f4f3f4"} 
+                ios_backgroundColor="#3e3e3e" 
               />
             </View>
 
-            <Text style={styles.subtitle}>Categoría</Text>
+            <Text style={dynamicStyles.subtitle}>Categoría</Text>
             <Dropdown
               data={categories.map(category => ({
                 label: category.nombre,
@@ -181,10 +184,10 @@ const TransactionsResults = () => {
               placeholder="Selecciona categoría"
               value={categoryId}
               onChange={item => setCategoryId(item.value)}
-              style={styles.select}
+              style={dynamicStyles.select}
             />
 
-            <View style={styles.buttonContainer}>
+            <View style={dynamicStyles.buttonContainer}>
               <Dialog.Button label="Cancelar" onPress={() => setIsEditDialogVisible(false)} />
               {isLoading ? (
                 <ActivityIndicator size="small" color="#0000ff" />

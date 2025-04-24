@@ -1,7 +1,9 @@
+import React from 'react';
 import { TextInput, Text, View, TouchableOpacity } from 'react-native';
-import styles from './AuthForm.styles';
 import useAuth from '../../utils/useAuth';
 import Icon from 'react-native-vector-icons/Entypo';
+import { useTheme } from '../../context/ThemeContext';
+import { styles } from './AuthForm.styles';  // ahora será una función
 
 function AuthForm() {
   const {
@@ -16,49 +18,54 @@ function AuthForm() {
     emailError,
     handleEmailChange,
     handleSubmit,
-    handleBiometricAuth, // <-- Importa la función de autenticación biométrica
+    handleBiometricAuth,
     isLoading,
   } = useAuth();
 
+  const { isDark } = useTheme();
+  const dynamicStyles = styles(isDark);
+
   return (
-    <View style={styles.authForm}>
-      <Text style={styles.title}>{isRegister ? 'Register' : 'Login'}</Text>
-      <View style={styles.form}>
+    <View style={dynamicStyles.authForm}>
+      <Text style={dynamicStyles.title}>{isRegister ? 'Register' : 'Login'}</Text>
+      <View style={dynamicStyles.form}>
         {isRegister && (
           <TextInput
-            style={styles.input}
+            style={dynamicStyles.input}
             placeholder="Name"
             value={name}
             onChangeText={(text) => setName(text)}
+            placeholderTextColor={isDark ? '#aaa' : '#555'}
           />
         )}
         <TextInput
-          style={[styles.input, emailError ? styles.errorInput : null]}
+          style={[dynamicStyles.input, emailError ? dynamicStyles.errorInput : null]}
           placeholder="Email"
           value={email}
           onChangeText={handleEmailChange}
+          placeholderTextColor={isDark ? '#aaa' : '#555'}
         />
-        {emailError && <Text style={styles.errorText}>{emailError}</Text>}
+        {emailError && <Text style={dynamicStyles.errorText}>{emailError}</Text>}
         <TextInput
-          style={styles.input}
+          style={dynamicStyles.input}
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry
+          placeholderTextColor={isDark ? '#aaa' : '#555'}
         />
         <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => handleSubmit()}
+          style={dynamicStyles.submitButton}
+          onPress={handleSubmit}
         >
-          <Text style={styles.submitButtonText}>
+          <Text style={dynamicStyles.submitButtonText}>
             {isRegister ? 'Register' : 'Login'}
           </Text>
         </TouchableOpacity>
 
-        {/* Botón de autenticación biométrica */}
         {!isRegister && (
           <TouchableOpacity
-            style={styles.biometricButton}
+            style={dynamicStyles.biometricButton}
             onPress={handleBiometricAuth}
           >
             <Icon name="fingerprint" size={35} color="white" />
@@ -67,10 +74,10 @@ function AuthForm() {
       </View>
 
       <TouchableOpacity
-        style={styles.switchButton}
+        style={dynamicStyles.switchButton}
         onPress={() => setIsRegister(!isRegister)}
       >
-        <Text style={styles.switchButtonText}>
+        <Text style={dynamicStyles.switchButtonText}>
           {isRegister ? 'Cambiar a Login' : 'Cambiar a Registro'}
         </Text>
       </TouchableOpacity>

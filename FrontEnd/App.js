@@ -7,7 +7,7 @@ import TransactionsList from './screens/Transactions/TransactionList/Transaction
 import AppContextProvider from './context/AppContextProvider';
 import Savings from './screens/Transactions/Savings/Savings';
 import Spent from './screens/Transactions/Spent/Spent';
-import Settings from './screens/Transactions/Configuration/Configuration';
+import Settings from './screens/Settings/Settings';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {

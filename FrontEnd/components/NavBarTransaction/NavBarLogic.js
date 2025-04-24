@@ -32,9 +32,6 @@ export const useNavBarLogic = () => {
     const handleLogout = async () => {
         try {
             await AsyncStorage.removeItem('access_token');
-
-            const tokenAfterLogout = await AsyncStorage.getItem('access_token'); // Verificar si se eliminó
-
             navigation.reset({
                 index: 0,
                 routes: [{ name: 'Dashboard' }]

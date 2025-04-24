@@ -1,17 +1,24 @@
 import { StyleSheet } from 'react-native';
+import { lightColors, darkColors } from '../../../styles/colors'; // Importa los colores de tus temas
 
-const styles = StyleSheet.create({
+export default (isDark) => {
+  const colors = isDark ? darkColors : lightColors; // Usamos el tema correspondiente
 
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1F5A7A', // Ajusta este color según tu diseño
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 18,
-    color: '#F5A167', // Ajusta este color según tu diseño
-  },
-});
-
-export default styles;
+  return StyleSheet.create({
+    container: {
+      marginTop: 20,
+      padding: 15,
+      backgroundColor: colors.background, // Fondo adaptado según el tema
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colors.primary, // Título con color primario según el tema
+      marginBottom: 10,
+    },
+    text: {
+      fontSize: 18,
+      color: colors.text, // Color de texto dependiendo del tema
+    },
+  });
+};

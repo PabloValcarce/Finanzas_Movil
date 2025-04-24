@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('screen');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -15,7 +16,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   }
-
 });
 
 export default styles;
