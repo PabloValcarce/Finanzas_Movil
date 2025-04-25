@@ -8,7 +8,7 @@ export default (isDark) => {
     container: {
       marginTop: 20,
       padding: 15,
-      backgroundColor: colors.background, // Fondo adaptado según el tema
+      backgroundColor: colors.background3, // Fondo adaptado según el tema
     },
     title: {
       fontSize: 20,
@@ -18,7 +18,7 @@ export default (isDark) => {
     },
     text: {
       fontSize: 18,
-      color: colors.text, // Color de texto dependiendo del tema
+      color: colors.text2, // Color de texto dependiendo del tema
     },
   });
 };

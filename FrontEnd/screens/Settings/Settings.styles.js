@@ -9,7 +9,7 @@ export default (isDark) => {
   return StyleSheet.create({
     SettingsPage: {
       flex: 1,
-      backgroundColor: colors.background, // Aplica el color de fondo dependiendo del tema
+      backgroundColor: colors.background2, // Aplica el color de fondo dependiendo del tema
     },
 
     SettingsPageContent: {
@@ -17,6 +17,7 @@ export default (isDark) => {
       justifyContent: 'space-between',
       padding: 30,
       marginTop: 100,
+      backgroundColor: colors.background3,
       gap: 50,
     },
 

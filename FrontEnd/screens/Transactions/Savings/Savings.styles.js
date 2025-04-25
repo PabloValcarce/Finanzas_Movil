@@ -7,13 +7,13 @@ export default (isDark) => {
   return StyleSheet.create({
     savingsPage: {
       flex: 1,
-      backgroundColor: colors.background,  // Fondo dependiendo del modo
+      backgroundColor: colors.background2,  // Fondo dependiendo del modo
     },
     savingsPageContent: {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: 30,
-      backgroundColor: colors.background,  // Fondo dependiendo del modo
+      backgroundColor: colors.background3,  // Fondo dependiendo del modo
     },
     label: {
       fontWeight: 'bold',

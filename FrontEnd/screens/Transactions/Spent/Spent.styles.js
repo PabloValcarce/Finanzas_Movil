@@ -7,13 +7,13 @@ export default (isDark) => {
   return StyleSheet.create({
     spentPage: {
       flex: 1,
-      backgroundColor: colors.background, // Fondo dependiendo del modo
+      backgroundColor: colors.background2, // Fondo dependiendo del modo
     },
     spentPageContent: {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: 30,
-      backgroundColor: colors.background, // Fondo dependiendo del modo
+      backgroundColor: colors.background2, // Fondo dependiendo del modo
     },
     label: {
       fontWeight: 'bold',
@@ -29,7 +29,7 @@ export default (isDark) => {
       zIndex: 10,
     },
     spentData: {
-      backgroundColor: colors.cardBackground, // Fondo de la tarjeta dependiendo del modo
+      backgroundColor: colors.background3, // Fondo de la tarjeta dependiendo del modo
       borderRadius: 10,
       padding: 10,
       marginBottom: 10,
@@ -38,7 +38,7 @@ export default (isDark) => {
       marginTop: 20,
     },
     spentList: {
-      backgroundColor: colors.cardBackground, // Fondo de la lista dependiendo del modo
+      backgroundColor: colors.background, // Fondo de la lista dependiendo del modo
       marginTop: 30,
       marginBottom: 40,
       borderRadius: 10,
