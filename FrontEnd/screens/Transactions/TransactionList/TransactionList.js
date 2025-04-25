@@ -12,7 +12,7 @@ import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTrans
 import AddTransaction from '../../../components/AddTransaction/AddTransaction';
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 import TransactionsResults from '../../../components/TransactionResults/TransactionsResults';
-import { styles } from './TransactionList.styles'; 
+import { styles } from './TransactionList.styles';
 import { useCategories } from '../../../context/CategoryContext';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconSelector from '../../../components/IconSelector/IconSelector';
@@ -34,10 +34,10 @@ function TransactionsList() {
     agregarCategoria,
     eliminarCategoria,
   } = useTransactions();
-  
+
   const { isDark } = useTheme(); // Obtener el estado del tema
   const dynamicStyles = styles(isDark); // Aplicar los estilos dinámicamente según el tema
-  
+
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isIconModalVisible, setIsIconModalVisible] = useState(false);
@@ -64,7 +64,7 @@ function TransactionsList() {
     if (nuevaCategoria.trim() !== '') {
       agregarCategoria(nuevaCategoria, selectedIcon);
       setNuevaCategoria('');
-      setSelectedIcon('smile'); 
+      setSelectedIcon('smile');
     }
   };
 
@@ -120,6 +120,7 @@ function TransactionsList() {
               </ScrollView>
             </View>
           </View>
+        </View>
 
           <View style={dynamicStyles.headDatePicker}>
             <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
@@ -132,18 +133,18 @@ function TransactionsList() {
               onReset={handleResetDates}
             />
             <AddTransaction userId={userId} />
-          </View>
         </View>
-
-        <ScrollView
-          contentContainerStyle={dynamicStyles.TransactionList}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        >
-          <View style={dynamicStyles.transactionsResults}>
-            <TransactionsResults transactions={filteredTransactions} />
-          </View>
-        </ScrollView>
+        <View style={dynamicStyles.TransactionTable}>
+          <ScrollView
+            contentContainerStyle={dynamicStyles.TransactionList}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            <View style={dynamicStyles.transactionsResults}>
+              <TransactionsResults transactions={filteredTransactions} />
+            </View>
+          </ScrollView>
+        </View>
       </View>
 
       <Dialog.Container visible={isDialogVisible}>

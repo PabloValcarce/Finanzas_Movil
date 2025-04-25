@@ -66,7 +66,7 @@ const AddTransactionLogic = ({ userId }) => {
                 style={dynamicStyles.add}
                 onPress={() => setIsDialogVisible(true)}
             >
-                <Icon name="plus" size={20} color={isDark ? '#fff' : '#144468'} />
+                <Icon name="plus" size={20} color={isDark ? '#fff' : 'white'} />
             </TouchableOpacity>
 
             <Dialog.Container visible={isDialogVisible}>

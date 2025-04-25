@@ -11,7 +11,7 @@ export default (isDark) => {
       justifyContent: 'center',
       alignItems: 'center',
       flex: 1,
-      backgroundColor: colors.background2, // Aplica el color de fondo dependiendo del tema
+      backgroundColor: colors.secondary, // Aplica el color de fondo dependiendo del tema
     },
 
     dashboardContainer: {
@@ -21,12 +21,12 @@ export default (isDark) => {
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.background, // Aplica el color de fondo para el contenedor del dashboard
+      backgroundColor: colors.primary, // Aplica el color de fondo para el contenedor del dashboard
     },
 
     text: {
       fontSize: 20,
-      color: colors.text, // Aplica color de texto según el tema
+      color: colors.white, // Aplica color de texto según el tema
     },
   });
 };

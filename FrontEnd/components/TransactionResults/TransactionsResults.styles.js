@@ -8,10 +8,9 @@ export default (isDark) => {
     container: {
       marginTop: 20,
       padding: 15,
-      backgroundColor: colors.background, // Fondo adaptado según el tema
     },
     title: {
-      fontSize: 20,
+      fontSize: 24,
       fontWeight: 'bold',
       color: colors.primary, // Título con color primario según el tema
       textAlign: 'center',
@@ -20,7 +19,6 @@ export default (isDark) => {
     tableWrapper: {
       justifyContent: 'center',
       width: '100%',
-      marginBottom: 25,
     },
     table: {
       minWidth: 300,
@@ -39,7 +37,7 @@ export default (isDark) => {
     row: {
       flexDirection: 'row',
       borderBottomWidth: 1,
-      borderBottomColor: colors.rowBorder,
+      borderBottomColor: colors.background,
       paddingVertical: 10,
       textAlign: 'center',
     },

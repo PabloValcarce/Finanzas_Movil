@@ -1,69 +1,36 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import AppStyles from '../../../styles/AppStyles';
+import { lightColors, darkColors } from '../../../styles/colors';
 
 const { height } = Dimensions.get('window');
 
 export const styles = (isDark) => {
-  const colors = isDark ? {
-    background: '#121212',
-    text: '#FFFFFF',
-    primary: '#007B8F',
-    secondary: '#B0B0B0',
-    border: '#333',
-  } : {
-    background: '#FFFFFF',
-    text: '#000000',
-    primary: '#007B8F',
-    secondary: '#555',
-    border: '#CCC',
-  };
+  const colors = isDark ? darkColors : lightColors;
 
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
-      padding: 5,
-    },
-    head: {
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      marginTop: 100,
-      marginBottom: 30,
-      zIndex: 10,
+      backgroundColor: colors.tertiary,
     },
     TransactionListContent: {
       flexDirection: 'column',
       justifyContent: 'space-between',
-      padding: 15,
-    },
-    headDatePicker: {
-      flexDirection: 'column',
-    },
-    label: {
-      fontWeight: 'bold',
-      marginBottom: 10,
-      fontSize: 20,
-      color: colors.text,
-    },
-    headFilterAdd: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    transactionsResults: {
-      backgroundColor: colors.background,
-      borderRadius: 10,
-      width: '100%',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    TransactionList: {
       padding: 30,
-      backgroundColor: colors.background,
+      backgroundColor: colors.four,
+    },
+    head: {
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      borderRadius: 10,
+      marginTop: 70,
+      marginBottom: 30,
+      padding: 20,
+      zIndex: 10,
+      backgroundColor: colors.white,
     },
     CategoriesPerso: {
-      width: '95%',
+      width: '90%',
       flexDirection: 'column',
+      alignSelf: 'center',
       gap: 20,
     },
     title: {
@@ -76,6 +43,25 @@ export const styles = (isDark) => {
     add: {
       flexDirection: 'row',
     },
+    headDatePicker: {
+      flexDirection: 'column',
+    },
+    label: {
+      fontWeight: 'bold',
+      marginBottom: 10,
+      fontSize: 20,
+      color: colors.primary,
+    },
+    headFilterAdd: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    TransactionTable:{
+      padding: 12,
+      marginTop: 30,
+      backgroundColor: colors.white,
+      borderRadius: 5,
+    },    
     input: {
       width: '70%',
       borderWidth: 1.5,

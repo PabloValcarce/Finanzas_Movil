@@ -9,15 +9,17 @@ export default (isDark) => {
   return StyleSheet.create({
     SettingsPage: {
       flex: 1,
-      backgroundColor: colors.background2, // Aplica el color de fondo dependiendo del tema
+      backgroundColor: colors.four, // Aplica el color de fondo dependiendo del tema
     },
 
     SettingsPageContent: {
       flexDirection: 'column',
       justifyContent: 'space-between',
-      padding: 30,
-      marginTop: 100,
-      backgroundColor: colors.background3,
+      margin: 20,
+      padding: 20,
+      marginTop: 70,
+      backgroundColor: colors.white,
+      borderRadius: 10,
       gap: 50,
     },
 

@@ -20,7 +20,7 @@ export const styles = (isDark) => {
       borderRadius: 5,
       borderWidth: 1,
       borderColor: colors.borderColor,
-      backgroundColor: colors.inputBackground,
+      backgroundColor: colors.tertiary,
       height: 30,
       paddingLeft: 20,
       paddingRight: 20,

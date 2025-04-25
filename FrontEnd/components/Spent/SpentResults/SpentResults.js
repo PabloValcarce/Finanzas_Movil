@@ -39,7 +39,7 @@ const SpentResults = ({ expenses }) => {
                 const backgroundColor = index % 2 === 0 ? dynamicStyles.evenRow : dynamicStyles.oddRow;
 
                 return (
-                  <View style={[dynamicStyles.row, { backgroundColor }]}>
+                  <View style={[dynamicStyles.row,  backgroundColor ]}>
                     <Text style={dynamicStyles.cell}>{item.formattedDate}</Text>
                     <Text style={dynamicStyles.cell}>{item.description}</Text>
                     <Text style={dynamicStyles.cell}>{item.categoria}</Text>

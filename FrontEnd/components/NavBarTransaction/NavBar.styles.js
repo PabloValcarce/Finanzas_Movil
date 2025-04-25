@@ -23,7 +23,7 @@ export const styles = (isDark) => {
     brand: {
       fontSize: 24,
       fontWeight: 'bold',
-      color: colors.text,
+      color: colors.white,
     },
     menu: {
       flexDirection: 'column',
@@ -40,9 +40,10 @@ export const styles = (isDark) => {
     },
     menuOpen: {
       display: 'flex',
+      gap: 10,
     },
     menuItem: {
-      color: colors.text,
+      color: colors.white,
       fontSize: 18,
     },
     menuItemContainer: {
@@ -57,7 +58,7 @@ export const styles = (isDark) => {
     bar: {
       width: 25,
       height: 3,
-      backgroundColor: colors.text,
+      backgroundColor: colors.white,
       marginVertical: 4,
     },
     logoutButton: {
@@ -65,7 +66,7 @@ export const styles = (isDark) => {
       fontSize: 16,
     },
     icon: {
-      color: colors.text,
+      color: colors.white,
     },
   });
 };

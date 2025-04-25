@@ -8,12 +8,12 @@ export default (isDark) => {
     container: {
       flex: 1,
       padding: 10,
-      backgroundColor: colors.background, // Fondo dependiendo del tema
+      backgroundColor: colors.white, 
     },
     title: {
       fontSize: 20,
       fontWeight: "bold",
-      color: colors.primary, // Color del título dependiendo del tema
+      color: colors.primary, 
       textAlign: "center",
       marginBottom: 10,
     },
@@ -35,19 +35,20 @@ export default (isDark) => {
       textAlign: "center",
       paddingTop: 8,
       paddingBottom: 8,
-      backgroundColor: colors.headerBackground, // Fondo de encabezado
+      backgroundColor: colors.tableBorder, // Fondo de encabezado
     },
     row: {
       flexDirection: "row",
       borderBottomWidth: 1,
-      borderBottomColor: colors.tableBorder, // Borde de fila
+      borderBottomColor: colors.tertiary, // Borde de fila
       paddingVertical: 10,
     },
     cell: {
       flex: 1,
       textAlign: "center",
       padding: 2,
-      color: colors.text, // Color del texto dependiendo del tema
+      width: 120,
+      color: colors.text, 
     },
     evenRow: {
       backgroundColor: colors.rowEven, // Color de fila par
@@ -57,7 +58,7 @@ export default (isDark) => {
     },
     noExpenses: {
       textAlign: "center",
-      color: colors.textMuted, // Color de texto para "no hay gastos"
+      color: colors.secondary, // Color de texto para "no hay gastos"
       fontSize: 16,
       marginTop: 15,
     },

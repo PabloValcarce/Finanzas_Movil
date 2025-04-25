@@ -15,7 +15,7 @@ export const styles = (isDark) => {
     },
     title: {
       fontSize: 24,
-      color: colors.text,
+      color: colors.white,
       textAlign: 'center',
       marginBottom: 20,
     },

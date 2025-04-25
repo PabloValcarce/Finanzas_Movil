@@ -6,9 +6,8 @@ export default (isDark) => {
 
   return StyleSheet.create({
     container: {
-      marginTop: 20,
+      marginTop: 10,
       padding: 15,
-      backgroundColor: colors.background3, // Fondo adaptado según el tema
     },
     title: {
       fontSize: 20,
@@ -18,7 +17,7 @@ export default (isDark) => {
     },
     text: {
       fontSize: 18,
-      color: colors.text2, // Color de texto dependiendo del tema
+      color: colors.secondary, // Color de texto dependiendo del tema
     },
   });
 };
