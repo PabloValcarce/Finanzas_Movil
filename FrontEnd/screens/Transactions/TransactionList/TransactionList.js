@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import { useCategories } from '../../../context/CategoryContext';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconSelector from '../../../components/IconSelector/IconSelector';
 import Dialog from 'react-native-dialog';
-import { useTheme } from '../../../context/ThemeContext'; // Añadido para manejar el tema
+
 
 function TransactionsList() {
   const {
@@ -33,10 +33,9 @@ function TransactionsList() {
     setSelectedIcon,
     agregarCategoria,
     eliminarCategoria,
+    isDark
   } = useTransactions();
-
-  const { isDark } = useTheme(); // Obtener el estado del tema
-  const dynamicStyles = styles(isDark); // Aplicar los estilos dinámicamente según el tema
+  const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -47,7 +46,6 @@ function TransactionsList() {
     setSelectedCategory(category);
     setIsDialogVisible(true);
   };
-
   const handleConfirmDelete = () => {
     if (selectedCategory) {
       eliminarCategoria(selectedCategory.id);
@@ -74,7 +72,7 @@ function TransactionsList() {
 
   return (
     <ScrollView style={dynamicStyles.container}>
-      <NavBarTransaction />
+      <NavBarTransaction isDark={isDark} />
       <View style={dynamicStyles.TransactionListContent}>
         <View style={dynamicStyles.head}>
           <View style={dynamicStyles.CategoriesPerso}>
@@ -85,7 +83,7 @@ function TransactionsList() {
                 style={dynamicStyles.iconButton}
                 onPress={openIconModal}
               >
-                <Icon name={selectedIcon} size={24} color="#144468" />
+                <Icon name={selectedIcon} style={dynamicStyles.icon} />
               </TouchableOpacity>
 
               <TextInput
@@ -93,13 +91,14 @@ function TransactionsList() {
                 value={nuevaCategoria}
                 onChangeText={setNuevaCategoria}
                 style={dynamicStyles.input}
+                placeholderTextColor={isDark ? '#e0e0e0' : '#666666'}
               />
 
               <TouchableOpacity
                 style={dynamicStyles.addCategoryButton}
                 onPress={handleAddCategory}
               >
-                <Icon name="plus" size={20} color="#144468" />
+                <Icon name="plus" style={dynamicStyles.iconplus} />
               </TouchableOpacity>
             </View>
 
@@ -107,7 +106,7 @@ function TransactionsList() {
               <ScrollView>
                 {categorias?.map((item) => (
                   <View key={item.id.toString()} style={dynamicStyles.categoryItem}>
-                    <Icon name={item.icono} size={20} color="#144468" />
+                    <Icon name={item.icono} style={dynamicStyles.icon} />
                     <Text style={dynamicStyles.categoryText}>{' ' + item.nombre}</Text>
                     <TouchableOpacity
                       style={dynamicStyles.deleteIcon}
@@ -122,17 +121,18 @@ function TransactionsList() {
           </View>
         </View>
 
-          <View style={dynamicStyles.headDatePicker}>
-            <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
-          </View>
-          <View style={dynamicStyles.headFilterAdd}>
-            <DateRangePicker
-              startDate={dateRange.startDate}
-              endDate={dateRange.endDate}
-              onDateRangeChange={setDateRange}
-              onReset={handleResetDates}
-            />
-            <AddTransaction userId={userId} />
+        <View style={dynamicStyles.headDatePicker}>
+          <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
+        </View>
+        <View style={dynamicStyles.headFilterAdd}>
+          <DateRangePicker
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
+            onDateRangeChange={setDateRange}
+            onReset={handleResetDates}
+            isDark={isDark}
+          />
+          <AddTransaction userId={userId} isDark={isDark}/>
         </View>
         <View style={dynamicStyles.TransactionTable}>
           <ScrollView
@@ -141,7 +141,9 @@ function TransactionsList() {
             showsHorizontalScrollIndicator={false}
           >
             <View style={dynamicStyles.transactionsResults}>
-              <TransactionsResults transactions={filteredTransactions} />
+              <TransactionsResults
+                transactions={filteredTransactions}
+                isDark={isDark} />
             </View>
           </ScrollView>
         </View>

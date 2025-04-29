@@ -7,19 +7,18 @@ export default (isDark) => {
   return StyleSheet.create({
     savingsPage: {
       flex: 1,
-      backgroundColor: colors.four,  // Fondo dependiendo del modo
     },
     savingsPageContent: {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: 30,
-      backgroundColor: colors.four,  // Fondo dependiendo del modo
+      backgroundColor: colors.tertiary,  // Fondo dependiendo del modo
     },
     label: {
       fontWeight: 'bold',
       marginBottom: 10,
       fontSize: 20,
-      color: colors.primary,  // Color de texto dependiendo del modo
+      color: colors.text,  // Color de texto dependiendo del modo
     },
     dateFilter: {
       flexDirection: 'column',
@@ -28,7 +27,7 @@ export default (isDark) => {
       zIndex: 10,
     },
     savingsData: {
-      backgroundColor: colors.white,  // Color de fondo de los componentes
+      backgroundColor: colors.four,  // Color de fondo de los componentes
       borderRadius: 10,
       marginTop: 30,
       marginBottom: 10,

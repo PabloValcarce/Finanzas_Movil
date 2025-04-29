@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import styles from './SavingsCards.styles';
-
+import {useTheme} from '../../../context/ThemeContext';
 import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
+import CardItem from '../Cards/Card/CardItem'
+
 
 const { width } = Dimensions.get('screen');
 
-const SavingsCards = ({ monthlySavings }) => {
-    const scrollX = useSharedValue(0);
+function SavingsCards({ monthlySavings }){
+    const scrollX = useSharedValue(0); 
+    const { isDark } = useTheme();
+    const dynamicStyles = styles(isDark);
 
     const onScrollHandler = useAnimatedScrollHandler({
         onScroll: (e) => {
             scrollX.value = e.contentOffset.x;
         }
     });
-
+    
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Historial de Ahorro Mensual</Text>
-            {/* <Animated.FlatList
+        <View style={dynamicStyles.container}>
+            <Text style={dynamicStyles.title}>Historial de Ahorro Mensual</Text>
+            <Animated.FlatList
                 data={monthlySavings}
                 keyExtractor={(item) => item.month}
                 renderItem={({ item, index }) => {
@@ -41,9 +45,8 @@ const SavingsCards = ({ monthlySavings }) => {
                 contentContainerStyle={{ width: monthlySavings.length * width }}
                 snapToAlignment="center"
                 decelerationRate={'fast'}
-            /> */}
+            />
         </View>
     );
-};
-
+}
 export default SavingsCards;

@@ -12,7 +12,7 @@ export default (isDark) => {
     title: {
       fontSize: 24,
       fontWeight: 'bold',
-      color: colors.primary, // Título con color primario según el tema
+      color: colors.text, 
       textAlign: 'center',
       marginBottom: 10,
     },
@@ -48,10 +48,10 @@ export default (isDark) => {
       color: colors.text,
     },
     negative: {
-      backgroundColor: '#f0c8a5',
+      backgroundColor: colors.negative,
     },
     positive: {
-      backgroundColor: '#d0eaff',
+      backgroundColor: colors.positive,
     },
     noExpenses: {
       textAlign: 'center',
@@ -84,7 +84,11 @@ export default (isDark) => {
     },
     checkboxLabel: {
       fontSize: 16,
-      color: colors.text,
+      color: colors.primary,
     },
+    editButton:{
+      fontSize: 24,
+      color: colors.text,
+    }
   });
 };

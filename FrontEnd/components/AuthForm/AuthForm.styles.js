@@ -10,12 +10,12 @@ export const styles = (isDark) => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.background,
+      backgroundColor: colors.loginBackground,
       padding: 20,
     },
     title: {
       fontSize: 24,
-      color: colors.white,
+      color: colors.borderColor,
       textAlign: 'center',
       marginBottom: 20,
     },
@@ -30,7 +30,7 @@ export const styles = (isDark) => {
       borderRadius: 5,
       borderColor: '#ccc',
       borderWidth: 1,
-      backgroundColor: colors.inputBackground,
+      backgroundColor: colors.secondary,
       color: colors.text,
     },
     errorInput: {
@@ -45,7 +45,7 @@ export const styles = (isDark) => {
       marginTop: 50,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      backgroundColor: '#FF4500',
+      backgroundColor: colors.loginSwitchButton,
       borderRadius: 5,
       alignItems: 'center',
       justifyContent: 'center',
@@ -59,7 +59,7 @@ export const styles = (isDark) => {
       marginTop: 20,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      backgroundColor: '#87CEEB',
+      backgroundColor: colors.loginSubmitButton,
       borderRadius: 5,
       alignItems: 'center',
       justifyContent: 'center',
@@ -76,5 +76,9 @@ export const styles = (isDark) => {
       marginTop: 15,
       padding: 10,
     },
+    finger:{
+      fontSize: 40,
+      color: colors.borderColor,
+    }
   });
 };

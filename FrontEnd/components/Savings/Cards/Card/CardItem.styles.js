@@ -1,12 +1,12 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { lightColors, darkColors } from '../../../../styles/colors'; // Asegúrate de tener un archivo de colores
+import { lightColors, darkColors } from '../../../../styles/colors';
 
 const { width } = Dimensions.get('screen');
 
-export const styles = (isDark) => {
+export default (isDark) => {
   const colors = isDark ? darkColors : lightColors;
 
-  return StyleSheet.create({
+  const styles = StyleSheet.create({
     card: {
       justifyContent: 'center',
       alignItems: 'center',
@@ -22,18 +22,13 @@ export const styles = (isDark) => {
       marginBottom: 20,
     },
     seasonIcon: {
-      position: "absolute",
-      top: 10,
-      left: 10,
+     
     },
     header: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       marginBottom: 10,
-    },
-    seasonIcon: {
-      marginRight: 10,
     },
     cardLabel: {
       fontSize: 20,
@@ -51,11 +46,17 @@ export const styles = (isDark) => {
     amount: {
       fontSize: 22,
       fontWeight: "bold",
-      color: colors.primary,
+      color: colors.text,
     },
     cardCategory: {
-      fontSize: 14,
-      color: colors.textSecondary,
+      fontSize: 20,
+      fontWeight: "bold",
+      color: colors.text,
+      marginTop: 10,
+    },
+    cardCategoryText: {
+      fontSize: 16,
+      color: colors.text,
     },
     subscriptionsContainer: {
       marginTop: 15,
@@ -71,7 +72,12 @@ export const styles = (isDark) => {
     },
     cardSubscriptions: {
       fontSize: 14,
-      color: colors.textSecondary,
+      color: colors.text,
     },
   });
+
+  return {
+    styles,
+    colors,
+  };
 };

@@ -21,12 +21,12 @@ export default (isDark) => {
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.primary, // Aplica el color de fondo para el contenedor del dashboard
+      backgroundColor: colors.loginBackground, // Aplica el color de fondo para el contenedor del dashboard
     },
 
     text: {
       fontSize: 20,
-      color: colors.white, // Aplica color de texto según el tema
+      color: colors.text, // Aplica color de texto según el tema
     },
   });
 };

@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react';
 import { View, Text } from 'react-native';
 import Svg, { Circle, G, Text as SvgText } from 'react-native-svg';
-import styles from './SavingsCircularChart.styles';
+import { styles } from './SavingsCircularChart.styles';
+import { useTheme } from '../../../../context/ThemeContext';
 
 function SavingsCircularChart({ transactions }) {
     const currentMonth = useMemo(() => {
         return new Date().toLocaleString('default', { month: 'long' });
     }, []);
+    const { isDark } = useTheme();
+    const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
 
     const currentMonthTransactions = useMemo(() => {
         return transactions.filter(transaction => {
@@ -38,8 +41,8 @@ function SavingsCircularChart({ transactions }) {
     const savedStrokeDashoffset = circumference * (1 - savedPercentage / 100);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.chartTitle}>Distribución de gastos y ahorros</Text>
+        <View style={dynamicStyles.container}>
+            <Text style={dynamicStyles.chartTitle}>Distribución de gastos y ahorros</Text>
             <Svg height="150" width="150" viewBox="0 0 120 120">
                 <G rotation="-90" origin="60,60">
                     {/* Fondo del círculo */}
@@ -78,13 +81,14 @@ function SavingsCircularChart({ transactions }) {
                     y="65"
                     textAnchor="middle"
                     fontSize="14"
-                    fill="#333"
+                    fill={dynamicStyles.chartTitleColor.color}
                     fontWeight="bold"
                 >
                     {total === 0 ? "No data" : `${spentPercentage.toFixed(1)}% Gastado`}
+
                 </SvgText>
             </Svg>
-        </View>
+        </View >
     );
 }
 

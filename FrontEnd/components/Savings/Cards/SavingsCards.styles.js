@@ -1,21 +1,24 @@
 import { StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
+import { lightColors, darkColors } from '../../../styles/colors';
 
-const { width } = Dimensions.get('screen');
+export default (isDark) => {
+  const colors = isDark ? darkColors : lightColors;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  }
-});
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      backgroundColor: colors.tertiary, // Fondo dependiendo del modo
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 20,
+      textAlign: 'center',
+      color: colors.text,  
+    }
+  });
+}
 
-export default styles;

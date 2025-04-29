@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { useTheme } from '../../context/ThemeContext'; // Importamos el contexto de tema
 import { styles } from './DateRangePicker.styles'; // Estilos dinámicos
 import DateRangePickerLogic from './DateRangePickerLogic'; // Lógica del selector de fecha
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange }) => {
+const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange,isDark }) => {
   const { startDate, endDate, handleStartDateChange, handleEndDateChange, handleReset } = DateRangePickerLogic(
     initialStartDate,
     initialEndDate,
     onDateRangeChange
   );
-
-  const { isDark } = useTheme(); // Obtener el estado del tema (oscuro o claro)
-  const dynamicStyles = styles(isDark); // Aplicar estilos dinámicos
-
+  const dynamicStyles = useMemo(() => styles(isDark), [isDark]); 
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
 
@@ -54,7 +50,7 @@ const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange }
       </View>
 
       <TouchableOpacity style={dynamicStyles.resetButton} onPress={handleReset}>
-        <FontAwesomeIcon icon={faRotateRight} size={27} />
+        <FontAwesomeIcon icon={faRotateRight} size={27} style={dynamicStyles.resetButtonIcon}/>
       </TouchableOpacity>
 
       {/* Start Date Picker */}

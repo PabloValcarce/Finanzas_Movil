@@ -68,7 +68,7 @@ function AuthForm() {
             style={dynamicStyles.biometricButton}
             onPress={handleBiometricAuth}
           >
-            <Icon name="fingerprint" size={35} color="white" />
+            <Icon name="fingerprint" style={dynamicStyles.finger} />
           </TouchableOpacity>
         )}
       </View>

@@ -15,7 +15,7 @@ export const styles = (isDark) => {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: 30,
-      backgroundColor: colors.four,
+      backgroundColor: colors.tertiary,
     },
     head: {
       flexDirection: 'column',
@@ -25,7 +25,7 @@ export const styles = (isDark) => {
       marginBottom: 30,
       padding: 20,
       zIndex: 10,
-      backgroundColor: colors.white,
+      backgroundColor: colors.four,
     },
     CategoriesPerso: {
       width: '90%',
@@ -38,7 +38,7 @@ export const styles = (isDark) => {
       fontWeight: 'bold',
       textAlign: 'center',
       marginBottom: 10,
-      color: colors.primary,
+      color: colors.text,
     },
     add: {
       flexDirection: 'row',
@@ -50,7 +50,7 @@ export const styles = (isDark) => {
       fontWeight: 'bold',
       marginBottom: 10,
       fontSize: 20,
-      color: colors.primary,
+      color: colors.text,
     },
     headFilterAdd: {
       flexDirection: 'row',
@@ -59,13 +59,13 @@ export const styles = (isDark) => {
     TransactionTable:{
       padding: 12,
       marginTop: 30,
-      backgroundColor: colors.white,
+      backgroundColor: colors.four,
       borderRadius: 5,
     },    
     input: {
       width: '70%',
       borderWidth: 1.5,
-      borderColor: colors.border,
+      borderColor: colors.text,
       padding: 10,
       borderRadius: 5,
       color: colors.text,
@@ -77,8 +77,8 @@ export const styles = (isDark) => {
       justifyContent: 'center',
       alignItems: 'center',
       marginLeft: 10,
-      backgroundColor: '#f0f0f0',
-      color: colors.primary,
+      backgroundColor: colors.background,
+      color: colors.text,
       borderRadius: 8,
       paddingHorizontal: 15,
       paddingVertical: 10,
@@ -86,12 +86,22 @@ export const styles = (isDark) => {
       fontWeight: 'bold',
       height: 40,
     },
+    icon: {
+      fontSize: 24,
+      color: colors.text,
+
+    },
+    iconplus: {
+      fontSize: 20,
+      color: colors.white,
+    },
     categoryItem: {
       marginTop: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       backgroundColor: '#f0f0f0',
+      backgroundColor: colors.four,
       padding: 12,
       borderRadius: 10,
       marginVertical: 6,

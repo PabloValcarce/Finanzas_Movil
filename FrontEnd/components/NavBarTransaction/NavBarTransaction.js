@@ -4,15 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons';
 import { useNavBarLogic } from './NavBarLogic';
-import { styles } from './NavBar.styles'; // 👈 igual que en Settings
-import { useTheme } from '../../context/ThemeContext';
+import { styles } from './NavBar.styles'; 
 
-const NavBarTransaction = () => {
+const NavBarTransaction = ({isDark}) => {
   const { handleLogout } = useNavBarLogic();
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
-  const { isDark } = useTheme();
-  const dynamicStyles = styles(isDark); // 👈 igual que en Settings
+  const dynamicStyles = styles(isDark); 
 
   const toggleMenu = () => setMenuVisible((prev) => !prev);
 

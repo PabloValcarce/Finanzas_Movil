@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import { View, Text, FlatList, ScrollView, TouchableOpacity, Switch, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from 'react-native-vector-icons';
 import Dialog from 'react-native-dialog';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useTransactions } from '../../context/TransactionContext';
 import { useCategories } from '../../context/CategoryContext';
-import { useTheme } from '../../context/ThemeContext'; // Contexto para obtener el tema
 import styles from './TransactionsResults.styles'; // Usamos los estilos adaptados al tema
 
-const TransactionsResults = () => {
+const TransactionsResults = ({isDark}) => {
   const { transactions, updateTransaction, deleteTransaction } = useTransactions();
   const { categories, loadCombinedCategories } = useCategories();
   const [visible, setVisible] = useState(false);
@@ -21,8 +20,9 @@ const TransactionsResults = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
-  const { isDark } = useTheme(); // Obtenemos el estado de isDark desde el contexto del tema
-  const dynamicStyles = styles(isDark); // Usamos los estilos adaptados al tema
+  const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
+
+
 
   useEffect(() => {
     loadCombinedCategories();
@@ -84,10 +84,9 @@ const TransactionsResults = () => {
       hideDialog();
     }
   };
-
   const renderItem = ({ item }) => {
     const rowClass = item.amount < 0 ? dynamicStyles.negative : dynamicStyles.positive;
-
+    
     return (
       <View style={[dynamicStyles.row, rowClass]}>
         <Text style={dynamicStyles.cell}>{item.description}</Text>
@@ -95,7 +94,7 @@ const TransactionsResults = () => {
         <Text style={dynamicStyles.cell}>{item.amount.toFixed(2)} €</Text>
         <View style={dynamicStyles.buttonContainer}>
           <TouchableOpacity style={dynamicStyles.editButton} onPress={() => handleEdit(item)}>
-            <MaterialIcons name="edit" size={24} color="#007B8F" />
+            <MaterialIcons name="edit" style={dynamicStyles.editButton} />
           </TouchableOpacity>
 
           <TouchableOpacity style={dynamicStyles.deleteButton} onPress={() => showDeleteDialog(item)}>

@@ -12,13 +12,13 @@ export default (isDark) => {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: 30,
-      backgroundColor: colors.four, // Fondo dependiendo del modo
+      backgroundColor: colors.tertiary, // Fondo dependiendo del modo
     },
     label: {
       fontWeight: 'bold',
       marginBottom: 10,
       fontSize: 20,
-      color: colors.primary, // Color de texto dependiendo del modo
+      color: colors.text, // Color de texto dependiendo del modo
     },
     dateFilter: {
       flexDirection: 'column',
@@ -28,7 +28,7 @@ export default (isDark) => {
       zIndex: 10,
     },
     spentData: {
-      backgroundColor: colors.white, // Fondo de la tarjeta dependiendo del modo
+      backgroundColor: colors.four, // Fondo de la tarjeta dependiendo del modo
       borderRadius: 10,
       padding: 10,
       marginBottom: 10,
@@ -37,7 +37,6 @@ export default (isDark) => {
       marginTop: 20,
     },
     spentList: {
-      backgroundColor: colors.background, // Fondo de la lista dependiendo del modo
       marginTop: 30,
       marginBottom: 40,
       borderRadius: 10,

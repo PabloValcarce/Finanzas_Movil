@@ -13,7 +13,8 @@ const { width } = Dimensions.get('screen');
 
 export default function CardItem ({ month, index, scrollX }) {
   const { isDark } = useTheme();
-  const dynamicStyles = styles(isDark);
+  const { styles: dynamicStyles, colors } = styles(isDark);
+
 
   const monthDate = new Date(`${month.month}-01`);
   const monthName = monthDate.toLocaleString("es-ES", { month: "long" });
@@ -28,12 +29,7 @@ export default function CardItem ({ month, index, scrollX }) {
   const seasonalIcon = getSeasonalIcon(monthDate.getMonth() + 1);
 
   const getSeasonalBackground = (monthNumber) => {
-    const seasonColors = {
-      winter: "#ADD8E6",
-      spring: "#D6EBD1",
-      summer: "#F8F2D0",
-      autumn: "#E6D1B3"
-    };
+    const seasonColors = colors.seasonal;
 
     if ([12, 1, 2].includes(monthNumber)) return seasonColors.winter;
     if ([3, 4, 5].includes(monthNumber)) return seasonColors.spring;
@@ -68,7 +64,7 @@ export default function CardItem ({ month, index, scrollX }) {
           <Text style={dynamicStyles.cardValue}>Total Gastado:</Text>
           <Text style={dynamicStyles.amount}>${month.total_spent}</Text>
           <Text style={dynamicStyles.cardCategory}>Categoría con más gasto:</Text> 
-          <Text>{month.top_category}</Text>
+          <Text style={dynamicStyles.cardCategoryText}>{month.top_category}</Text>
         </View>
 
         <View style={dynamicStyles.subscriptionsContainer}>

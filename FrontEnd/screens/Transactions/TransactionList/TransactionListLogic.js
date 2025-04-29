@@ -3,6 +3,7 @@ import { useTransactions as useTransactionContext } from '../../../context/Trans
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
 import { useCategories } from '../../../context/CategoryContext';
+import { useTheme } from '../../../context/ThemeContext'; 
 
 export const useTransactions = () => {
   const { transactions, loadTransactions, loading } = useTransactionContext();
@@ -16,7 +17,12 @@ export const useTransactions = () => {
   } = useCategories();
   const [nuevaCategoria, setNuevaCategoria] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('smile');
+  const { isDark } = useTheme();
 
+  useEffect(() => {
+    console.log('Tema actualizado:', isDark);  // Verifica si isDark cambia
+  }, [isDark]);
+  
   useEffect(() => {
     const fetchUserId = async () => {
       const access_token = await AsyncStorage.getItem('access_token');
@@ -114,6 +120,7 @@ export const useTransactions = () => {
     selectedIcon,
     agregarCategoria,
     eliminarCategoria,
+    isDark
   };
 };
 export default useTransactions;

@@ -8,12 +8,13 @@ export default (isDark) => {
     container: {
       flex: 1,
       padding: 10,
-      backgroundColor: colors.white, 
+      backgroundColor: colors.tableBackground, 
+      borderRadius: 10,
     },
     title: {
       fontSize: 20,
       fontWeight: "bold",
-      color: colors.primary, 
+      color: colors.text, 
       textAlign: "center",
       marginBottom: 10,
     },
@@ -27,7 +28,7 @@ export default (isDark) => {
     headerRow: {
       flexDirection: "row",
       borderBottomWidth: 1,
-      borderBottomColor: colors.tableBorder, // Línea de borde según el tema
+      borderBottomColor: colors.text, // Línea de borde según el tema
     },
     header: {
       flex: 1,
@@ -35,7 +36,8 @@ export default (isDark) => {
       textAlign: "center",
       paddingTop: 8,
       paddingBottom: 8,
-      backgroundColor: colors.tableBorder, // Fondo de encabezado
+      backgroundColor: colors.tableBorder,
+      color: colors.text, 
     },
     row: {
       flexDirection: "row",

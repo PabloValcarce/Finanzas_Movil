@@ -19,7 +19,7 @@ export const styles = (isDark) => {
       padding: 8,
       borderRadius: 5,
       borderWidth: 1,
-      borderColor: colors.borderColor,
+      borderColor: colors.text,
       backgroundColor: colors.tertiary,
       height: 30,
       paddingLeft: 20,
@@ -27,18 +27,20 @@ export const styles = (isDark) => {
       fontSize: 14,
     },
     dateText: {
-      color: colors.text2,
+      color: colors.text,
     },
     resetButton: {
       padding: 5,
       marginLeft: 10,
-      backgroundColor: colors.buttonBackground,
       borderRadius: 5,
-      borderColor: colors.borderColor,
+      borderColor: colors.text,
       borderWidth: 1,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
     },
+    resetButtonIcon:{
+      color: colors.text,
+    }
   });
 };

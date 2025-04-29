@@ -1,30 +1,60 @@
 export const lightColors = {
-    primary: '#144468',
-    secondary: '#4682B4',
-    tertiary: '#ddd',
-    four:'#f0f0f0',
-    button: '#FF4500',
-    inputBackground:"#fff",
-    buttonHover: '#f0c8a5',
-    white: 'white',
-    background: '#144468',
-    tableHeader:'#B0BEC5',
-    rowEven: "#F5F5F5", 
-    rowOdd: "#FFFFFF", 
-  };
-  
-  export const darkColors = {
-    primary: '#0f2d44',           // Más oscuro que el original, pero en la misma línea azul
-    secondary: '#3b6a8f',         // Azul más apagado para contrastar
-    tertiary: '#2a2a2a',          // Gris oscuro neutro
-    four: '#1e1e1e',              // Fondo secundario
-    button: '#ff5722',            // Naranja ligeramente más suave
-    inputBackground: '#2c2c2c',   // Fondo de inputs gris oscuro
-    buttonHover: '#cc9977',       // Tono cálido y suave para hover
-    white: '#e0e0e0',             // Blanco suavizado para que no canse la vista
-    background: '#121212',        // Fondo general oscuro
-    tableHeader: '#37474F',       // Azul grisáceo para encabezados de tabla
-    rowEven: '#1e1e1e',           // Fondo para filas pares
-    rowOdd: '#2a2a2a',
-  };
-  
+  primary: '#144468',
+  secondary: '#4682B4',
+  tertiary: '#ddd',
+  four: '#f0f0f0',
+  text: '#144468',
+  button: '#FF4500',
+  inputBackground: "#fff",
+  buttonHover: '#f0c8a5',
+  white: 'white',
+  background: '#144468',
+  loginBackground:'#144468',
+  loginSwitchButton:'#FF4500',
+  loginSubmitButton:'#87CEEB',
+  tableHeader: '#B0BEC5',
+  rowEven: "#F5F5F5",
+  rowOdd: "#FFFFFF",
+  positive: '#d0eaff',
+  negative: '#f0c8a5',
+  borderColor: '#e0ecf5',
+  tableBackground: 'white',
+  seasonal: {
+    winter: "#ADD8E6",
+    spring: "#D6EBD1",
+    summer: "#F8F2D0",
+    autumn: "#E6D1B3"
+  }
+};
+
+export const darkColors = {
+  primary: '#144468',           // Más oscuro que el original, pero en la misma línea azul
+  secondary: '#3b6a8f',         // Azul más apagado para contrastar
+  tertiary: '#666666',          // Gris oscuro neutro
+  four: '#4a4a4a',
+  text: '#e0ecf5',
+  button: '#ff5722',            // Naranja ligeramente más suave
+  inputBackground: '#2c2c2c',   // Fondo de inputs gris oscuro
+  buttonHover: '#cc9977',       // Tono cálido y suave para hover
+  white: '#e0e0e0',             // Blanco suavizado para que no canse la vista
+  background: '#121212',        // Fondo general oscuro
+  loginBackground:'#223b50',
+  loginSwitchButton:'#CC3700',
+  loginSubmitButton:'#6699B3',
+  tableHeader: '#37474F',       // Azul grisáceo para encabezados de tabla
+  tableBackground: '#1e1e1e', // Fondo de tabla gris oscuro
+  rowEven: '#3a3a3a',  // Más claro que #1e1e1e
+  rowOdd: '#4a4a4a',  // Más claro que #2a2a2a
+  positive: '#4d7a99',
+  negative: '#8c5e39',
+  borderColor: '#e0ecf5', // Color de borde gris oscuro
+  seasonal: {
+    winter: "#224466",
+    spring: "#1E4021",
+    summer: "#5C4E1A",
+    autumn: "#4B2E1F"
+  }
+
+
+};
+
