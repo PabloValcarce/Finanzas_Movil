@@ -10,8 +10,10 @@ export default (isDark) => {
       justifyContent: 'center',
       alignItems: 'center',
       padding: 10,
-      backgroundColor: colors.tertiary, // Fondo dependiendo del modo
+      backgroundColor: colors.tertiary,
+      marginBottom: 40,
     },
+
     title: {
       fontSize: 20,
       fontWeight: 'bold',

@@ -11,7 +11,7 @@ export default (isDark) => {
     },
     label: {
       marginRight: 70,
-      color: colors.text2, // Dependiendo del tema, cambia el color del texto
+      color: colors.text, 
     },
     Switch: {
       zIndex: 1,

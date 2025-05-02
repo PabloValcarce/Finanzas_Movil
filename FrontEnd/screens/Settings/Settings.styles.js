@@ -18,7 +18,7 @@ export default (isDark) => {
       margin: 20,
       padding: 20,
       marginTop: 70,
-      backgroundColor: colors.white,
+      backgroundColor: colors.tertiary,
       borderRadius: 10,
       gap: 50,
     },
@@ -28,11 +28,11 @@ export default (isDark) => {
       fontWeight: 'bold',
       textAlign: 'center',
       marginBottom: 10,
-      color: colors.primary, // Aplica el color de texto según el tema
+      color: colors.text, // Aplica el color de texto según el tema
     },
     itemText: {
       fontSize: 15,
-      color: colors.text2, // Aplica color de texto según el tema
+      color: colors.text, // Aplica color de texto según el tema
     },
 
     itemRow: {
