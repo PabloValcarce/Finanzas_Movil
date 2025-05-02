@@ -8,11 +8,13 @@ import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker
 import styles from './Savings.styles';
 import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import SavingsCards from '../../../components/Savings/Cards/SavingsCards';
+import { useTranslation } from 'react-i18next';
 
 function Savings() {
   const { dateRange, setDateRange, filteredTransactions, handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
   const { isDark } = useTheme();  
   const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
+  const { t } = useTranslation();
 
   if (loading) {
     return (
@@ -27,7 +29,7 @@ function Savings() {
       <View style={dynamicStyles.savingsPageContent}>
         <View style={dynamicStyles.dateFilter}>
           <View style={dynamicStyles.headDatePicker}>
-            <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
+            <Text style={dynamicStyles.label}>{t('Savings.fechas')}</Text>
           </View>
           <DateRangePicker
             startDate={dateRange.startDate}

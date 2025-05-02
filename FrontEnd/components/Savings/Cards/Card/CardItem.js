@@ -8,16 +8,17 @@ import Animated, {
 import { useTheme } from '../../../../context/ThemeContext'; // Asegúrate de tener un contexto para el tema
 import Icon from "react-native-vector-icons/FontAwesome5";
 import styles from "./CardItem.styles";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../assets/language/i18n"
 
 const { width } = Dimensions.get('screen');
 
 export default function CardItem ({ month, index, scrollX }) {
   const { isDark } = useTheme();
   const { styles: dynamicStyles, colors } = styles(isDark);
-
-
+  const { t } = useTranslation();
   const monthDate = new Date(`${month.month}-01`);
-  const monthName = monthDate.toLocaleString("es-ES", { month: "long" });
+  const monthName = monthDate.toLocaleString(i18n.language, { month: "long" });
 
   const getSeasonalIcon = (monthNumber) => {
     if ([12, 1, 2].includes(monthNumber)) return { name: "snowflake", color: "#00BFFF" };
@@ -61,16 +62,16 @@ export default function CardItem ({ month, index, scrollX }) {
         </View>
 
         <View style={dynamicStyles.summary}>
-          <Text style={dynamicStyles.cardValue}>Total Gastado:</Text>
+          <Text style={dynamicStyles.cardValue}>{t('Savings.SavingsCards.CardItem.TotalSpent')}</Text>
           <Text style={dynamicStyles.amount}>${month.total_spent}</Text>
-          <Text style={dynamicStyles.cardCategory}>Categoría con más gasto:</Text> 
+          <Text style={dynamicStyles.cardCategory}>{t('Savings.SavingsCards.CardItem.Category')}</Text> 
           <Text style={dynamicStyles.cardCategoryText}>{month.top_category}</Text>
         </View>
 
         <View style={dynamicStyles.subscriptionsContainer}>
-          <Text style={dynamicStyles.subscriptionsTitle}>📌 Suscripciones:</Text>
+          <Text style={dynamicStyles.subscriptionsTitle}>📌 {t('Savings.SavingsCards.CardItem.Subscription')}</Text>
           <Text style={dynamicStyles.cardSubscriptions}>
-            {Array.isArray(month.subscriptions) ? month.subscriptions.join(", ") : "No hay suscripciones"}
+            {Array.isArray(month.subscriptions) ? month.subscriptions.join(", ") : t('Savings.SavingsCards.CardItem.NoSubscription')}
           </Text>
         </View>
       </View>

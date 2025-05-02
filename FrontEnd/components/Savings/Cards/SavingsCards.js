@@ -5,6 +5,7 @@ import {useTheme} from '../../../context/ThemeContext';
 import Animated, { useSharedValue, useAnimatedScrollHandler } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
 import CardItem from '../Cards/Card/CardItem'
+import { useTranslation } from 'react-i18next';
 
 
 const { width } = Dimensions.get('screen');
@@ -13,6 +14,7 @@ function SavingsCards({ monthlySavings }){
     const scrollX = useSharedValue(0); 
     const { isDark } = useTheme();
     const dynamicStyles = styles(isDark);
+    const { t } = useTranslation();
 
     const onScrollHandler = useAnimatedScrollHandler({
         onScroll: (e) => {
@@ -22,7 +24,7 @@ function SavingsCards({ monthlySavings }){
     
     return (
         <View style={dynamicStyles.container}>
-            <Text style={dynamicStyles.title}>Historial de Ahorro Mensual</Text>
+            <Text style={dynamicStyles.title}>{t('Savings.SavingsCards.title')}</Text>
             <Animated.FlatList
                 data={monthlySavings}
                 keyExtractor={(item) => item.month}

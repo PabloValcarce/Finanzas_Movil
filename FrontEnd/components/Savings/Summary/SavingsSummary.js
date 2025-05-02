@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import styles from './SavingsSummary.styles';
 import { useTheme } from '../../../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 function SavingsSummary({ transactions }) {
     const {
@@ -14,21 +15,22 @@ function SavingsSummary({ transactions }) {
         = SavingsSummaryLogic(transactions);    
     const { isDark } = useTheme();
     const dynamicStyles = styles(isDark);
+    const { t } = useTranslation();
         
     return (
         <View style={dynamicStyles.container}>
-            <Text style={dynamicStyles.title}>Resumen Financiero</Text>
+            <Text style={dynamicStyles.title}>{t('Savings.SavingsSummary.title')}</Text>
             {/* Dinero Ingresado */}
             <View style={[dynamicStyles.card, dynamicStyles.cardPositive]}>
                 <FontAwesome5 name="arrow-down" size={24} color="white" />
-                <Text style={dynamicStyles.label}>Dinero ingresado</Text>
-                <Text style={dynamicStyles.value}>${totalEarn}</Text>
+                <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Earn')}</Text>
+                <Text style={dynamicStyles.value}>{totalEarn} €</Text>
             </View>
             {/* Dinero Gastado */}
             <View style={[dynamicStyles.card, dynamicStyles.cardNegative]}>
                 <FontAwesome5 name="arrow-up" size={24} color="white" />
-                <Text style={dynamicStyles.label}>Dinero gastado</Text>
-                <Text style={dynamicStyles.value}>${totalSpent}</Text>
+                <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Spent')}</Text>
+                <Text style={dynamicStyles.value}>{totalSpent} €</Text>
             </View>
             <View style={[
                 dynamicStyles.card,
@@ -39,8 +41,8 @@ function SavingsSummary({ transactions }) {
                     size={24}
                     color="white"
                 />
-                <Text style={dynamicStyles.label}>Dinero ahorrado</Text>
-                <Text style={dynamicStyles.value}>${totalSavings}</Text>
+                <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Saving')}</Text>
+                <Text style={dynamicStyles.value}>{totalSavings} €</Text>
             </View>
         </View>
     );

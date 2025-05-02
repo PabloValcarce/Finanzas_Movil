@@ -1,0 +1,30 @@
+{
+    "Savings": {
+        "fechas": "Filtro entre fechas:",
+        "SavingsSummary": {
+            "title": "Resumen Financiero",
+            "Ingresos": "Dinero ingresado",
+            "Gasto": "Dinero gastado",
+            "Ahorro": "Dinero ahorrado"
+        },
+        "SavingsCircularChart":{
+            "title": "Distribución de gastos y ahorros",
+            "subtitle":"Gastado"
+        },
+        "SavingsCards":{
+            "title": "Historial de ahorro mensual",
+            "CardItem":{
+                "TotalSpent":"Total gastado",
+                "Category":"Categoría con más gasto :",
+                "Suscription":"Suscripciones activas :"
+            }
+        }
+    },
+    "Spent": {},
+    "Transactions": {},
+    "Settings": {},
+    "Navbar": {},
+    "DashboardLogin": {},
+    "Home": {},
+    "DateRangePicker": {}
+}

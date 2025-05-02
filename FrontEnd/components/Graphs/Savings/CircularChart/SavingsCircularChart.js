@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import Svg, { Circle, G, Text as SvgText } from 'react-native-svg';
 import { styles } from './SavingsCircularChart.styles';
 import { useTheme } from '../../../../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 function SavingsCircularChart({ transactions }) {
     const currentMonth = useMemo(() => {
@@ -10,6 +11,7 @@ function SavingsCircularChart({ transactions }) {
     }, []);
     const { isDark } = useTheme();
     const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
+    const { t } = useTranslation();
 
     const currentMonthTransactions = useMemo(() => {
         return transactions.filter(transaction => {
@@ -42,7 +44,7 @@ function SavingsCircularChart({ transactions }) {
 
     return (
         <View style={dynamicStyles.container}>
-            <Text style={dynamicStyles.chartTitle}>Distribución de gastos y ahorros</Text>
+            <Text style={dynamicStyles.chartTitle}>{t('Savings.SavingsCircularChart.title')}</Text>
             <Svg height="150" width="150" viewBox="0 0 120 120">
                 <G rotation="-90" origin="60,60">
                     {/* Fondo del círculo */}
@@ -84,7 +86,7 @@ function SavingsCircularChart({ transactions }) {
                     fill={dynamicStyles.chartTitleColor.color}
                     fontWeight="bold"
                 >
-                    {total === 0 ? "No data" : `${spentPercentage.toFixed(1)}% Gastado`}
+                    {total === 0 ? "No data" : `${spentPercentage.toFixed(1)}% ${t('Savings.SavingsCircularChart.subtitle')}`}
 
                 </SvgText>
             </Svg>
