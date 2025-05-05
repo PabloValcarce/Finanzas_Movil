@@ -140,3 +140,29 @@ def get_monthly_subscription_total(current_user):
     ).scalar() or 0  # Si no hay transacciones, retorna 0
 
     return jsonify({'total_subscription_expense': total})
+
+@transactions.route('/transactions/recent', methods=['GET'])
+@token_required
+def get_recent_transactions(current_user):
+    now = datetime.now(timezone.utc)
+    thirty_days_ago = now - timedelta(days=30)
+
+    recent_transactions = Transaction.query.filter(
+        Transaction.user_id == current_user.id,
+        Transaction.date >= thirty_days_ago
+    ).order_by(Transaction.date.desc()).all()
+
+    if not recent_transactions:
+        return jsonify({'message': 'No recent transactions found'}), 404
+
+    # Devuelve una lista de diccionarios
+    return jsonify([{
+        'id': t.id,
+        'description': t.description,
+        'amount': t.amount,
+        'date': t.date.isoformat() if t.date else None,
+        'categoria': t.categoria.nombre if t.categoria else None,
+        'is_subscription': t.is_subscription,
+        'next_payment_date': t.next_payment_date.isoformat() if t.next_payment_date else None
+    } for t in recent_transactions])
+

@@ -73,7 +73,7 @@ function TransactionsList() {
 
   return (
     <ScrollView style={dynamicStyles.container}>
-      <NavBarTransaction isDark={isDark} />
+      <NavBarTransaction />
       <View style={dynamicStyles.TransactionListContent}>
         <View style={dynamicStyles.head}>
           <View style={dynamicStyles.CategoriesPerso}>

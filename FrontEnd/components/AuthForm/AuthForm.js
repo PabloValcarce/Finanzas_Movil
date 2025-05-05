@@ -4,6 +4,7 @@ import useAuth from '../../utils/useAuth';
 import Icon from 'react-native-vector-icons/Entypo';
 import { useTheme } from '../../context/ThemeContext';
 import  styles  from './AuthForm.styles'; 
+import { useTranslation } from 'react-i18next';
 
 function AuthForm() {
   const {
@@ -24,15 +25,16 @@ function AuthForm() {
 
   const { isDark } = useTheme();
   const dynamicStyles = styles(isDark);
+  const { t } = useTranslation();
 
   return (
     <View style={dynamicStyles.authForm}>
-      <Text style={dynamicStyles.title}>{isRegister ? 'Register' : 'Login'}</Text>
+      <Text style={dynamicStyles.title}>{isRegister ? t('DashBoard.titleRegister') : t('DashBoard.titleLogin')}</Text>
       <View style={dynamicStyles.form}>
         {isRegister && (
           <TextInput
             style={dynamicStyles.input}
-            placeholder="Name"
+            placeholder={t('DashBoard.Name')}
             value={name}
             onChangeText={(text) => setName(text)}
             placeholderTextColor={isDark ? '#aaa' : '#555'}
@@ -40,7 +42,7 @@ function AuthForm() {
         )}
         <TextInput
           style={[dynamicStyles.input, emailError ? dynamicStyles.errorInput : null]}
-          placeholder="Email"
+          placeholder={t('DashBoard.Email')}
           value={email}
           onChangeText={handleEmailChange}
           placeholderTextColor={isDark ? '#aaa' : '#555'}
@@ -48,7 +50,7 @@ function AuthForm() {
         {emailError && <Text style={dynamicStyles.errorText}>{emailError}</Text>}
         <TextInput
           style={dynamicStyles.input}
-          placeholder="Password"
+          placeholder={t('DashBoard.Password')}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry
@@ -59,7 +61,7 @@ function AuthForm() {
           onPress={handleSubmit}
         >
           <Text style={dynamicStyles.submitButtonText}>
-            {isRegister ? 'Register' : 'Login'}
+            {isRegister ? t('DashBoard.titleRegister') : t('DashBoard.titleLogin')}
           </Text>
         </TouchableOpacity>
 
@@ -78,7 +80,7 @@ function AuthForm() {
         onPress={() => setIsRegister(!isRegister)}
       >
         <Text style={dynamicStyles.switchButtonText}>
-          {isRegister ? 'Cambiar a Login' : 'Cambiar a Registro'}
+          {isRegister ? t('DashBoard.ChangeLogin') : t('DashBoard.titleRegister')}
         </Text>
       </TouchableOpacity>
     </View>

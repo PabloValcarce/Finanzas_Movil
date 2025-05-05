@@ -15,6 +15,8 @@ export const TransactionProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const { checkToken } = useAuth();
   const [totalSubscriptionExpense, setTotalSubscriptionExpense] = useState(0);
+  const [recentTransactions, setRecentTransactions] = useState([]);
+
 
   useEffect(() => {
     loadTransactions();
@@ -132,14 +134,43 @@ export const TransactionProvider = ({ children }) => {
     } finally {
         setLoading(false);
     }
-};
+  }
+    //Transacciones últimos 30 dias
+
+    const loadRecentTransactions = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+    
+        const access_token = await AsyncStorage.getItem('access_token');
+        if (!access_token) {
+          setError('Token not found');
+          return;
+        }
+    
+        const response = await api.get('/api/transactions/recent', {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        });
+    
+        setRecentTransactions(response.data);
+      } catch (error) {
+        console.error('Failed to load recent transactions:', error);
+        setError('Failed to load recent transactions');
+      } finally {
+        setLoading(false);
+      }
+    };
 
   return (
     <TransactionContext.Provider value={{ 
       transactions, 
       addTransaction, 
+      recentTransactions,
       updateTransaction, 
       deleteTransaction, 
+      loadRecentTransactions,
       loadTransactions, 
       loadSuscriptions,
       totalSubscriptionExpense,

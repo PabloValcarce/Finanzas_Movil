@@ -1,29 +1,40 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ScrollView, Text, ActivityIndicator, View } from 'react-native';
 import useTransactionHomeLogic from './TransactionHomeLogic';
 import styles from './TransactionHome.styles';
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
+import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
+import { useTheme } from '../../../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 function TransactionHome() {
-  const { loading, totalSubscriptionExpense } = useTransactionHomeLogic();
+  const {
+    loading,
+    recentTransactions,
+    totalSubscriptionExpense,
+  } = useTransactionHomeLogic();
+
+  const { isDark } = useTheme();
+  const dynamicStyles = styles(isDark);
+  const { t } = useTranslation();
 
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
+      <View style={dynamicStyles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={dynamicStyles.container}>
       <NavBarTransaction />
-      <View style={styles.transactionsPage}>
-        <View style={styles.suscriptionsContainer}>
-          <Text>Gasto suscripciones mensuales</Text>
-          <Text>${totalSubscriptionExpense}</Text>
+      <View style={dynamicStyles.transactionsPageContent}>
+        <View style={dynamicStyles.transactionsPageData}>
+          <View style={dynamicStyles.savingsData}>
+            <SavingsSummary transactions={recentTransactions} subscriptions={totalSubscriptionExpense} />
+          </View>
         </View>
-
       </View>
     </ScrollView>
   );

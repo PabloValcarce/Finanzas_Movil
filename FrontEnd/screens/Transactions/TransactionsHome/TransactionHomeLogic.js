@@ -5,20 +5,32 @@ import { useTransactions } from "../../../context/TransactionContext";
 const useTransactionHomeLogic = () => {
 
   const { checkToken } = useAuth();
-  const { loading  ,loadSuscriptions,loadTransactions, totalSubscriptionExpense } = useTransactions();
+  const { loading,
+    loadSuscriptions,
+    recentTransactions,
+    loadRecentTransactions,
+    loadTransactions,
+    totalSubscriptionExpense
+  } = useTransactions();
 
   const verifyToken = async () => {
-    await checkToken();  
+    await checkToken();
   };
 
   useEffect(() => {
     verifyToken();
     loadTransactions();
     loadSuscriptions();
+    loadRecentTransactions();
   }, []);
 
 
-  return { loading,totalSubscriptionExpense };
+
+  return {
+    loading,
+    totalSubscriptionExpense,
+    recentTransactions
+  };
 };
 
 export default useTransactionHomeLogic; // Exportación por defecto

@@ -87,9 +87,40 @@
             }
         }
     },
-    "Settings": {},
-    "Navbar": {},
-    "DashboardLogin": {},
+    "Settings": {
+        "Information":{
+            "title":"Información",
+            "Privacy":"Política de privacidad"
+        },
+        "Preferences":{
+            "title":"Preferencias",
+            "Language":"Idioma",
+            "Currency":"Moneda",
+            "DarkMode":"Modo oscuro"
+        },
+        "Account":{
+            "title":"Cuenta",
+            "LogOut":"Cerrar sesión"
+        }
+    },
+    "Navbar": {
+        "Title":"Finanzas",
+        "Menu":{
+            "Savings":"Ahorros",
+            "Spent":"Gastos",
+            "Transactions":"Transacciones",
+            "Settings":"Configuración"
+        }
+    },
+    "DashBoard": {
+        "titleLogin":"Iniciar sesión",
+        "titleRegister":"Registrarse",
+        "Email":"Correo electrónico",
+        "Password":"Contraseña",
+        "Name":"Nombre",
+        "ChangeLogin":"Cambiar a Login",
+        "ChangeRegister":"Cambiar a Registro"
+    },
     "Home": {},
     "DateRangePicker": {
         "title":"Filtro entre fechas :",

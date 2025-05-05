@@ -1,54 +1,44 @@
+// SavingsSummaryLogic.js
 import { useMemo } from 'react';
 
-export const SavingsSummaryLogic = (transactions) => {
+export const SavingsSummaryLogic = (transactions, subscriptions) => {
     return useMemo(() => {
-        const totalEarn = transactions
-            .filter((transaction) => transaction.amount > 0)
-            .reduce((sum, transaction) => sum + transaction.amount, 0);
+        
 
-        const totalSavings = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
+        const totalEarn = transactions
+            .filter(t => typeof t.amount === 'number' && t.amount > 0)
+            .reduce((sum, t) => sum + t.amount, 0);
 
         const totalSpent = transactions
-            .filter((transaction) => transaction.amount < 0)
-            .reduce((sum, transaction) => sum + transaction.amount, 0);
+            .filter(t => typeof t.amount === 'number' && t.amount < 0)
+            .reduce((sum, t) => sum + t.amount, 0);
 
-        const monthlySavings = transactions.reduce((acc, transaction) => {
-            const date = new Date(transaction.date);
-            const year = date.getFullYear();
-            const month = date.getMonth(); 
-            const key = `${year}-${month}`; 
+        const totalBalance = transactions.reduce((sum, t) => (
+            typeof t.amount === 'number' && !isNaN(t.amount) ? sum + t.amount : sum
+        ), 0);
 
-            if (!acc[key]) {
-                acc[key] = 0;
-            }
-            acc[key] += transaction.amount;
+        const monthlySavings = transactions.reduce((acc, t) => {
+            if (!t.date) return acc;
+            const date = new Date(t.date);
+            const key = `${date.getFullYear()}-${date.getMonth()}`;
+            acc[key] = (acc[key] || 0) + t.amount;
             return acc;
         }, {});
 
         const formattedMonthlySavings = Object.entries(monthlySavings)
             .map(([month, savings]) => {
-                const parts = month.split("-"); // Separar "2025-2"
-
-                if (parts.length !== 2) {
-                    console.error("Formato de fecha inválido:", month);
-                    return null; // Evitar errores si el formato es incorrecto
-                }
-
-                const year = parseInt(parts[0], 10); // Obtener año
-                const monthNumber = parseInt(parts[1], 10); // Obtener mes (1-12)
-
+                const [year, m] = month.split('-');
+                const monthNum = parseInt(m, 10);
                 return {
-                    month: `${year}-${monthNumber.toString().padStart(2, "0")}`, // Asegurar formato "YYYY-MM"
+                    month: `${year}-${(monthNum + 1).toString().padStart(2, '0')}`,
                     savings,
-                    year,
-                    monthIndex: monthNumber - 1 // Convertir "2" en 1 para ordenar bien
+                    year: parseInt(year),
+                    monthIndex: monthNum
                 };
             })
-            .filter(item => item !== null) // Eliminar valores nulos por errores
             .sort((a, b) => a.year === b.year ? a.monthIndex - b.monthIndex : a.year - b.year)
-            .slice(-12); // Últimos 12 meses
-        return { totalEarn, totalSpent, totalSavings };
+            .slice(-12);
 
-
-    }, [transactions]);
+        return { totalEarn, totalSpent, totalBalance, formattedMonthlySavings, totalSubscriptionExpense };
+    }, [transactions, subscriptions]); // 👈 Añadido como dependencia
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SavingsSummaryLogic } from './SavingsSummaryLogic';
 import { View, Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -6,17 +6,22 @@ import styles from './SavingsSummary.styles';
 import { useTheme } from '../../../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
 
-function SavingsSummary({ transactions }) {
+function SavingsSummary({ transactions ,subscriptions }) {
+
+
+    console.log(subscriptions);
+    
     const {
         totalEarn,
         totalSpent,
-        totalSavings,
-        }
-        = SavingsSummaryLogic(transactions);    
+        totalBalance,
+    }
+        = SavingsSummaryLogic(transactions, subscriptions);
+        
     const { isDark } = useTheme();
     const dynamicStyles = styles(isDark);
     const { t } = useTranslation();
-        
+
     return (
         <View style={dynamicStyles.container}>
             <Text style={dynamicStyles.title}>{t('Savings.SavingsSummary.title')}</Text>
@@ -32,17 +37,23 @@ function SavingsSummary({ transactions }) {
                 <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Spent')}</Text>
                 <Text style={dynamicStyles.value}>{totalSpent} €</Text>
             </View>
+            {/* Dinero Subscripciones */}
+            <View style={[dynamicStyles.card, dynamicStyles.cardNegative]}>
+                <FontAwesome5 name="arrow-up" size={24} color="white" />
+                <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Spent')}</Text>
+                <Text style={dynamicStyles.value}>{subscriptions} €</Text>
+            </View>
             <View style={[
                 dynamicStyles.card,
-                totalSavings < 0 ? dynamicStyles.cardNegative : dynamicStyles.cardPositive
+                totalBalance < 0 ? dynamicStyles.cardNegative : dynamicStyles.cardPositive
             ]}>
                 <FontAwesome5
-                    name={totalSavings < 0 ? "exclamation-circle" : "check-circle"}
+                    name={totalBalance < 0 ? "exclamation-circle" : "check-circle"}
                     size={24}
                     color="white"
                 />
                 <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Saving')}</Text>
-                <Text style={dynamicStyles.value}>{totalSavings} €</Text>
+                <Text style={dynamicStyles.value}>{totalBalance} €</Text>
             </View>
         </View>
     );
