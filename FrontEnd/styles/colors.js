@@ -19,6 +19,7 @@ export const lightColors = {
   negative: '#f0c8a5',
   borderColor: '#e0ecf5',
   tableBackground: 'white',
+  inputBackground:'white',
   seasonal: {
     winter: "#ADD8E6",
     spring: "#D6EBD1",
@@ -41,6 +42,7 @@ export const darkColors = {
   loginBackground:'#223b50',
   loginSwitchButton:'#CC3700',
   loginSubmitButton:'#6699B3',
+  inputBackground:'#3b6a8f',
   tableHeader: '#37474F',       // Azul grisáceo para encabezados de tabla
   tableBackground: '#1e1e1e', // Fondo de tabla gris oscuro
   rowEven: '#3a3a3a',  // Más claro que #1e1e1e

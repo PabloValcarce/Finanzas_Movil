@@ -2,7 +2,7 @@
 import { StyleSheet } from 'react-native';
 import { lightColors, darkColors } from '../../styles/colors';
 
-export const styles = (isDark) => {
+const styles = (isDark) => {
   const colors = isDark ? darkColors : lightColors;
 
   return StyleSheet.create({
@@ -30,7 +30,7 @@ export const styles = (isDark) => {
       borderRadius: 5,
       borderColor: '#ccc',
       borderWidth: 1,
-      backgroundColor: colors.secondary,
+      backgroundColor: colors.inputBackground,
       color: colors.text,
     },
     errorInput: {
@@ -82,3 +82,4 @@ export const styles = (isDark) => {
     }
   });
 };
+export default styles;

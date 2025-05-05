@@ -3,7 +3,7 @@ import { TextInput, Text, View, TouchableOpacity } from 'react-native';
 import useAuth from '../../utils/useAuth';
 import Icon from 'react-native-vector-icons/Entypo';
 import { useTheme } from '../../context/ThemeContext';
-import { styles } from './AuthForm.styles';  // ahora será una función
+import  styles  from './AuthForm.styles'; 
 
 function AuthForm() {
   const {
