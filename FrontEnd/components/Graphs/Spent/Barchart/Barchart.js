@@ -3,11 +3,13 @@ import { View, Text, ActivityIndicator } from "react-native";
 import { Svg, Rect, Text as SvgText } from "react-native-svg";
 import { useCategories } from "../../../../context/CategoryContext";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useTheme } from "../../../../context/ThemeContext"; // Importar el contexto de tema
+import { useTheme } from "../../../../context/ThemeContext"; 
+import { useTranslation } from "react-i18next"; // Para la traducción
 
 function SpentBarChart({ transactions }) {
   const { categories, loading } = useCategories();
   const { isDark } = useTheme();
+  const { t } = useTranslation(); // Para la traducción
 
   const data = useMemo(() => {
     if (!categories || categories.length === 0) {
@@ -55,7 +57,7 @@ function SpentBarChart({ transactions }) {
   return (
     <View style={{ backgroundColor, padding: 10, borderRadius: 10 }}>
       <Text style={{ textAlign: "center", marginBottom: 10, color: textColor }}>
-        Gastos por categoría
+      {t('Spent.SpentBarChart.title')}
       </Text>
       <Svg width={chartWidth} height={chartHeight + 40} viewBox={`0 0 ${chartWidth} ${chartHeight + 50}`}>
         {data.labels.map((iconName, index) => {

@@ -7,6 +7,7 @@ import { useCategories } from '../../context/CategoryContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useTheme } from '../../context/ThemeContext';
 import { styles } from './AddTransaction.styles';
+import { useTranslation } from 'react-i18next';
 
 const AddTransactionLogic = ({ userId }) => {
     const { addTransaction } = useTransactions();
@@ -20,6 +21,7 @@ const AddTransactionLogic = ({ userId }) => {
     const [successMessage, setSuccessMessage] = useState('');
     const { isDark } = useTheme();
     const dynamicStyles = styles(isDark);  // ⬅️ Aplica estilos dinámicos
+    const { t } = useTranslation();
 
     useEffect(() => {
         loadCombinedCategories();
@@ -70,28 +72,28 @@ const AddTransactionLogic = ({ userId }) => {
             </TouchableOpacity>
 
             <Dialog.Container visible={isDialogVisible}>
-                <Dialog.Title style={dynamicStyles.title}>Añadir transacción</Dialog.Title>
+                <Dialog.Title style={dynamicStyles.title}>{t('TransactionsList.AddTransaction.title')}</Dialog.Title>
 
                 {successMessage ? (
                     <Text style={dynamicStyles.successMessage}>{successMessage}</Text>
                 ) : (
                     <>
-                        <Text style={dynamicStyles.subtitle}>Descripción</Text>
+                        <Text style={dynamicStyles.subtitle}>{t('TransactionsList.AddTransaction.Description')}</Text>
                         <Dialog.Input
                             value={description}
                             onChangeText={setDescription}
-                            placeholder="Descripción"
+                            placeholder={t('TransactionsList.AddTransaction.Description')}
                         />
-                        <Text style={dynamicStyles.subtitle}>Cantidad</Text>
+                        <Text style={dynamicStyles.subtitle}>{t('TransactionsList.AddTransaction.Amount')}</Text>
                         <Dialog.Input
                             value={amount}
                             onChangeText={setAmount}
                             keyboardType="numeric"
-                            placeholder="Cantidad"
+                            placeholder={t('TransactionsList.AddTransaction.Amount')}
                         />
 
                         <View style={dynamicStyles.checkboxContainer}>
-                            <Text style={dynamicStyles.checkboxLabel}>Es una suscripción mensual</Text>
+                            <Text style={dynamicStyles.checkboxLabel}>{t('TransactionsList.AddTransaction.Subscription')}</Text>
                             <Switch
                                 value={isSubscription}
                                 onValueChange={setIsSubscription}
@@ -101,7 +103,7 @@ const AddTransactionLogic = ({ userId }) => {
                             />
                         </View>
 
-                        <Text style={dynamicStyles.subtitle}>Categoría</Text>
+                        <Text style={dynamicStyles.subtitle}>{t('TransactionsList.AddTransaction.Category')}</Text>
                         <Dropdown
                             data={categories.map(category => ({
                                 label: category.nombre,
@@ -109,18 +111,18 @@ const AddTransactionLogic = ({ userId }) => {
                             }))}
                             labelField="label"
                             valueField="value"
-                            placeholder="Selecciona categoría"
+                            placeholder={t('TransactionsList.AddTransaction.SelectCategory')}
                             value={categoryId}
                             onChange={item => setCategoryId(item.value)}
                             style={dynamicStyles.select}
                         />
 
                         <View style={dynamicStyles.buttonContainer}>
-                            <Dialog.Button label="Cancelar" onPress={() => setIsDialogVisible(false)} />
+                            <Dialog.Button label={t('TransactionsList.AddTransaction.Cancel')} onPress={() => setIsDialogVisible(false)} />
                             {isLoading ? (
                                 <ActivityIndicator size="small" color="#0000ff" />
                             ) : (
-                                <Dialog.Button label="Añadir" onPress={handleAddTransaction} />
+                                <Dialog.Button label={t('TransactionsList.AddTransaction.Save')} onPress={handleAddTransaction} />
                             )}
                         </View>
                     </>

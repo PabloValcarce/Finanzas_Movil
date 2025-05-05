@@ -1,22 +1,24 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import SpentSummaryLogic from './SpentSummaryLogic';
-import { useTheme } from '../../../context/ThemeContext';  // Asegúrate de tener un contexto para el tema
-import styles from './SpentSummary.styles'; // Usamos los estilos adaptados al tema
+import { useTheme } from '../../../context/ThemeContext';  
+import styles from './SpentSummary.styles'; 
+import { useTranslation } from 'react-i18next'; // Para la traducción
 
 const SpentSummary = ({ transactions }) => {
   const totalSpent = SpentSummaryLogic(transactions);
-  const { isDark } = useTheme(); // Obtenemos el estado de isDark desde el contexto del tema
-  const dynamicStyles = styles(isDark); // Pasamos el isDark a los estilos
+  const { isDark } = useTheme(); 
+  const dynamicStyles = styles(isDark); 
+  const { t } = useTranslation();
 
   if (transactions.length === 0) {
-    return <Text>No hay transacciones disponibles.</Text>;
+    return <Text>{t('Spent.SpentSummary.noSpent')}</Text>;
   }
 
   return (
     <View style={dynamicStyles.container}>
-      <Text style={dynamicStyles.title}>Total gastado</Text>
-      <Text style={dynamicStyles.text}>Tus gastos totales: {totalSpent}€</Text>
+      <Text style={dynamicStyles.title}>{t('Spent.SpentSummary.title')}</Text>
+      <Text style={dynamicStyles.text}>{t('Spent.SpentSummary.spent')} {totalSpent}€</Text>
     </View>
   );
 };

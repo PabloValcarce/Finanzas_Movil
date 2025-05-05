@@ -1,6 +1,5 @@
 {
     "Savings": {
-        "fechas": "Filtro entre fechas :",
         "SavingsSummary": {
             "title": "Resumen Financiero",
             "Earn": "Dinero ingresado",
@@ -21,13 +20,79 @@
             }
         }
     },
-    "Spent": {},
-    "Transactions": {},
+    "Spent": {
+        "SpentSummary": {
+            "title": "Total gastado",
+            "spent": "Tus gastos totales:",
+            "noSpent":"No hay transacciones disponibles."
+        },
+        "SpentBarChart":{
+            "title": "Gastos por categoría",
+            "subtitle":"Gastado"
+        },
+        "SpentResults":{
+            "noResults":"No hay resultados disponibles.",
+            "title": "Detalles de gastos",
+            "table":{
+                "Date":"Fecha",
+                "Description":"Descripción",
+                "Category":"Categoría",
+                "Amount":"Gasto"
+            }
+        }
+    },
+    "TransactionsList": {
+        "PersoCategory":{
+            "title":"Categorías personalizadas",
+            "placeholder":"Nueva categoría",
+            "DeleteConfirmTitle":"Confirmar eliminación",
+            "DeleteConfirmText":"¿Estás seguro de que deseas eliminar esta categoría",
+            "DeleteCancelButton":"Cancelar",
+            "DeleteConfirmButton":"Eliminar"
+        },
+        "AddTransaction": {
+            "title":"Añadir transacción",
+            "Description":"Descripción",
+            "Amount":"Cantidad",
+            "Subscription":"Es una suscripción mensual",
+            "Category":"Categoría",
+            "SelectCategory":"Seleccionar categoría",
+            "Cancel":"Cancelar",
+            "Save":"Añadir"
+        },
+        "TransactionResults":{
+            "title": "Transacciones",
+            "noResults":"No hay transacciones disponibles.",
+            "table":{
+                "Description":"Descripción",
+                "Category":"Categoría",
+                "Amount":"Gasto",
+                "Actions":"Acciones"
+            },
+            "Delete":{
+                "Title":"Confirmar eliminación",
+                "Text":"¿Estás seguro de que quieres eliminar esta transacción ?",
+                "CancelButton":"Cancelar",
+                "ConfirmButton":"Eliminar"
+            },
+            "Edit":{
+                "Title":"Editar transacción",
+                "Description":"Descripción",
+                "Amount":"Cantidad",
+                "Subscription":"Es una suscripción mensual",
+                "Category":"Categoría",
+                "SelectCategory":"Seleccionar categoría",
+                "CancelButton":"Cancelar",
+                "ConfirmButton":"Modificar"
+            }
+        }
+    },
     "Settings": {},
     "Navbar": {},
     "DashboardLogin": {},
     "Home": {},
     "DateRangePicker": {
+        "title":"Filtro entre fechas :",
         "Begin": "Inicio",
         "End": "Fin"
     }

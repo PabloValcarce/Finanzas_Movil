@@ -10,12 +10,14 @@ import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTrans
 import { useTheme } from '../../../context/ThemeContext'; 
 import styles from './Spent.styles'; // Estilos dinámicos
 import { ActivityIndicator } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 function SpentPage() {
   useAuth();
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
   const { isDark } = useTheme();
   const dynamicStyles = styles(isDark);
+  const { t } = useTranslation(); 
   const { filteredTransactions, loading } = SpentLogic(dateRange); // Usamos la lógica con el hook
 
   const handleResetDates = () => {
@@ -36,7 +38,7 @@ function SpentPage() {
       <View style={dynamicStyles.spentPageContent}>
         <View style={dynamicStyles.dateFilter}>
           <View style={dynamicStyles.headDatePicker}>
-            <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
+            <Text style={dynamicStyles.label}>{t('DateRangePicker.title')}</Text>
           </View>
           <DateRangePicker
             startDate={dateRange.startDate}

@@ -17,7 +17,7 @@ import { useCategories } from '../../../context/CategoryContext';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconSelector from '../../../components/IconSelector/IconSelector';
 import Dialog from 'react-native-dialog';
-
+import { useTranslation } from 'react-i18next';
 
 function TransactionsList() {
   const {
@@ -41,6 +41,7 @@ function TransactionsList() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isIconModalVisible, setIsIconModalVisible] = useState(false);
   const { userId } = useCategories();
+  const { t } = useTranslation();
 
   const showConfirmationDialog = (category) => {
     setSelectedCategory(category);
@@ -76,7 +77,7 @@ function TransactionsList() {
       <View style={dynamicStyles.TransactionListContent}>
         <View style={dynamicStyles.head}>
           <View style={dynamicStyles.CategoriesPerso}>
-            <Text style={dynamicStyles.title}>Categorías personalizadas</Text>
+            <Text style={dynamicStyles.title}>{t('TransactionsList.PersoCategory.title')}</Text>
 
             <View style={dynamicStyles.add}>
               <TouchableOpacity
@@ -87,7 +88,7 @@ function TransactionsList() {
               </TouchableOpacity>
 
               <TextInput
-                placeholder="Nueva categoría"
+                placeholder={t('TransactionsList.PersoCategory.placeholder')}
                 value={nuevaCategoria}
                 onChangeText={setNuevaCategoria}
                 style={dynamicStyles.input}
@@ -122,7 +123,7 @@ function TransactionsList() {
         </View>
 
         <View style={dynamicStyles.headDatePicker}>
-          <Text style={dynamicStyles.label}>Filtro entre fechas:</Text>
+          <Text style={dynamicStyles.label}>{t('DateRangePicker.title')}</Text>
         </View>
         <View style={dynamicStyles.headFilterAdd}>
           <DateRangePicker
@@ -150,15 +151,15 @@ function TransactionsList() {
       </View>
 
       <Dialog.Container visible={isDialogVisible}>
-        <Dialog.Title>Confirmar eliminación</Dialog.Title>
+        <Dialog.Title>{t('TransactionsList.PersoCategory.DeleteConfirmTitle')}</Dialog.Title>
         <Dialog.Description>
-          ¿Estás seguro de que deseas eliminar la categoría{" "}
+        {t('TransactionsList.PersoCategory.DeleteConfirmText')}{" "}
           <Text style={{ fontWeight: 'bold' }}>
             {selectedCategory ? selectedCategory.nombre : ''}
           </Text> ?
         </Dialog.Description>
-        <Dialog.Button label="Cancelar" onPress={() => setIsDialogVisible(false)} />
-        <Dialog.Button label="Eliminar" onPress={handleConfirmDelete} />
+        <Dialog.Button label={t('TransactionsList.PersoCategory.DeleteCancelButton')} onPress={() => setIsDialogVisible(false)} />
+        <Dialog.Button label={t('TransactionsList.PersoCategory.DeleteConfirmButton')} onPress={handleConfirmDelete} />
       </Dialog.Container>
 
       <IconSelector

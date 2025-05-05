@@ -29,7 +29,7 @@ function Savings() {
       <View style={dynamicStyles.savingsPageContent}>
         <View style={dynamicStyles.dateFilter}>
           <View style={dynamicStyles.headDatePicker}>
-            <Text style={dynamicStyles.label}>{t('Savings.fechas')}</Text>
+            <Text style={dynamicStyles.label}>{t('DateRangePicker.title')}</Text>
           </View>
           <DateRangePicker
             startDate={dateRange.startDate}

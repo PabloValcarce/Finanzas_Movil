@@ -47,7 +47,7 @@ const DateRangePicker = ({ initialStartDate, initialEndDate, onDateRangeChange,i
 
       <View>
         <TouchableOpacity style={dynamicStyles.datePicker} onPress={showEndDate}>
-          <Text style={dynamicStyles.dateText}>{endDate ? endDate.toLocaleDateString() : t('DateRangePicker.End ')}</Text>
+          <Text style={dynamicStyles.dateText}>{endDate ? endDate.toLocaleDateString() : t('DateRangePicker.End')}</Text>
         </TouchableOpacity>
       </View>
 
