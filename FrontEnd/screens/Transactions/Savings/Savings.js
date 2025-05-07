@@ -6,12 +6,11 @@ import SavingsCircularChart from '../../../components/Graphs/Savings/CircularCha
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 import styles from './Savings.styles';
-import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import SavingsCards from '../../../components/Savings/Cards/SavingsCards';
 import { useTranslation } from 'react-i18next';
 
 function Savings() {
-  const { dateRange, setDateRange, filteredTransactions, handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
+  const { dateRange, setDateRange,  handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
   const { isDark } = useTheme();  
   const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
   const { t } = useTranslation();
@@ -39,7 +38,6 @@ function Savings() {
           />
         </View>
         <View style={dynamicStyles.savingsData}>
-          <SavingsSummary transactions={filteredTransactions} />
           <View style={dynamicStyles.savingsGraphs}>
             <View style={dynamicStyles.savingsCircularChart}>
               <SavingsCircularChart transactions={transactions} />

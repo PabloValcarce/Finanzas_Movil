@@ -39,6 +39,6 @@ export const SavingsSummaryLogic = (transactions, subscriptions) => {
             .sort((a, b) => a.year === b.year ? a.monthIndex - b.monthIndex : a.year - b.year)
             .slice(-12);
 
-        return { totalEarn, totalSpent, totalBalance, formattedMonthlySavings, totalSubscriptionExpense };
-    }, [transactions, subscriptions]); // 👈 Añadido como dependencia
+        return { totalEarn, totalSpent, totalBalance, formattedMonthlySavings };
+    }, [transactions, subscriptions]); 
 };

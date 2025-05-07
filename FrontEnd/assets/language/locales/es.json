@@ -4,7 +4,8 @@
             "title": "Resumen Financiero",
             "Earn": "Dinero ingresado",
             "Spent": "Dinero gastado",
-            "Saving": "Dinero ahorrado"
+            "Saving": "Dinero ahorrado",
+            "Subscriptions": "Gasto suscripciones"
         },
         "SavingsCircularChart":{
             "title": "Distribución de gastos y ahorros",
@@ -121,7 +122,11 @@
         "ChangeLogin":"Cambiar a Login",
         "ChangeRegister":"Cambiar a Registro"
     },
-    "Home": {},
+    "Home": {
+        "Graph":{
+            "title":"Balance mensual"
+        }
+    },
     "DateRangePicker": {
         "title":"Filtro entre fechas :",
         "Begin": "Inicio",

@@ -6,6 +6,7 @@ import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTrans
 import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import { useTheme } from '../../../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import SavingsLineChart from '../../../components/Graphs/Savings/LineChart/SavingsLineChart';
 
 function TransactionHome() {
   const {
@@ -33,6 +34,7 @@ function TransactionHome() {
         <View style={dynamicStyles.transactionsPageData}>
           <View style={dynamicStyles.savingsData}>
             <SavingsSummary transactions={recentTransactions} subscriptions={totalSubscriptionExpense} />
+            <SavingsLineChart transactions={recentTransactions} />
           </View>
         </View>
       </View>

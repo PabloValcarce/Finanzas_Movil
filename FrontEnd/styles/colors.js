@@ -25,6 +25,9 @@ export const lightColors = {
     spring: "#D6EBD1",
     summer: "#F8F2D0",
     autumn: "#E6D1B3"
+  },
+  graph:{
+    line:"#144468"
   }
 };
 
@@ -55,6 +58,9 @@ export const darkColors = {
     spring: "#1E4021",
     summer: "#5C4E1A",
     autumn: "#4B2E1F"
+  },
+  graph:{
+    line:"#4d7a99"
   }
 
 
