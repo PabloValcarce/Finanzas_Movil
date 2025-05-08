@@ -101,7 +101,7 @@ export const styles = (isDark) => {
       justifyContent: 'space-between',
       alignItems: 'center',
       backgroundColor: '#f0f0f0',
-      backgroundColor: colors.four,
+      backgroundColor: colors.category,
       padding: 12,
       borderRadius: 10,
       marginVertical: 6,

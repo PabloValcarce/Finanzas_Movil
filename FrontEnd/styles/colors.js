@@ -9,6 +9,7 @@ export const lightColors = {
   buttonHover: '#f0c8a5',
   white: 'white',
   background: '#144468',
+  category:'#f0f0f0',
   loginBackground:'#144468',
   loginSwitchButton:'#FF4500',
   loginSubmitButton:'#87CEEB',
@@ -42,6 +43,7 @@ export const darkColors = {
   buttonHover: '#cc9977',       // Tono cálido y suave para hover
   white: '#e0e0e0',             // Blanco suavizado para que no canse la vista
   background: '#121212',        // Fondo general oscuro
+  category:'#7a7a7a',
   loginBackground:'#223b50',
   loginSwitchButton:'#CC3700',
   loginSubmitButton:'#6699B3',

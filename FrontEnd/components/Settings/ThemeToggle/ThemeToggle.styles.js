@@ -8,9 +8,9 @@ export default (isDark) => {
     container: {
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'space-between',
     },
     label: {
-      marginRight: 70,
       color: colors.text, 
     },
     Switch: {

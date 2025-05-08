@@ -41,5 +41,52 @@ export default (isDark) => {
       alignItems: 'center',
       paddingVertical: 12,
     },
+    languageSelector: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: 20,
+    },
+    languageText: {
+      fontSize: 15,
+      color: colors.text,
+    },
+    languageTouchable: {
+      zIndex: 1,
+      marginRight: 12,
+    },
+    modal: {
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    modalContent: {
+      margin: 20,
+      backgroundColor: colors.tertiary,
+      borderRadius: 10,
+      padding: 20
+    },
+    itemFlag: {
+      fontSize: 24,
+    },
+    languageItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: colors.four,
+     
+      padding: 12,
+      marginVertical: 6,
+      borderRadius: 10,
+      justifyContent: 'flex-start'
+    },
+    flagEmoji: {
+      fontSize: 28,
+      marginRight: 10
+    },
+    languageLabel: {
+      fontSize: 18,
+      fontWeight: '500',
+      color: colors.text,
+    },
   });
 };

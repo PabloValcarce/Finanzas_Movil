@@ -39,58 +39,106 @@ function SavingsCircularChart({ transactions }) {
     const radius = 50;
     const strokeWidth = 15;
     const circumference = 2 * Math.PI * radius;
-    const spentStrokeDashoffset = circumference * (1 - spentPercentage / 100);
     const savedStrokeDashoffset = circumference * (1 - savedPercentage / 100);
+
+    const isSpendingHigherThanSaving = totals.spent > totals.saved;
+
+    const spentColor = isSpendingHigherThanSaving ? '#FF3B30' : '#F5A167';
 
     return (
         <View style={dynamicStyles.container}>
-            <Text style={dynamicStyles.chartTitle}>{t('Savings.SavingsCircularChart.title')}</Text>
-            <Svg height="150" width="150" viewBox="0 0 120 120">
-                <G rotation="-90" origin="60,60">
-                    {/* Fondo del círculo */}
-                    <Circle cx="60" cy="60" r={radius} stroke="#E0E0E0" strokeWidth={strokeWidth} fill="none" />
+            <Text style={dynamicStyles.chartTitle}>
+                {t('Savings.SavingsCircularChart.title')}
+            </Text>
 
-                    {/* Gastado */}
-                    <Circle
-                        cx="60"
-                        cy="60"
-                        r={radius}
-                        stroke="#F5A167"
-                        strokeWidth={strokeWidth}
-                        fill="none"
-                        strokeDasharray={circumference}
-                        strokeDashoffset={spentStrokeDashoffset}
-                        strokeLinecap="round"
-                    />
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+                <Svg height="150" width="150" viewBox="0 0 120 120">
+                    <G rotation="-90" origin="60,60">
+                        {/* Fondo = Gasto (100% del círculo) */}
+                        <Circle
+                            cx="60"
+                            cy="60"
+                            r={radius}
+                            stroke={spentColor}
+                            strokeWidth={strokeWidth}
+                            fill="none"
+                            strokeDasharray={circumference}
+                            strokeDashoffset={0}
+                        />
 
-                    {/* Ahorrado */}
-                    <Circle
-                        cx="60"
-                        cy="60"
-                        r={radius}
-                        stroke="#70BFF5"
-                        strokeWidth={strokeWidth}
-                        fill="none"
-                        strokeDasharray={circumference}
-                        strokeDashoffset={savedStrokeDashoffset}
-                        strokeLinecap="round"
-                    />
-                </G>
+                        {/* Ahorro encima (solo si hay) */}
+                        {savedPercentage > 0 && (
+                            <Circle
+                                cx="60"
+                                cy="60"
+                                r={radius}
+                                stroke="#70BFF5"
+                                strokeWidth={strokeWidth}
+                                fill="none"
+                                strokeDasharray={circumference}
+                                strokeDashoffset={savedStrokeDashoffset}
+                                strokeLinecap="round"
+                            />
+                        )}
+                    </G>
 
-                {/* Texto en el centro */}
-                <SvgText
-                    x="60"
-                    y="65"
-                    textAnchor="middle"
-                    fontSize="14"
-                    fill={dynamicStyles.chartTitleColor.color}
-                    fontWeight="bold"
-                >
-                    {total === 0 ? "No data" : `${spentPercentage.toFixed(1)}% ${t('Savings.SavingsCircularChart.subtitle')}`}
+                    <SvgText
+                        x="60"
+                        y="65"
+                        textAnchor="middle"
+                        fontSize="14"
+                        fill={dynamicStyles.chartTitleColor.color}
+                        fontWeight="bold"
+                    >
+                        {total === 0
+                            ? "No data"
+                            : `${spentPercentage.toFixed(1)}% ${t('Savings.SavingsCircularChart.subtitle')}`}
+                    </SvgText>
+                </Svg>
 
-                </SvgText>
-            </Svg>
-        </View >
+                {/* Leyenda */}
+                <View>
+                    {savedPercentage > 0 && (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+                            <View style={{
+                                width: 12,
+                                height: 12,
+                                backgroundColor: '#70BFF5',
+                                borderRadius: 6,
+                                marginRight: 8
+                            }} />
+                            <Text style={{ color: dynamicStyles.chartTitleColor.color }}>
+                                {t('Savings.SavingsCircularChart.legend.Saving')}
+                            </Text>
+                        </View>
+                    )}
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <View style={{
+                            width: 12,
+                            height: 12,
+                            backgroundColor: spentColor,
+                            borderRadius: 6,
+                            marginRight: 8
+                        }} />
+                        <Text style={{ color: dynamicStyles.chartTitleColor.color }}>
+                            {t('Savings.SavingsCircularChart.legend.Spent')}
+                        </Text>
+                    </View>
+                </View>
+            </View>
+
+            {/* Texto explicativo debajo */}
+            <Text style={{
+                marginTop: 20,
+                textAlign: 'center',
+                color: dynamicStyles.chartTitleColor.color,
+                fontSize: 14,
+            }}>
+                {isSpendingHigherThanSaving
+                    ? t('Savings.SavingsCircularChart.explanation.greaterSpending')
+                    : t('Savings.SavingsCircularChart.explanation.normal')}
+            </Text>
+        </View>
     );
 }
 

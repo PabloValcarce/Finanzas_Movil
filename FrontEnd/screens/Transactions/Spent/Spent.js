@@ -45,7 +45,7 @@ function SpentPage() {
             endDate={dateRange.endDate}
             onDateRangeChange={setDateRange}
             onReset={handleResetDates}
-            isDark={isDark} // Pasamos el valor de isDark al componente
+            isDark={isDark} 
           />
         </View>
         <View style={dynamicStyles.spentData}>

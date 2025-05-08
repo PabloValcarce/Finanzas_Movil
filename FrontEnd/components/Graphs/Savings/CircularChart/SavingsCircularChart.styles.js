@@ -8,7 +8,7 @@ export const styles = (isDark) => {
 
         container: {
             alignItems: 'center',
-            marginVertical: 20,
+            marginVertical: 50,
         },
         chartTitle: {
             fontSize: 18,

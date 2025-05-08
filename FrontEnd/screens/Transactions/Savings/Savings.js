@@ -35,6 +35,7 @@ function Savings() {
             endDate={dateRange.endDate}
             onDateRangeChange={setDateRange}
             onReset={handleResetDates}
+            isDark={isDark} 
           />
         </View>
         <View style={dynamicStyles.savingsData}>

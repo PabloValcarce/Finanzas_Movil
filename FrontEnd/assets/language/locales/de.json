@@ -1,0 +1,153 @@
+{
+    "Savings": {
+      "SavingsSummary": {
+        "title": "Finanzübersicht",
+        "Earn": "Eingegangenes Geld",
+        "Spent": "Ausgegebenes Geld",
+        "Saving": "Gespartes Geld",
+        "Subscriptions": "Abonnementausgaben"
+      },
+      "SavingsCircularChart": {
+        "title": "Verteilung der Ausgaben und Ersparnisse",
+        "subtitle": "Ausgegeben",
+        "overspent": "überzogen",
+        "legend": {
+          "Spent": "Ausgabe",
+          "Saving": "Einnahme",
+          "Subscriptions": "Abonnements",
+          "OverSpent": "Überausgaben"
+        },
+        "explanation": {
+          "greaterSpending": "Ihre Ausgaben übersteigen Ihre Einnahmen in diesem Monat, was auf ein finanzielles Ungleichgewicht hinweist.",
+          "normal": "Ihre Einnahmen übersteigen Ihre Ausgaben."
+        }
+      },
+      "SavingsCards": {
+        "title": "Monatliche Sparhistorie",
+        "CardItem": {
+          "TotalSpent": "Gesamt ausgegeben",
+          "Category": "Kategorie mit den meisten Ausgaben :",
+          "Subscription": "Aktive Abonnements :",
+          "NoSubscription": "Keine aktiven Abonnements"
+        }
+      }
+    },
+    "Spent": {
+      "SpentSummary": {
+        "title": "Gesamt ausgegeben",
+        "spent": "Ihre Gesamtausgaben :",
+        "noSpent": "Keine Transaktionen verfügbar."
+      },
+      "SpentBarChart": {
+        "title": "Ausgaben nach Kategorie",
+        "subtitle": "Ausgegeben"
+      },
+      "SpentResults": {
+        "noResults": "Keine Ergebnisse verfügbar.",
+        "title": "Ausgabedetails",
+        "table": {
+          "Date": "Datum",
+          "Description": "Beschreibung",
+          "Category": "Kategorie",
+          "Amount": "Ausgabe"
+        }
+      }
+    },
+    "TransactionsList": {
+      "PersoCategory": {
+        "title": "Benutzerdefinierte Kategorien",
+        "placeholder": "Neue Kategorie",
+        "DeleteConfirmTitle": "Löschung bestätigen",
+        "DeleteConfirmText": "Sind Sie sicher, dass Sie diese Kategorie löschen möchten?",
+        "DeleteCancelButton": "Abbrechen",
+        "DeleteConfirmButton": "Löschen"
+      },
+      "AddTransaction": {
+        "title": "Transaktion hinzufügen",
+        "Description": "Beschreibung",
+        "Amount": "Betrag",
+        "Subscription": "Monatliches Abonnement",
+        "Category": "Kategorie",
+        "SelectCategory": "Kategorie auswählen",
+        "Cancel": "Abbrechen",
+        "Save": "Hinzufügen"
+      },
+      "TransactionResults": {
+        "title": "Transaktionen",
+        "noResults": "Keine Transaktionen verfügbar.",
+        "table": {
+          "Description": "Beschreibung",
+          "Category": "Kategorie",
+          "Amount": "Ausgabe",
+          "Actions": "Aktionen"
+        },
+        "Delete": {
+          "Title": "Löschung bestätigen",
+          "Text": "Sind Sie sicher, dass Sie diese Transaktion löschen möchten?",
+          "CancelButton": "Abbrechen",
+          "ConfirmButton": "Löschen"
+        },
+        "Edit": {
+          "Title": "Transaktion bearbeiten",
+          "Description": "Beschreibung",
+          "Amount": "Betrag",
+          "Subscription": "Monatliches Abonnement",
+          "Category": "Kategorie",
+          "SelectCategory": "Kategorie auswählen",
+          "CancelButton": "Abbrechen",
+          "ConfirmButton": "Bearbeiten"
+        }
+      }
+    },
+    "Settings": {
+      "Information": {
+        "title": "Informationen",
+        "Privacy": "Datenschutz"
+      },
+      "Preferences": {
+        "title": "Einstellungen",
+        "Language": "Sprache",
+        "Currency": "Währung",
+        "DarkMode": "Dunkelmodus"
+      },
+      "Account": {
+        "title": "Konto",
+        "LogOut": "Abmelden"
+      }
+    },
+    "Navbar": {
+      "Title": "Finanzen",
+      "Menu": {
+        "Savings": "Ersparnisse",
+        "Spent": "Ausgaben",
+        "Transactions": "Transaktionen",
+        "Settings": "Einstellungen"
+      }
+    },
+    "DashBoard": {
+      "titleLogin": "Anmelden",
+      "titleRegister": "Registrieren",
+      "Email": "E-Mail",
+      "Password": "Passwort",
+      "Name": "Name",
+      "ChangeLogin": "Wechseln zu Login",
+      "ChangeRegister": "Wechseln zu Registrierung"
+    },
+    "Home": {
+      "Graph": {
+        "title": "Monatliche Bilanz"
+      }
+    },
+    "DateRangePicker": {
+      "title": "Filtern nach Datum:",
+      "Begin": "Beginn",
+      "End": "Ende"
+    },
+    "language": {
+      "english": "Englisch",
+      "spanish": "Spanisch",
+      "french": "Französisch",
+      "german": "Deutsch"
+    }
+  }
+  
