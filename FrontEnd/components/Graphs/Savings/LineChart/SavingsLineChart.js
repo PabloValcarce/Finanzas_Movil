@@ -63,8 +63,8 @@ function SavingsLineChart({ transactions }) {
         <View style={dynamicStyles.container}>
             <Text style={dynamicStyles.chartTitle}>{t('Home.Graph.title')}</Text>
             <Svg width={width} height={height}>
-                <Line x1={padding} y1={padding} x2={padding} y2={height - padding} stroke={axisColor} strokeWidth="1" />
-                <Line x1={padding} y1={height / 2} x2={width - padding} y2={height / 2} stroke={axisColor} strokeWidth="1" />
+                <Line x1={padding} y1={padding} x2={padding} y2={height - padding+10} stroke={axisColor} strokeWidth="1" />
+                <Line x1={padding} y1={height / 2} x2={width - padding + 20} y2={height / 2} stroke={axisColor} strokeWidth="1" />
                 <Polyline points={points} fill="none" stroke={lineColor} strokeWidth="3" />
 
                 {balanceByMonth.map((value, index) => {

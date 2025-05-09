@@ -13,7 +13,7 @@ import i18n from "../../../../assets/language/i18n"
 
 const { width } = Dimensions.get('screen');
 
-export default function CardItem ({ month, index, scrollX }) {
+export default function CardItem({ month, index, scrollX }) {
   const { isDark } = useTheme();
   const { styles: dynamicStyles, colors } = styles(isDark);
   const { t } = useTranslation();
@@ -62,9 +62,11 @@ export default function CardItem ({ month, index, scrollX }) {
         </View>
 
         <View style={dynamicStyles.summary}>
-          <Text style={dynamicStyles.cardValue}>{t('Savings.SavingsCards.CardItem.TotalSpent')}</Text>
-          <Text style={dynamicStyles.amount}>${month.total_spent}</Text>
-          <Text style={dynamicStyles.cardCategory}>{t('Savings.SavingsCards.CardItem.Category')}</Text> 
+          <View style={dynamicStyles.summaryContainer}>
+            <Text style={dynamicStyles.cardValue}>{t('Savings.SavingsCards.CardItem.TotalSpent')}</Text>
+            <Text style={dynamicStyles.amount}>{month.total_spent} €</Text>
+          </View>
+          <Text style={dynamicStyles.cardCategory}>{t('Savings.SavingsCards.CardItem.Category')}</Text>
           <Text style={dynamicStyles.cardCategoryText}>{month.top_category}</Text>
         </View>
 

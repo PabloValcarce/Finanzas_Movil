@@ -2,14 +2,14 @@
     "Savings": {
         "SavingsSummary": {
             "title": "Resumen Financiero",
-            "Earn": "Dinero ingresado",
-            "Spent": "Dinero gastado",
-            "Saving": "Dinero ahorrado",
-            "Subscriptions": "Gasto suscripciones"
+            "Earn": "Ingresos",
+            "Spent": "Gastos",
+            "Saving": "Ahorro",
+            "Subscriptions": "Suscripciones"
         },
         "SavingsCircularChart": {
-            "title": "Distribución de gastos y ahorros",
-            "subtitle": "Gastado",
+            "title": "Distribución de ingresos y gastos",
+            "subtitle": "gastado",
             "overspent": "gasto",
             "legend": {
                 "Spent": "Gasto",
@@ -18,14 +18,14 @@
                 "OverSpent": "Sobre gasto"
             },
             "explanation": {
-                "greaterSpending": "Tus gastos superan tus ingresos este mes, lo que indica un desequilibrio financiero.",
+                "greaterSpending": "Tus gastos superan tus ingresos este mes",
                 "normal": "Tus ingresos superan tus gastos."
             }
         },
         "SavingsCards": {
             "title": "Historial de ahorro mensual",
             "CardItem": {
-                "TotalSpent": "Total gastado",
+                "TotalSpent": "Total ahorrado",
                 "Category": "Categoría con más gasto :",
                 "Subscription": "Suscripciones activas :",
                 "NoSubscription": "No hay suscripciones activas"

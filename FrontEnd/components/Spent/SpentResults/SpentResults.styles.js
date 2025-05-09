@@ -48,8 +48,8 @@ export default (isDark) => {
     cell: {
       flex: 1,
       textAlign: "center",
-      padding: 2,
-      width: 120,
+      padding: 4,
+      width: 88,
       color: colors.text, 
     },
     evenRow: {

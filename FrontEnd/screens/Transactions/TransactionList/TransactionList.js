@@ -133,27 +133,25 @@ function TransactionsList() {
             onReset={handleResetDates}
             isDark={isDark}
           />
-          <AddTransaction userId={userId} isDark={isDark}/>
+          <AddTransaction userId={userId} isDark={isDark} />
         </View>
-        <View style={dynamicStyles.TransactionTable}>
-          <ScrollView
-            contentContainerStyle={dynamicStyles.TransactionList}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            <View style={dynamicStyles.transactionsResults}>
-              <TransactionsResults
-                transactions={filteredTransactions}
-                isDark={isDark} />
-            </View>
-          </ScrollView>
-        </View>
+      </View>
+      <View style={dynamicStyles.TransactionTable}>
+        <Text style={dynamicStyles.title}>{t('TransactionsList.TransactionResults.title')}</Text>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          <TransactionsResults
+            transactions={filteredTransactions}
+            isDark={isDark} />
+        </ScrollView>
       </View>
 
       <Dialog.Container visible={isDialogVisible}>
         <Dialog.Title>{t('TransactionsList.PersoCategory.DeleteConfirmTitle')}</Dialog.Title>
         <Dialog.Description>
-        {t('TransactionsList.PersoCategory.DeleteConfirmText')}{" "}
+          {t('TransactionsList.PersoCategory.DeleteConfirmText')}{" "}
           <Text style={{ fontWeight: 'bold' }}>
             {selectedCategory ? selectedCategory.nombre : ''}
           </Text> ?

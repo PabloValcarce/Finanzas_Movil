@@ -7,7 +7,6 @@ export default (isDark) => {
   return StyleSheet.create({
     container: {
       marginTop: 20,
-      padding: 15,
     },
     title: {
       fontSize: 24,
@@ -18,7 +17,6 @@ export default (isDark) => {
     },
     tableWrapper: {
       justifyContent: 'center',
-      width: '100%',
     },
     table: {
       minWidth: 300,
@@ -44,7 +42,8 @@ export default (isDark) => {
     cell: {
       flex: 1,
       textAlign: 'center',
-      width: 120,
+      padding: 4,
+      width: 99,
       color: colors.text,
     },
     negative: {

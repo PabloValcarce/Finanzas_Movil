@@ -9,26 +9,32 @@ export const lightColors = {
   buttonHover: '#f0c8a5',
   white: 'white',
   background: '#144468',
-  category:'#f0f0f0',
-  loginBackground:'#144468',
-  loginSwitchButton:'#FF4500',
-  loginSubmitButton:'#87CEEB',
+  category: '#f0f0f0',
+  loginBackground: '#144468',
+  loginSwitchButton: '#FF4500',
+  loginSubmitButton: '#87CEEB',
   tableHeader: '#B0BEC5',
   rowEven: "#F5F5F5",
   rowOdd: "#FFFFFF",
-  positive: '#d0eaff',
-  negative: '#f0c8a5',
+  positive: '#a8d4f2',
+  negative: '#e2b086',
   borderColor: '#e0ecf5',
   tableBackground: 'white',
-  inputBackground:'white',
+  inputBackground: 'white',
   seasonal: {
     winter: "#ADD8E6",
     spring: "#D6EBD1",
     summer: "#F8F2D0",
     autumn: "#E6D1B3"
   },
-  graph:{
-    line:"#144468"
+  graph: {
+    line: "#144468",
+    barchart: {
+      barColor: '#87CEFA',
+      strokeColor: '#1B3A57',
+      textColor: '#000000',
+      backgroundColor: '#ffffff',
+    }
   }
 };
 
@@ -43,11 +49,11 @@ export const darkColors = {
   buttonHover: '#cc9977',       // Tono cálido y suave para hover
   white: '#e0e0e0',             // Blanco suavizado para que no canse la vista
   background: '#121212',        // Fondo general oscuro
-  category:'#7a7a7a',
-  loginBackground:'#223b50',
-  loginSwitchButton:'#CC3700',
-  loginSubmitButton:'#6699B3',
-  inputBackground:'#3b6a8f',
+  category: '#7a7a7a',
+  loginBackground: '#223b50',
+  loginSwitchButton: '#CC3700',
+  loginSubmitButton: '#6699B3',
+  inputBackground: '#3b6a8f',
   tableHeader: '#37474F',       // Azul grisáceo para encabezados de tabla
   tableBackground: '#1e1e1e', // Fondo de tabla gris oscuro
   rowEven: '#3a3a3a',  // Más claro que #1e1e1e
@@ -61,8 +67,14 @@ export const darkColors = {
     summer: "#5C4E1A",
     autumn: "#4B2E1F"
   },
-  graph:{
-    line:"#4d7a99"
+  graph: {
+    line: "#4d7a99",
+    barchart: {
+      barColor: '#4FC3F7',
+      strokeColor: '#CCCCCC',
+      textColor: '#FFFFFF',
+      backgroundColor: '#1e1e1e',
+    }
   }
 
 

@@ -11,7 +11,7 @@ export default (isDark) => {
     spentPageContent: {
       flexDirection: 'column',
       justifyContent: 'space-between',
-      padding: 30,
+      padding: 0,
       backgroundColor: colors.tertiary, // Fondo dependiendo del modo
     },
     label: {
@@ -25,13 +25,14 @@ export default (isDark) => {
       justifyContent: 'space-between',
       marginTop: 100,
       marginBottom: 30,
+      padding: 20,
       zIndex: 10,
     },
     spentData: {
       backgroundColor: colors.four, // Fondo de la tarjeta dependiendo del modo
       borderRadius: 10,
-      padding: 10,
       marginBottom: 10,
+      alignItems: 'center',
     },
     spentGraphs: {
       marginTop: 20,

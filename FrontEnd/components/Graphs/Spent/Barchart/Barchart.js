@@ -1,15 +1,31 @@
-import React, { useMemo } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import React, { useMemo, useState } from "react";
+import { View, Text, ActivityIndicator,TouchableOpacity } from "react-native";
 import { Svg, Rect, Text as SvgText } from "react-native-svg";
 import { useCategories } from "../../../../context/CategoryContext";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useTheme } from "../../../../context/ThemeContext"; 
-import { useTranslation } from "react-i18next"; // Para la traducción
+import { useTheme } from "../../../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
+import styles from "./Barchart.styles";
+import { lightColors, darkColors } from "../../../../styles/colors"; // colores
 
 function SpentBarChart({ transactions }) {
   const { categories, loading } = useCategories();
   const { isDark } = useTheme();
-  const { t } = useTranslation(); // Para la traducción
+  const dynamicStyles = styles(isDark);
+  const { t } = useTranslation();
+  const colors = isDark ? darkColors : lightColors;
+  const [selectedIcon, setSelectedIcon] = useState(null);
+  const iconToNameMap = useMemo(() => {
+    const map = {};
+    categories.forEach(cat => {
+      map[cat.icono] = cat.nombre;
+    });
+    return map;
+  }, [categories]);
+  
+
+
+
 
   const data = useMemo(() => {
     if (!categories || categories.length === 0) {
@@ -39,25 +55,19 @@ function SpentBarChart({ transactions }) {
   }
 
   if (data.values.length === 0) {
-    return <Text style={{ textAlign: "center", margin: 20 }}>No hay datos</Text>;
+    return <Text style={dynamicStyles.noDataText}>No hay datos</Text>;
   }
 
   const maxValue = Math.max(...data.values);
   const barWidth = 40;
   const barSpacing = 10;
-  const chartWidth = data.labels.length * (barWidth + barSpacing) + 40;
+  const chartWidth = data.labels.length * (barWidth + barSpacing)+20;
   const chartHeight = 200;
 
-  // Colores dinámicos para modo claro/oscuro
-  const barColor = isDark ? "#4FC3F7" : "#87CEFA";         // Azul más oscuro para dark mode
-  const strokeColor = isDark ? "#CCCCCC" : "#1B3A57";
-  const textColor = isDark ? "#FFFFFF" : "#000000";
-  const backgroundColor = isDark ? "#1e1e1e" : "#ffffff";
-
   return (
-    <View style={{ backgroundColor, padding: 10, borderRadius: 10 }}>
-      <Text style={{ textAlign: "center", marginBottom: 10, color: textColor }}>
-      {t('Spent.SpentBarChart.title')}
+    <View style={dynamicStyles.container}>
+      <Text style={dynamicStyles.title}>
+        {t('Spent.SpentBarChart.title')}
       </Text>
       <Svg width={chartWidth} height={chartHeight + 40} viewBox={`0 0 ${chartWidth} ${chartHeight + 50}`}>
         {data.labels.map((iconName, index) => {
@@ -71,8 +81,8 @@ function SpentBarChart({ transactions }) {
                 y={chartHeight - barHeight}
                 width={barWidth}
                 height={barHeight}
-                fill={barColor}
-                stroke={strokeColor}
+                fill={colors.graph.barchart.barColor}
+                stroke={colors.graph.barchart.strokeColor}
                 strokeWidth={1}
               />
               <SvgText
@@ -80,30 +90,36 @@ function SpentBarChart({ transactions }) {
                 y={chartHeight - barHeight - 10}
                 fontSize="12"
                 fontWeight="bold"
-                fill={textColor}
+                fill={colors.graph.barchart.textColor}
                 textAnchor="middle"
               >
-                {`$${data.values[index].toFixed(2)}`}
+                {`${data.values[index].toFixed(2)} €`}
               </SvgText>
             </React.Fragment>
           );
         })}
       </Svg>
 
-      {/* Íconos debajo de las barras */}
-      <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10 }}>
+      <View style={dynamicStyles.iconRow}>
         {data.labels.map((iconName, index) => {
           const xPosition = 12.5 + index * (barWidth + barSpacing);
           return (
             <View
               key={index}
-              style={{
-                position: "absolute",
-                left: xPosition + barWidth / 2 - 10,
-                bottom: 30,
-              }}
+              style={[
+                dynamicStyles.iconContainer,
+                { left: xPosition + barWidth / 2 - 10 },
+              ]}
             >
-              <Icon name={iconName} size={20} color={textColor} />
+              <TouchableOpacity onPress={() => setSelectedIcon(prev => (prev === iconName ? null : iconName))}>
+                <Icon name={iconName} size={20} color={colors.text} />
+                {selectedIcon === iconName && (
+                  <Text style={dynamicStyles.iconText}>
+                    {iconToNameMap[iconName]}
+                  </Text>
+                )}
+              </TouchableOpacity>
+
             </View>
           );
         })}

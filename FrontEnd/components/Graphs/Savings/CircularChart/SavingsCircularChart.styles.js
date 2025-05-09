@@ -7,17 +7,50 @@ export const styles = (isDark) => {
     return StyleSheet.create({
 
         container: {
+            height: 270,
             alignItems: 'center',
-            marginVertical: 50,
         },
         chartTitle: {
             fontSize: 18,
             fontWeight: 'bold',
             marginBottom: 10,
-            color: colors.text,  // Color de texto dependiendo del modo
+            color: colors.text,
+            marginTop: -10,
         },
         chartTitleColor: {
-            color: colors.text,  // Color de texto dependiendo del modo
-        }
+            color: isDark ? '#ffffff' : '#000000',
+          },
+        savingsCircularChart: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: 10,
+            marginRight: 20,
+        },
+        chartTitleColor: {
+            color: colors.text,
+        },
+        legend:{
+            marginLeft: 20,
+        },
+        legendItem: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 8,
+          },
+          legendDot: {
+            width: 12,
+            height: 12,
+            borderRadius: 6,
+            marginRight: 8,
+          },
+          legendLabel: {
+            color: isDark ? '#ffffff' : '#000000',
+          },
+          explanationText: {
+            marginTop: 20,
+            textAlign: 'center',
+            fontSize: 14,
+            color: isDark ? '#ffffff' : '#000000',
+          },
     })
 }

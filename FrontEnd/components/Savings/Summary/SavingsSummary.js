@@ -23,19 +23,19 @@ function SavingsSummary({ transactions, subscriptions }) {
 
             <View style={dynamicStyles.grid}>
                 <View style={[dynamicStyles.card, dynamicStyles.cardPositive]}>
-                    <FontAwesome5 name="arrow-down" size={24} color="white" />
+                    <FontAwesome5 name="arrow-down" size={20} color="white" />
                     <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Earn')}</Text>
                     <Text style={dynamicStyles.value}>{totalEarn} €</Text>
                 </View>
 
                 <View style={[dynamicStyles.card, dynamicStyles.cardNegative]}>
-                    <FontAwesome5 name="arrow-up" size={24} color="white" />
+                    <FontAwesome5 name="arrow-up" size={20} color="white" />
                     <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Spent')}</Text>
                     <Text style={dynamicStyles.value}>{totalSpent} €</Text>
                 </View>
 
                 <View style={[dynamicStyles.card, dynamicStyles.cardNegative]}>
-                    <FontAwesome5 name="arrow-up" size={24} color="white" />
+                    <FontAwesome5 name="arrow-up" size={20} color="white" />
                     <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Subscriptions')}</Text>
                     <Text style={dynamicStyles.value}>{subscriptions} €</Text>
                 </View>
@@ -44,7 +44,7 @@ function SavingsSummary({ transactions, subscriptions }) {
                     dynamicStyles.card,
                     totalBalance < 0 ? dynamicStyles.cardNegative : dynamicStyles.cardPositive
                 ]}>
-                    <FontAwesome5 name="piggy-bank" size={24} color="white"/>
+                    <FontAwesome5 name="piggy-bank" size={20} color="white"/>
                     <Text style={dynamicStyles.label}>{t('Savings.SavingsSummary.Saving')}</Text>
                     <Text style={dynamicStyles.value}>{totalBalance} €</Text>
                 </View>

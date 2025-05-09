@@ -57,10 +57,11 @@ export const styles = (isDark) => {
       justifyContent: 'space-between',
     },
     TransactionTable:{
-      padding: 12,
+      alignSelf: 'center',
       marginTop: 30,
-      backgroundColor: colors.four,
+      marginBottom: 50,
       borderRadius: 5,
+      marginHorizontal: 15,
     },    
     input: {
       width: '70%',

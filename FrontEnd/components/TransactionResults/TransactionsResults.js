@@ -109,7 +109,6 @@ const TransactionsResults = ({isDark}) => {
 
   return (
     <View style={dynamicStyles.container}>
-      <Text style={dynamicStyles.title}>{t('TransactionsList.TransactionResults.title')}</Text>
       {transactions.length > 0 ? (
         <ScrollView horizontal contentContainerStyle={dynamicStyles.tableWrapper}>
           <View style={dynamicStyles.table}>

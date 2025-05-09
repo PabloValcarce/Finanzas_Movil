@@ -27,7 +27,7 @@ export default (isDark) => {
     header: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       marginBottom: 10,
     },
     cardLabel: {
@@ -38,13 +38,19 @@ export default (isDark) => {
     summary: {
       marginVertical: 10,
     },
+    summaryContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 10,
+    },
     cardValue: {
-      fontSize: 16,
+      fontSize: 22,
       fontWeight: "bold",
       color: colors.text,
+      marginRight: 50,
     },
     amount: {
-      fontSize: 22,
+      fontSize: 16,
       fontWeight: "bold",
       color: colors.text,
     },

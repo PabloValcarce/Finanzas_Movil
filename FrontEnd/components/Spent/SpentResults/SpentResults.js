@@ -19,8 +19,8 @@ const SpentResults = ({ expenses }) => {
           <View style={dynamicStyles.table}>
             <View style={dynamicStyles.headerRow}>
               <Text style={dynamicStyles.header}>{t('Spent.SpentResults.table.Date')}</Text>
-              <Text style={dynamicStyles.header}>{t('Spent.SpentResults.table.Description')}</Text>
               <Text style={dynamicStyles.header}>{t('Spent.SpentResults.table.Category')}</Text>
+              <Text style={dynamicStyles.header}>{t('Spent.SpentResults.table.Description')}</Text>
               <Text style={dynamicStyles.header}>{t('Spent.SpentResults.table.Amount')}</Text>
             </View>
             <FlatList
@@ -33,8 +33,8 @@ const SpentResults = ({ expenses }) => {
                 return (
                   <View style={[dynamicStyles.row,  backgroundColor ]}>
                     <Text style={dynamicStyles.cell}>{item.formattedDate}</Text>
-                    <Text style={dynamicStyles.cell}>{item.description}</Text>
                     <Text style={dynamicStyles.cell}>{item.categoria}</Text>
+                    <Text style={dynamicStyles.cell}>{item.description}</Text>
                     <Text style={dynamicStyles.cell}>{item.formattedAmount} €</Text>
                   </View>
                 );

@@ -50,7 +50,7 @@ export default (isDark) => {
             color: colors.text,
         },
         value: {
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: '600',
             color: 'white',
             marginTop: 5,

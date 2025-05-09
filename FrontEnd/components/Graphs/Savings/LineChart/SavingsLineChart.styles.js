@@ -9,9 +9,9 @@ export default (isDark) =>{
             marginVertical: 20,
         },
         chartTitle: {
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: 'bold',
-            marginBottom: 20,
+            marginBottom: -10,
             color: colors.text, 
         },
         axisColor:{

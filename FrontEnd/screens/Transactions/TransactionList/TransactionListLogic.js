@@ -18,10 +18,6 @@ export const useTransactions = () => {
   const [nuevaCategoria, setNuevaCategoria] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('smile');
   const { isDark } = useTheme();
-
-  useEffect(() => {
-    console.log('Tema actualizado:', isDark);  // Verifica si isDark cambia
-  }, [isDark]);
   
   useEffect(() => {
     const fetchUserId = async () => {

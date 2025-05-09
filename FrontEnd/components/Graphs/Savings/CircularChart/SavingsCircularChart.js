@@ -43,30 +43,25 @@ function SavingsCircularChart({ transactions }) {
 
     const isSpendingHigherThanSaving = totals.spent > totals.saved;
 
-    const spentColor = isSpendingHigherThanSaving ? '#FF3B30' : '#F5A167';
-
     return (
         <View style={dynamicStyles.container}>
             <Text style={dynamicStyles.chartTitle}>
                 {t('Savings.SavingsCircularChart.title')}
             </Text>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
-                <Svg height="150" width="150" viewBox="0 0 120 120">
+            <View style={dynamicStyles.savingsCircularChart}>
+                <Svg height="170" width="170" viewBox="0 0 120 120">
                     <G rotation="-90" origin="60,60">
-                        {/* Fondo = Gasto (100% del círculo) */}
                         <Circle
                             cx="60"
                             cy="60"
                             r={radius}
-                            stroke={spentColor}
+                            stroke='#F5A167'
                             strokeWidth={strokeWidth}
                             fill="none"
                             strokeDasharray={circumference}
                             strokeDashoffset={0}
                         />
-
-                        {/* Ahorro encima (solo si hay) */}
                         {savedPercentage > 0 && (
                             <Circle
                                 cx="60"
@@ -86,7 +81,7 @@ function SavingsCircularChart({ transactions }) {
                         x="60"
                         y="65"
                         textAnchor="middle"
-                        fontSize="14"
+                        fontSize="12"
                         fill={dynamicStyles.chartTitleColor.color}
                         fontWeight="bold"
                     >
@@ -96,44 +91,25 @@ function SavingsCircularChart({ transactions }) {
                     </SvgText>
                 </Svg>
 
-                {/* Leyenda */}
-                <View>
+                <View style={dynamicStyles.legend}>
                     {savedPercentage > 0 && (
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                            <View style={{
-                                width: 12,
-                                height: 12,
-                                backgroundColor: '#70BFF5',
-                                borderRadius: 6,
-                                marginRight: 8
-                            }} />
-                            <Text style={{ color: dynamicStyles.chartTitleColor.color }}>
+                        <View style={dynamicStyles.legendItem}>
+                            <View style={[dynamicStyles.legendDot, { backgroundColor: '#70BFF5' }]} />
+                            <Text style={dynamicStyles.legendLabel}>
                                 {t('Savings.SavingsCircularChart.legend.Saving')}
                             </Text>
                         </View>
                     )}
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{
-                            width: 12,
-                            height: 12,
-                            backgroundColor: spentColor,
-                            borderRadius: 6,
-                            marginRight: 8
-                        }} />
-                        <Text style={{ color: dynamicStyles.chartTitleColor.color }}>
+                    <View style={dynamicStyles.legendItem}>
+                        <View style={[dynamicStyles.legendDot, { backgroundColor: '#F5A167' }]} />
+                        <Text style={dynamicStyles.legendLabel}>
                             {t('Savings.SavingsCircularChart.legend.Spent')}
                         </Text>
                     </View>
                 </View>
             </View>
 
-            {/* Texto explicativo debajo */}
-            <Text style={{
-                marginTop: 20,
-                textAlign: 'center',
-                color: dynamicStyles.chartTitleColor.color,
-                fontSize: 14,
-            }}>
+            <Text style={dynamicStyles.explanationText}>
                 {isSpendingHigherThanSaving
                     ? t('Savings.SavingsCircularChart.explanation.greaterSpending')
                     : t('Savings.SavingsCircularChart.explanation.normal')}

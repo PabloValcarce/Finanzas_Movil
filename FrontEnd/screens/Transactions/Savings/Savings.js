@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import { SavingsLogic } from './SavingsLogic';
-import { useTheme } from '../../../context/ThemeContext'; 
+import { useTheme } from '../../../context/ThemeContext';
 import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
@@ -10,8 +10,8 @@ import SavingsCards from '../../../components/Savings/Cards/SavingsCards';
 import { useTranslation } from 'react-i18next';
 
 function Savings() {
-  const { dateRange, setDateRange,  handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
-  const { isDark } = useTheme();  
+  const { dateRange, setDateRange, handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
+  const { isDark } = useTheme();
   const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
   const { t } = useTranslation();
 
@@ -26,18 +26,6 @@ function Savings() {
     <ScrollView style={dynamicStyles.savingsPage}>
       <NavBarTransaction />
       <View style={dynamicStyles.savingsPageContent}>
-        <View style={dynamicStyles.dateFilter}>
-          <View style={dynamicStyles.headDatePicker}>
-            <Text style={dynamicStyles.label}>{t('DateRangePicker.title')}</Text>
-          </View>
-          <DateRangePicker
-            startDate={dateRange.startDate}
-            endDate={dateRange.endDate}
-            onDateRangeChange={setDateRange}
-            onReset={handleResetDates}
-            isDark={isDark} 
-          />
-        </View>
         <View style={dynamicStyles.savingsData}>
           <View style={dynamicStyles.savingsGraphs}>
             <View style={dynamicStyles.savingsCircularChart}>
@@ -46,7 +34,9 @@ function Savings() {
           </View>
         </View>
       </View>
-      <SavingsCards monthlySavings={monthlySummary} />
+      <View style={dynamicStyles.savingsCards}>
+        <SavingsCards monthlySavings={monthlySummary} />
+      </View>
     </ScrollView>
   );
 }

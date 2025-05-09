@@ -12,19 +12,8 @@ export default (isDark) => {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: 30,
+      marginTop: 50,
       backgroundColor: colors.tertiary,  // Fondo dependiendo del modo
-    },
-    label: {
-      fontWeight: 'bold',
-      marginBottom: 10,
-      fontSize: 20,
-      color: colors.text,  // Color de texto dependiendo del modo
-    },
-    dateFilter: {
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      marginTop: 100,
-      zIndex: 10,
     },
     savingsData: {
       backgroundColor: colors.four,  // Color de fondo de los componentes
@@ -38,6 +27,9 @@ export default (isDark) => {
       justifyContent: 'space-around',
       gap: 100,
       marginTop: 40,
+    },
+    savingsCards:{
+      marginTop: -20,
     },
     savingsLineChart: {
       // Si necesitas personalizar aún más
