@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Text, FlatList, ScrollView } from "react-native";
-import useSpentResultsLogic from "./SpentResultsLogic"; // Lógica
-import { useTheme } from '../../../context/ThemeContext'; // Llamamos al contexto del tema
+import useSpentResultsLogic from "./SpentResultsLogic"; 
+import { useTheme } from '../../../context/ThemeContext'; 
 import styles from "./SpentResults.styles"; 
-import { useTranslation } from "react-i18next"; // Importamos el hook de traducción
+import { useTranslation } from "react-i18next"; 
 
 const SpentResults = ({ expenses }) => {
-  const { isDark } = useTheme(); // Obtenemos el valor de isDark desde el contexto
+  const { isDark } = useTheme(); 
   const formattedExpenses = useSpentResultsLogic(expenses);
-  const dynamicStyles = styles(isDark); // Pasamos el isDark a los estilos
-  const { t } = useTranslation(); // Inicializamos el hook de traducción
+  const dynamicStyles = styles(isDark); 
+  const { t } = useTranslation(); 
 
   return (
     <View style={dynamicStyles.container}>
@@ -27,9 +27,7 @@ const SpentResults = ({ expenses }) => {
               data={formattedExpenses}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => {
-                // Determinar el color de fondo dependiendo del índice (par o impar)
                 const backgroundColor = index % 2 === 0 ? dynamicStyles.evenRow : dynamicStyles.oddRow;
-
                 return (
                   <View style={[dynamicStyles.row,  backgroundColor ]}>
                     <Text style={dynamicStyles.cell}>{item.formattedDate}</Text>

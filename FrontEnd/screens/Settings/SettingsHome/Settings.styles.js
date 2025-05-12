@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { lightColors, darkColors } from '../../styles/colors';  // Asegúrate de que los colores estén exportados correctamente
+import { lightColors, darkColors } from '../../../styles/colors';  // Asegúrate de que los colores estén exportados correctamente
 
 const { width, height } = Dimensions.get('window'); // Obtiene el tamaño de la pantalla
 
@@ -29,6 +29,12 @@ export default (isDark) => {
       textAlign: 'center',
       marginBottom: 10,
       color: colors.text, // Aplica el color de texto según el tema
+    },
+    informationContent:{
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      gap: 20,
+
     },
     itemText: {
       fontSize: 15,

@@ -17,7 +17,6 @@ const SpentSummary = ({ transactions }) => {
 
   return (
     <View style={dynamicStyles.container}>
-      <Text style={dynamicStyles.title}>{t('Spent.SpentSummary.title')}</Text>
       <Text style={dynamicStyles.text}>{t('Spent.SpentSummary.spent')} {totalSpent}€</Text>
     </View>
   );

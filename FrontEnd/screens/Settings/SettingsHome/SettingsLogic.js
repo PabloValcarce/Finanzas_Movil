@@ -1,4 +1,4 @@
-import { useTheme } from '../../context/ThemeContext'; // Usar el contexto para el tema
+import { useTheme } from '../../../context/ThemeContext'; // Usar el contexto para el tema
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
