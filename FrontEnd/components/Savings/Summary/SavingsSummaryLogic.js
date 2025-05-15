@@ -1,23 +1,22 @@
-// SavingsSummaryLogic.js
 import { useMemo } from 'react';
 
-export const SavingsSummaryLogic = (transactions, subscriptions) => {
+export const SavingsSummaryLogic = (recentTransactions, subscriptions) => {
     return useMemo(() => {
         
 
-        const totalEarn = transactions
+        const totalEarn = recentTransactions
             .filter(t => typeof t.amount === 'number' && t.amount > 0)
             .reduce((sum, t) => sum + t.amount, 0);
 
-        const totalSpent = transactions
+        const totalSpent = recentTransactions
             .filter(t => typeof t.amount === 'number' && t.amount < 0)
             .reduce((sum, t) => sum + t.amount, 0);
 
-        const totalBalance = transactions.reduce((sum, t) => (
+        const totalBalance = recentTransactions.reduce((sum, t) => (
             typeof t.amount === 'number' && !isNaN(t.amount) ? sum + t.amount : sum
         ), 0);
 
-        const monthlySavings = transactions.reduce((acc, t) => {
+        const monthlySavings = recentTransactions.reduce((acc, t) => {
             if (!t.date) return acc;
             const date = new Date(t.date);
             const key = `${date.getFullYear()}-${date.getMonth()}`;
@@ -40,5 +39,5 @@ export const SavingsSummaryLogic = (transactions, subscriptions) => {
             .slice(-12);
 
         return { totalEarn, totalSpent, totalBalance, formattedMonthlySavings };
-    }, [transactions, subscriptions]); 
+    }, [recentTransactions, subscriptions]); 
 };

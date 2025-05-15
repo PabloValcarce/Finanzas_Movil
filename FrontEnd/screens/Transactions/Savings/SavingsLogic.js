@@ -4,7 +4,7 @@ import useAuth from '../../../utils/useAuth';
 import { useCategories } from '../../../context/CategoryContext';
 import api from '../../../services/api';
 
-export const SavingsLogic = () => {
+export const useSavingsLogic = () => {
   useAuth();
   const { transactions, loadTransactions } = useTransactions();
   const { userId } = useCategories();

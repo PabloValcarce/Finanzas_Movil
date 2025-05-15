@@ -1,16 +1,15 @@
-import React, { useMemo } from 'react';
-import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
-import { SavingsLogic } from './SavingsLogic';
+import { useMemo } from 'react';
+import { View, ActivityIndicator, ScrollView } from 'react-native';
+import { useSavingsLogic } from './SavingsLogic';
 import { useTheme } from '../../../context/ThemeContext';
 import SavingsCircularChart from '../../../components/Graphs/Savings/CircularChart/SavingsCircularChart';
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
-import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 import styles from './Savings.styles';
 import SavingsCards from '../../../components/Savings/Cards/SavingsCards';
 import { useTranslation } from 'react-i18next';
 
 function Savings() {
-  const { dateRange, setDateRange, handleResetDates, transactions, monthlySummary, loading } = SavingsLogic();
+  const {  transactions, monthlySummary, loading } = useSavingsLogic();
   const { isDark } = useTheme();
   const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
   const { t } = useTranslation();

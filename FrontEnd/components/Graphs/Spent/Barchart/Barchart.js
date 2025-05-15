@@ -1,44 +1,43 @@
 import React, { useMemo, useState } from "react";
-import { View, Text, ActivityIndicator,TouchableOpacity } from "react-native";
+import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { Svg, Rect, Text as SvgText } from "react-native-svg";
 import { useCategories } from "../../../../context/CategoryContext";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useTheme } from "../../../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import styles from "./Barchart.styles";
-import { lightColors, darkColors } from "../../../../styles/colors"; // colores
+import { lightColors, darkColors } from "../../../../styles/colors";
 
-function SpentBarChart({ transactions }) {
-  const { categories, loading } = useCategories();
+function SpentBarChart({ transactions, categoriesCombined }) {
+  const { loading } = useCategories();
   const { isDark } = useTheme();
   const dynamicStyles = styles(isDark);
   const { t } = useTranslation();
   const colors = isDark ? darkColors : lightColors;
   const [selectedIcon, setSelectedIcon] = useState(null);
+
+  // Mapeo icono -> nombre (ahora usando "icon" y "name" en inglés)
   const iconToNameMap = useMemo(() => {
     const map = {};
-    categories.forEach(cat => {
-      map[cat.icono] = cat.nombre;
+    categoriesCombined.forEach(cat => {
+      map[cat.icon] = cat.name;
     });
     return map;
-  }, [categories]);
-  
+  }, [categoriesCombined]);
 
-
-
-
+  // Cálculo de datos para el gráfico
   const data = useMemo(() => {
-    if (!categories || categories.length === 0) {
+    if (!categoriesCombined || categoriesCombined.length === 0) {
       return { labels: [], values: [] };
     }
 
     const categoryTotals = transactions.reduce((acc, transaction) => {
-      const { categoria, amount } = transaction;
+      const { category, amount } = transaction;
 
       if (amount < 0) {
-        const category = categories.find(cat => cat.nombre === categoria);
-        if (category) {
-          acc[category.icono] = (acc[category.icono] || 0) + Math.abs(amount);
+        const categoryObj = categoriesCombined.find(cat => cat.name === category);
+        if (categoryObj) {
+          acc[categoryObj.icon] = (acc[categoryObj.icon] || 0) + Math.abs(amount);
         }
       }
       return acc;
@@ -48,20 +47,20 @@ function SpentBarChart({ transactions }) {
       labels: Object.keys(categoryTotals),
       values: Object.values(categoryTotals),
     };
-  }, [transactions, categories]);
+  }, [transactions, categoriesCombined]);
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />;
   }
 
   if (data.values.length === 0) {
-    return <Text style={dynamicStyles.noDataText}>No hay datos</Text>;
+    return <Text style={dynamicStyles.noDataText}>{t('Spent.SpentBarChart.noData') || 'No data available'}</Text>;
   }
 
   const maxValue = Math.max(...data.values);
   const barWidth = 40;
   const barSpacing = 10;
-  const chartWidth = data.labels.length * (barWidth + barSpacing)+20;
+  const chartWidth = data.labels.length * (barWidth + barSpacing) + 20;
   const chartHeight = 200;
 
   return (
@@ -119,7 +118,6 @@ function SpentBarChart({ transactions }) {
                   </Text>
                 )}
               </TouchableOpacity>
-
             </View>
           );
         })}

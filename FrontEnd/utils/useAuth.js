@@ -25,6 +25,12 @@ const useAuth = () => {
       }
 
       const decodedToken = decodeToken(access_token);
+      if (!decodedToken) {
+        await AsyncStorage.removeItem('access_token');
+        navigateToDashboard();
+        return;
+      }
+
       const currentTime = Date.now() / 1000;
 
       if (decodedToken.exp < currentTime) {
@@ -67,8 +73,9 @@ const useAuth = () => {
     });
 
     if (result.success) {
-      handleSubmit(true); 
+      handleSubmit(true); // Si es exitoso, mandamos true a handleSubmit
     } else {
+      alert('Autenticación biométrica fallida');
     }
   };
 
@@ -92,9 +99,9 @@ const useAuth = () => {
     setIsLoading(true);
     let endpoint = '';
     let data = {};
-  
+
     if (biometric) {
-      // Recuperar el refresh token almacenado
+      // Si es biométrico, usamos el refresh token
       const storedRefreshToken = await AsyncStorage.getItem('refresh_token');
       if (!storedRefreshToken) {
         alert('No hay refresh token almacenado. Inicia sesión con email y contraseña.');
@@ -104,6 +111,7 @@ const useAuth = () => {
       endpoint = '/auth/refresh-token';
       data = { refresh_token: storedRefreshToken };
     } else {
+      // Login tradicional (email + password)
       if (!validateEmail(email)) {
         setEmailError('Invalid email address');
         setIsLoading(false);
@@ -112,15 +120,19 @@ const useAuth = () => {
       endpoint = isRegister ? '/auth/register' : '/auth/login';
       data = isRegister ? { name, email, password } : { email, password };
     }
-  
+
     try {
       const response = await api.post(endpoint, data);
       if (response.status === 200) {
-        // En ambos casos esperamos recibir al menos un access token
         const { access_token, refresh_token } = response.data;
         if (access_token && refresh_token) {
           await AsyncStorage.setItem('access_token', access_token);
           await AsyncStorage.setItem('refresh_token', refresh_token);
+
+          if (!isRegister) {
+            await AsyncStorage.setItem('biometric_login', 'true'); // Guarda la preferencia biométrica
+          }
+
           navigation.reset({
             index: 0,
             routes: [{ name: 'Transactions' }],
@@ -136,8 +148,7 @@ const useAuth = () => {
       setIsLoading(false);
     }
   }, [email, isRegister, name, password, navigation]);
-  
-  
+
   // Función para redirigir al dashboard si no hay token
   const navigateToDashboard = () => {
     navigation.reset({
@@ -148,11 +159,10 @@ const useAuth = () => {
 
   // Verificar si el usuario ha iniciado sesión previamente con biometría
   const verifyBiometricLogin = async () => {
-    const isBiometricSaved = await AsyncStorage.getItem('biometric_login'); // Puedes guardarlo al momento de login exitoso
-    if (isBiometricSaved) {
-      await handleBiometricAuth(); // Si existe, intentamos hacer el login biométrico
+    const isBiometricSaved = await AsyncStorage.getItem('biometric_login');
+    if (isBiometricSaved === 'true') {
+      await handleBiometricAuth(); // Si tiene habilitada la biometría, realizar login biométrico
     } else {
-      // Si no, pedimos el login normal
       navigation.navigate('Login');
     }
   };
@@ -172,7 +182,7 @@ const useAuth = () => {
     handleBiometricAuth,
     isLoading,
     checkToken,
-    verifyBiometricLogin, 
+    verifyBiometricLogin,
   };
 };
 

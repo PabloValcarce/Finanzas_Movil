@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useTransactions } from '../../../context/TransactionContext';
+import { useCategories } from '../../../context/CategoryContext';
 
-const SpentLogic = (dateRange) => {
+export const useSpentLogic = (dateRange) => {
   const { transactions, loadTransactions } = useTransactions();
+  const { categoriesCombined, loadCombinedCategories } = useCategories();
   const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   useEffect(() => {
     loadTransactions();
   }, [loadTransactions]);
+  useEffect(() => {
+    loadCombinedCategories();
+  }, []);
 
   useEffect(() => {
     const filterTransactionsByDate = () => {
@@ -29,7 +34,8 @@ const SpentLogic = (dateRange) => {
   }, [dateRange, transactions]);
 
 
-  return { filteredTransactions };
+  return {
+    filteredTransactions,
+    categoriesCombined
+  };
 };
-
-export default SpentLogic;

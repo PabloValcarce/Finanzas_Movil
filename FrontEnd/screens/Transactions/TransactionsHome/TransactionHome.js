@@ -1,4 +1,3 @@
-import React from 'react';
 import { ScrollView, Text, ActivityIndicator, View } from 'react-native';
 import useTransactionHomeLogic from './TransactionHomeLogic';
 import styles from './TransactionHome.styles';
@@ -6,7 +5,6 @@ import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTrans
 import SavingsSummary from '../../../components/Savings/Summary/SavingsSummary';
 import { useTheme } from '../../../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import SavingsLineChart from '../../../components/Graphs/Savings/LineChart/SavingsLineChart';
 
 function TransactionHome() {
   const {
@@ -33,8 +31,8 @@ function TransactionHome() {
       <View style={dynamicStyles.transactionsPageContent}>
         <View style={dynamicStyles.transactionsPageData}>
           <View style={dynamicStyles.savingsData}>
-            <SavingsSummary transactions={recentTransactions} subscriptions={totalSubscriptionExpense} />
-            <SavingsLineChart transactions={recentTransactions} />
+            <SavingsSummary recentTransactions={recentTransactions} subscriptions={totalSubscriptionExpense} />
+            {/* <SavingsLineChart transactions={recentTransactions} /> */}
           </View>
         </View>
       </View>

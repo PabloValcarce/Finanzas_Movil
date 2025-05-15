@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
@@ -26,30 +26,32 @@ function TransactionsList() {
     setDateRange,
     handleResetDates,
     loading,
-    categorias,
-    nuevaCategoria,
-    setNuevaCategoria,
+    newCategory,
+    setNewCategory,
     selectedIcon,
     setSelectedIcon,
-    agregarCategoria,
-    eliminarCategoria,
+    addCategory,
+    deleteCategory,
     isDark
   } = useTransactions();
-  const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
 
+  const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isIconModalVisible, setIsIconModalVisible] = useState(false);
-  const { userId } = useCategories();
+  const { userId, categoriesPerso, loadPersoCategories, categoriesCombined, loadCombinedCategories } = useCategories();
   const { t } = useTranslation();
 
+  console.log(filteredTransactions);
+  
   const showConfirmationDialog = (category) => {
     setSelectedCategory(category);
     setIsDialogVisible(true);
   };
+
   const handleConfirmDelete = () => {
     if (selectedCategory) {
-      eliminarCategoria(selectedCategory.id);
+      deleteCategory(selectedCategory.id);
     }
     setIsDialogVisible(false);
     setSelectedCategory(null);
@@ -60,12 +62,19 @@ function TransactionsList() {
   };
 
   const handleAddCategory = () => {
-    if (nuevaCategoria.trim() !== '') {
-      agregarCategoria(nuevaCategoria, selectedIcon);
-      setNuevaCategoria('');
+    if (newCategory.trim() !== '') {
+      addCategory(newCategory, selectedIcon);
+      setNewCategory('');
       setSelectedIcon('smile');
     }
   };
+
+  useEffect(() => {
+    if (userId) {
+      loadPersoCategories();
+      loadCombinedCategories();
+    }
+  }, [userId]);
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -76,8 +85,8 @@ function TransactionsList() {
       <NavBarTransaction />
       <View style={dynamicStyles.TransactionListContent}>
         <View style={dynamicStyles.head}>
-          <View style={dynamicStyles.CategoriesPerso}>
-            <Text style={dynamicStyles.title}>{t('TransactionsList.PersoCategory.title')}</Text>
+          <View style={dynamicStyles.CategoriesPersonal}>
+            <Text style={dynamicStyles.title}>{t('TransactionsList.PersonalCategory.title')}</Text>
 
             <View style={dynamicStyles.add}>
               <TouchableOpacity
@@ -88,9 +97,9 @@ function TransactionsList() {
               </TouchableOpacity>
 
               <TextInput
-                placeholder={t('TransactionsList.PersoCategory.placeholder')}
-                value={nuevaCategoria}
-                onChangeText={setNuevaCategoria}
+                placeholder={t('TransactionsList.PersonalCategory.placeholder')}
+                value={newCategory}
+                onChangeText={setNewCategory}
                 style={dynamicStyles.input}
                 placeholderTextColor={isDark ? '#e0e0e0' : '#666666'}
               />
@@ -105,10 +114,10 @@ function TransactionsList() {
 
             <View style={dynamicStyles.listContainer}>
               <ScrollView>
-                {categorias?.map((item) => (
+                {categoriesPerso?.map((item) => (
                   <View key={item.id.toString()} style={dynamicStyles.categoryItem}>
-                    <Icon name={item.icono} style={dynamicStyles.icon} />
-                    <Text style={dynamicStyles.categoryText}>{' ' + item.nombre}</Text>
+                    <Icon name={item.icon} style={dynamicStyles.icon} />
+                    <Text style={dynamicStyles.categoryText}>{' ' + item.name}</Text>
                     <TouchableOpacity
                       style={dynamicStyles.deleteIcon}
                       onPress={() => showConfirmationDialog(item)}
@@ -133,7 +142,11 @@ function TransactionsList() {
             onReset={handleResetDates}
             isDark={isDark}
           />
-          <AddTransaction userId={userId} isDark={isDark} />
+          <AddTransaction
+            userId={userId}
+            isDark={isDark}
+            categoriesCombined={categoriesCombined}
+          />
         </View>
       </View>
       <View style={dynamicStyles.TransactionTable}>
@@ -144,20 +157,21 @@ function TransactionsList() {
         >
           <TransactionsResults
             transactions={filteredTransactions}
+            categoriesCombined={categoriesCombined}
             isDark={isDark} />
         </ScrollView>
       </View>
 
       <Dialog.Container visible={isDialogVisible}>
-        <Dialog.Title>{t('TransactionsList.PersoCategory.DeleteConfirmTitle')}</Dialog.Title>
+        <Dialog.Title>{t('TransactionsList.PersonalCategory.DeleteConfirmTitle')}</Dialog.Title>
         <Dialog.Description>
-          {t('TransactionsList.PersoCategory.DeleteConfirmText')}{" "}
+          {t('TransactionsList.PersonalCategory.DeleteConfirmText')}{" "}
           <Text style={{ fontWeight: 'bold' }}>
-            {selectedCategory ? selectedCategory.nombre : ''}
+            {selectedCategory ? selectedCategory.name : ''}
           </Text> ?
         </Dialog.Description>
-        <Dialog.Button label={t('TransactionsList.PersoCategory.DeleteCancelButton')} onPress={() => setIsDialogVisible(false)} />
-        <Dialog.Button label={t('TransactionsList.PersoCategory.DeleteConfirmButton')} onPress={handleConfirmDelete} />
+        <Dialog.Button label={t('TransactionsList.PersonalCategory.DeleteCancelButton')} onPress={() => setIsDialogVisible(false)} />
+        <Dialog.Button label={t('TransactionsList.PersonalCategory.DeleteConfirmButton')} onPress={handleConfirmDelete} />
       </Dialog.Container>
 
       <IconSelector

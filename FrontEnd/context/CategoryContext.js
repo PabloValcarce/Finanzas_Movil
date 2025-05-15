@@ -14,9 +14,9 @@ export const useCategories = () => {
 };
 
 export const CategoryProvider = ({ children }) => {
-    const [categories, setCategories] = useState([]);
     const [categoriesDefault, setCategoriesDefault] = useState([]);
     const [categoriesPerso, setCategoriesPerso] = useState([]);
+    const [categoriesCombined, setCategoriesCombined] = useState([]);
     const [userId, setUserId] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -39,20 +39,15 @@ export const CategoryProvider = ({ children }) => {
             setUserId(null);
         }
     };
-    useEffect(() => {
-        if (userId !== null) {
-            loadDefaultCategories();
-            loadCombinedCategories();
-            loadPersonalizedCategories();
-        }
-    }, [userId]);
+
+
 
     // Cargar categorías por defecto
     const loadDefaultCategories = async () => {
         setLoading(true);
         try {
-            const response = await api.get('/api/get-categorias-default');
-            setCategoriesDefault(response.data.categorias);
+            const response = await api.get('/api/get-default-categories');  // cambiado a inglés
+            setCategoriesDefault(response.data.categories);
         } catch (error) {
             console.error('Error al cargar las categorías por defecto:', error);
         } finally {
@@ -65,8 +60,8 @@ export const CategoryProvider = ({ children }) => {
         if (!userId) return;
         setLoading(true);
         try {
-            const response = await api.get(`/api/get-categorias-combinadas/${userId}`);
-            setCategories(response.data.categorias);
+            const response = await api.get(`/api/get-combined-categories/${userId}`);  // cambiado a inglés
+            setCategoriesCombined(response.data.categories);
         } catch (error) {
             console.error('Error al cargar las categorías combinadas:', error);
         } finally {
@@ -75,12 +70,12 @@ export const CategoryProvider = ({ children }) => {
     };
 
     // Cargar categorías personalizadas del usuario
-    const loadPersonalizedCategories = async () => {
+    const loadPersoCategories = async () => {
         if (!userId) return;
         setLoading(true);
         try {
-            const response = await api.get(`/api/get-categorias-personalizadas/${userId}`);
-            setCategoriesPerso(response.data.categorias);
+            const response = await api.get(`/api/get-custom-categories/${userId}`);  // cambiado a inglés
+            setCategoriesPerso(response.data.categories);
         } catch (error) {
             console.error('Error al cargar las categorías personalizadas:', error);
         } finally {
@@ -89,16 +84,16 @@ export const CategoryProvider = ({ children }) => {
     };
 
     // Agregar una categoría personalizada con icono
-    const addPersonalizedCategory = async (categoryName, icono) => {
+    const addCategoryPerso = async (categoryName, icono) => {
         if (!userId || !categoryName.trim()) return;
         setLoading(true);
         try {
-            const response = await api.post('/api/add-categoria-personalizada', {
-                nombre: categoryName,
+            const response = await api.post('/api/add-custom-category', {  // cambiado a inglés
+                name: categoryName,
                 user_id: userId,
-                icono: icono  // Asegúrate de enviar el icono
+                icon: icono  // adaptado a inglés también
             });
-            setCategories(prevCategories => [...prevCategories, response.data]);
+            setCategoriesPerso(prevCategories => [...prevCategories, response.data]);
         } catch (error) {
             console.error('Error al agregar la categoría personalizada:', error);
         } finally {
@@ -107,15 +102,15 @@ export const CategoryProvider = ({ children }) => {
     };
 
     // Eliminar una categoría personalizada
-    const removePersonalizedCategory = async (categoryId) => {
+    const removeCategoryPerso = async (categoryId) => {
         if (!userId || !categoryId) return;
         setLoading(true);
         try {
-            await api.post('/api/eliminar-categoria-personalizada', {
+            await api.post('/api/delete-custom-category', {  // cambiado a inglés
                 user_id: userId,
-                categoria_id: categoryId
+                category_id: categoryId
             });
-            setCategories(prevCategories => prevCategories.filter(cat => cat.id !== categoryId));
+            setCategoriesPerso(prevCategories => prevCategories.filter(cat => cat.id !== categoryId));
         } catch (error) {
             console.error('Error al eliminar la categoría personalizada:', error);
         } finally {
@@ -125,15 +120,15 @@ export const CategoryProvider = ({ children }) => {
 
     return (
         <CategoryContext.Provider value={{
-            categories,
             categoriesDefault,
             categoriesPerso,
+            categoriesCombined,
             loading,
             loadDefaultCategories,
             loadCombinedCategories,
-            loadPersonalizedCategories,
-            addPersonalizedCategory,
-            removePersonalizedCategory,
+            loadPersoCategories,
+            addCategoryPerso,
+            removeCategoryPerso,
             fetchUserId,
             userId
         }}>

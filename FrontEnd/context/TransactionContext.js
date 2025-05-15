@@ -17,12 +17,6 @@ export const TransactionProvider = ({ children }) => {
   const [totalSubscriptionExpense, setTotalSubscriptionExpense] = useState(0);
   const [recentTransactions, setRecentTransactions] = useState([]);
 
-
-  useEffect(() => {
-    loadTransactions();
-  },[]);
-  
-
   const loadTransactions = useCallback(async () => {
     try {
       setLoading(true);

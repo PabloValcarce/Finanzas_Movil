@@ -4,13 +4,11 @@ import { MaterialIcons } from 'react-native-vector-icons';
 import Dialog from 'react-native-dialog';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useTransactions } from '../../context/TransactionContext';
-import { useCategories } from '../../context/CategoryContext';
 import styles from './TransactionsResults.styles'; 
 import { useTranslation } from 'react-i18next';
 
-const TransactionsResults = ({isDark}) => {
-  const { transactions, updateTransaction, deleteTransaction } = useTransactions();
-  const { categories, loadCombinedCategories } = useCategories();
+const TransactionsResults = ({transactions,categoriesCombined, isDark}) => {
+  const {  updateTransaction, deleteTransaction } = useTransactions();
   const [visible, setVisible] = useState(false);
   const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -24,24 +22,19 @@ const TransactionsResults = ({isDark}) => {
 
   const dynamicStyles = useMemo(() => styles(isDark), [isDark]);
 
-
-
-  useEffect(() => {
-    loadCombinedCategories();
-  }, []);
-
   const handleEdit = (transaction) => {
     setSelectedTransaction(transaction);
     setDescription(transaction.description);
     setAmount(transaction.amount.toString());
     setIsSubscription(Boolean(transaction.is_subscription));
 
-    const category = categories.find(c => c.nombre === transaction.categoria);
+    const category = categoriesCombined.find(c => c.name === transaction.category);
     setCategoryId(category ? category.id : '');
 
     setIsEditDialogVisible(true);
   };
 
+  
   const handleUpdateTransaction = async () => {
     setIsLoading(true);
     const updatedTransaction = {
@@ -92,7 +85,7 @@ const TransactionsResults = ({isDark}) => {
     return (
       <View style={[dynamicStyles.row, rowClass]}>
         <Text style={dynamicStyles.cell}>{item.description}</Text>
-        <Text style={dynamicStyles.cell}>{item.categoria}</Text>
+        <Text style={dynamicStyles.cell}>{item.category}</Text>
         <Text style={dynamicStyles.cell}>{item.amount.toFixed(2)} €</Text>
         <View style={dynamicStyles.buttonContainer}>
           <TouchableOpacity style={dynamicStyles.editButton} onPress={() => handleEdit(item)}>
@@ -175,8 +168,8 @@ const TransactionsResults = ({isDark}) => {
 
             <Text style={dynamicStyles.subtitle}>{t('TransactionsList.TransactionResults.Edit.Category')}</Text>
             <Dropdown
-              data={categories.map(category => ({
-                label: category.nombre,
+              data={categoriesCombined.map(category => ({
+                label: category.name,
                 value: category.id
               }))}
               labelField="label"

@@ -1,10 +1,11 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { TextInput, Text, View, TouchableOpacity } from 'react-native';
 import useAuth from '../../utils/useAuth';
 import Icon from 'react-native-vector-icons/Entypo';
 import { useTheme } from '../../context/ThemeContext';
-import  styles  from './AuthForm.styles'; 
+import styles from './AuthForm.styles';
 import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function AuthForm() {
   const {
@@ -13,19 +14,27 @@ function AuthForm() {
     name,
     setName,
     email,
-    setEmail,
     password,
     setPassword,
     emailError,
     handleEmailChange,
     handleSubmit,
     handleBiometricAuth,
-    isLoading,
   } = useAuth();
 
   const { isDark } = useTheme();
   const dynamicStyles = styles(isDark);
   const { t } = useTranslation();
+  const [hasBiometricPreference, setHasBiometricPreference] = useState(false);
+  const [isBiometricLogin, setIsBiometricLogin] = useState(false); 
+
+
+  useEffect(() => {
+    AsyncStorage.getItem('biometric_login').then(value => {
+      if (value) setHasBiometricPreference(true);
+    });
+  }, []);
+
 
   return (
     <View style={dynamicStyles.authForm}>
@@ -58,21 +67,28 @@ function AuthForm() {
         />
         <TouchableOpacity
           style={dynamicStyles.submitButton}
-          onPress={handleSubmit}
+          onPress={() => {
+            handleSubmit(isBiometricLogin); 
+          }}
         >
           <Text style={dynamicStyles.submitButtonText}>
             {isRegister ? t('DashBoard.titleRegister') : t('DashBoard.titleLogin')}
           </Text>
         </TouchableOpacity>
 
-        {!isRegister && (
+
+        {!isRegister && hasBiometricPreference && (
           <TouchableOpacity
             style={dynamicStyles.biometricButton}
-            onPress={handleBiometricAuth}
+            onPress={() => {
+              setIsBiometricLogin(true);
+              handleBiometricAuth()
+            }}
           >
             <Icon name="fingerprint" style={dynamicStyles.finger} />
           </TouchableOpacity>
         )}
+
       </View>
 
       <TouchableOpacity

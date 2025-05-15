@@ -6,12 +6,12 @@ import { useTheme } from '../../../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { SavingsSummaryLogic } from './SavingsSummaryLogic';
 
-function SavingsSummary({ transactions, subscriptions }) {
+function SavingsSummary({ recentTransactions, subscriptions }) {
     const {
         totalEarn,
         totalSpent,
         totalBalance,
-    } = SavingsSummaryLogic(transactions, subscriptions);
+    } = SavingsSummaryLogic(recentTransactions, subscriptions);
 
     const { isDark } = useTheme();
     const dynamicStyles = styles(isDark);

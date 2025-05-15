@@ -5,13 +5,12 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useTransactions } from '../../context/TransactionContext';
 import { useCategories } from '../../context/CategoryContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useTheme } from '../../context/ThemeContext';
 import { styles } from './AddTransaction.styles';
 import { useTranslation } from 'react-i18next';
 
-const AddTransactionLogic = ({ userId }) => {
+const AddTransactionLogic = ({ userId,isDark, categoriesCombined}) => {
     const { addTransaction } = useTransactions();
-    const { categories, loading, loadCombinedCategories } = useCategories();
+    const { loading } = useCategories();
     const [isDialogVisible, setIsDialogVisible] = useState(false);
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
@@ -19,13 +18,8 @@ const AddTransactionLogic = ({ userId }) => {
     const [isSubscription, setIsSubscription] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
-    const { isDark } = useTheme();
     const dynamicStyles = styles(isDark);  // ⬅️ Aplica estilos dinámicos
     const { t } = useTranslation();
-
-    useEffect(() => {
-        loadCombinedCategories();
-    }, []);
 
     const handleAddTransaction = async () => {
         setIsLoading(true);
@@ -33,10 +27,9 @@ const AddTransactionLogic = ({ userId }) => {
             description,
             amount,
             user_id: userId,
-            categoria_id: categoryId,
+            category_id: categoryId,
             is_subscription: isSubscription,
-        };
-
+        };       
         try {
             await addTransaction(newTransaction);
             setSuccessMessage("✅ Transacción añadida con éxito!");
@@ -105,8 +98,8 @@ const AddTransactionLogic = ({ userId }) => {
 
                         <Text style={dynamicStyles.subtitle}>{t('TransactionsList.AddTransaction.Category')}</Text>
                         <Dropdown
-                            data={categories.map(category => ({
-                                label: category.nombre,
+                            data={categoriesCombined.map(category => ({
+                                label: category.name,
                                 value: category.id
                             }))}
                             labelField="label"

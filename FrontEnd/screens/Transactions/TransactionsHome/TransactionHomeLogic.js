@@ -9,7 +9,6 @@ const useTransactionHomeLogic = () => {
     loadSuscriptions,
     recentTransactions,
     loadRecentTransactions,
-    loadTransactions,
     totalSubscriptionExpense
   } = useTransactions();
 
@@ -19,7 +18,6 @@ const useTransactionHomeLogic = () => {
 
   useEffect(() => {
     verifyToken();
-    loadTransactions();
     loadSuscriptions();
     loadRecentTransactions();
   }, []);

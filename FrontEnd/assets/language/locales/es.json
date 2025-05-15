@@ -40,7 +40,8 @@
         },
         "SpentBarChart": {
             "title": "Gastos por categoría",
-            "subtitle": "Gastado"
+            "subtitle": "Gastado",
+            "noData": "No hay datos disponibles"
         },
         "SpentResults": {
             "noResults": "No hay resultados disponibles.",
@@ -54,7 +55,7 @@
         }
     },
     "TransactionsList": {
-        "PersoCategory": {
+        "PersonalCategory": {
             "title": "Categorías personalizadas",
             "placeholder": "Nueva categoría",
             "DeleteConfirmTitle": "Confirmar eliminación",

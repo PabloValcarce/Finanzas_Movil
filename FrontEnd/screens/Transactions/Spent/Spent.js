@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import useAuth from '../../../utils/useAuth';
-import SpentLogic from './SpentLogic';
+import { useSpentLogic } from './SpentLogic'; 
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 import SpentSummary from '../../../components/Spent/SpentSummary/SpentSummary';
 import SpentResults from '../../../components/Spent/SpentResults/SpentResults';
 import SpentBarChart from '../../../components/Graphs/Spent/Barchart/Barchart';
 import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTransaction';
 import { useTheme } from '../../../context/ThemeContext'; 
-import styles from './Spent.styles'; // Estilos dinámicos
+import styles from './Spent.styles';
 import { ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -18,7 +18,7 @@ function SpentPage() {
   const { isDark } = useTheme();
   const dynamicStyles = styles(isDark);
   const { t } = useTranslation(); 
-  const { filteredTransactions, loading } = SpentLogic(dateRange); // Usamos la lógica con el hook
+  const { filteredTransactions,categoriesCombined, loading } = useSpentLogic(dateRange); // Usamos la lógica con el hook
 
   const handleResetDates = () => {
     setDateRange({ startDate: null, endDate: null });
@@ -56,7 +56,7 @@ function SpentPage() {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            <SpentBarChart transactions={filteredTransactions} />
+            <SpentBarChart transactions={filteredTransactions} categoriesCombined={categoriesCombined} />
           </ScrollView>
 
           <ScrollView

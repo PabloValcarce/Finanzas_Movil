@@ -1,104 +1,88 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useTransactions as useTransactionContext } from '../../../context/TransactionContext'; // Asegúrate de que el contexto esté importado correctamente
+import { useTransactions as useTransactionContext } from '../../../context/TransactionContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
 import { useCategories } from '../../../context/CategoryContext';
-import { useTheme } from '../../../context/ThemeContext'; 
+import { useTheme } from '../../../context/ThemeContext';
 
 export const useTransactions = () => {
   const { transactions, loadTransactions, loading } = useTransactionContext();
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
   const [userId, setUserId] = useState(null);
   const {
+    categoriesCombined,
+    categoriesDefault,
     categoriesPerso,
-    loadPersonalizedCategories,
-    addPersonalizedCategory,
-    removePersonalizedCategory
+    loadCombinedCategories,
+    addCategoryPerso,
+    removeCategoryPerso,
   } = useCategories();
-  const [nuevaCategoria, setNuevaCategoria] = useState('');
+
+  const [newCategory, setNewCategory] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('smile');
   const { isDark } = useTheme();
-  
+
   useEffect(() => {
     const fetchUserId = async () => {
-      const access_token = await AsyncStorage.getItem('access_token');
-      if (access_token) {
+      const accessToken = await AsyncStorage.getItem('access_token');
+      if (accessToken) {
         try {
-          const decoded = jwtDecode(access_token);
+          const decoded = jwtDecode(accessToken);
           setUserId(decoded.user_id);
         } catch (error) {
           console.error("Error decoding JWT:", error);
         }
       }
-      setLoading(false);
     };
     fetchUserId();
   }, []);
 
-  useEffect(() => {
-    loadTransactions();
-  }, [loadTransactions]);
-  // Normalizar fechas al formato adecuado para comparar
   const normalizeDate = (date) => {
     if (!date) return null;
-    const normalizedDate = new Date(date);
-    normalizedDate.setHours(0, 0, 0, 0);  // Ajusta a medianoche
-    return normalizedDate;
+    const normalized = new Date(date);
+    normalized.setHours(0, 0, 0, 0);
+    return normalized;
   };
 
-  // Función para filtrar las transacciones
   const filterTransactionsByDate = () => {
     const { startDate, endDate } = dateRange;
-    const normalizedStartDate = normalizeDate(startDate);
-    const normalizedEndDate = normalizeDate(endDate);
+    const normalizedStart = normalizeDate(startDate);
+    const normalizedEnd = normalizeDate(endDate);
 
-    return transactions.filter((transaction) => {
+    return transactions.filter(transaction => {
       const transactionDate = new Date(transaction.date);
 
-      // Si no hay filtro de fecha, mostrar todas las transacciones
-      if (!normalizedStartDate && !normalizedEndDate) return true;
-      // Filtrado por fecha de inicio
-      if (normalizedStartDate && !normalizedEndDate) {
-        return transactionDate >= normalizedStartDate;
-      }
-      // Filtrado por fecha final
-      if (!normalizedStartDate && normalizedEndDate) {
-        return transactionDate <= normalizedEndDate;
-      }
-      // Filtrado entre fechas de inicio y final
-      return transactionDate >= normalizedStartDate && transactionDate <= normalizedEndDate;
-    }) // Filtrar solo los gastos
+      if (!normalizedStart && !normalizedEnd) return true;
+      if (normalizedStart && !normalizedEnd) return transactionDate >= normalizedStart;
+      if (!normalizedStart && normalizedEnd) return transactionDate <= normalizedEnd;
+
+      return transactionDate >= normalizedStart && transactionDate <= normalizedEnd;
+    });
   };
 
-  // Utilizamos useMemo para memorizar las transacciones filtradas y evitar recalcular en cada render
-  const filteredTransactions = useMemo(() => filterTransactionsByDate(), [transactions, dateRange]);
+  const filteredTransactions = useMemo(filterTransactionsByDate, [transactions, dateRange]);
 
-
-  const handleResetDates = () => {
+  const resetDates = () => {
     setDateRange({ startDate: null, endDate: null });
   };
 
-  useEffect(() => {
-    loadPersonalizedCategories();
-  }, []);
-  const agregarCategoria = async () => {
-    if (!nuevaCategoria.trim()) return;
-    try {
-      await addPersonalizedCategory(nuevaCategoria, selectedIcon);
-      await loadPersonalizedCategories();
 
-      // Solo resetear después de que todo se haya completado
-      setNuevaCategoria('');
+
+  const addCategory = async () => {
+    if (!newCategory.trim()) return;
+    try {
+      await addCategoryPerso(newCategory, selectedIcon);
+      await loadCombinedCategories();
+      setNewCategory('');
       setSelectedIcon('smile');
     } catch (error) {
-      console.error('Error al agregar categoría:', error);
+      console.error('Error adding category:', error);
     }
   };
 
-
-  const eliminarCategoria = async (categoriaId) => {
-    await removePersonalizedCategory(categoriaId);
-    loadPersonalizedCategories();
+  const deleteCategory = async (categoryId) => {
+    await removeCategoryPerso(categoryId);
+    await loadCombinedCategories();
   };
 
   return {
@@ -106,17 +90,18 @@ export const useTransactions = () => {
     filteredTransactions,
     dateRange,
     setDateRange,
-    handleResetDates,
+    resetDates,
     userId,
     loading,
-    categorias: categoriesPerso,  
-    nuevaCategoria,
-    setNuevaCategoria,
-    setSelectedIcon,
+    categoriesCombined,
+    newCategory,
+    setNewCategory,
     selectedIcon,
-    agregarCategoria,
-    eliminarCategoria,
-    isDark
+    setSelectedIcon,
+    addCategory,
+    deleteCategory,
+    isDark,
   };
 };
+
 export default useTransactions;
