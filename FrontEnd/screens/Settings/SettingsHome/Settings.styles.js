@@ -17,7 +17,7 @@ export default (isDark) => {
       justifyContent: 'space-between',
       margin: 20,
       padding: 20,
-      marginTop: 70,
+      marginTop: 100,
       backgroundColor: colors.tertiary,
       borderRadius: 10,
       gap: 50,

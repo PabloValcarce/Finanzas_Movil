@@ -22,7 +22,7 @@ const AboutApp = () => {
     };
 
     const contactEmail = () => {
-        Linking.openURL('mailto:soporte@finanzasapp.com');
+        Linking.openURL('mailto:pvalca99@gmail.com');
     };
     const goBack = () => {
         navigation.goBack();  // Regresa a la pantalla anterior (Settings)
@@ -76,7 +76,7 @@ const AboutApp = () => {
                 <View style={dynamicStyles.sectionContent}>
                     <Text style={dynamicStyles.sectionTitle}>{t('AboutApp.contactTitle')}</Text>
                     <TouchableOpacity onPress={contactEmail}>
-                        <Text style={[dynamicStyles.itemText, dynamicStyles.linkText]}>soporte@finanzasapp.com</Text>
+                        <Text style={[dynamicStyles.itemText, dynamicStyles.linkText]}>pvalca99@gmail.com</Text>
                     </TouchableOpacity>
                 </View>
 

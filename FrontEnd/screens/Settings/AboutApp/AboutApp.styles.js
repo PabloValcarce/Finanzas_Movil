@@ -15,11 +15,11 @@ export default (isDark) => {
       justifyContent: 'space-between',
       margin: 20,
       padding: 20,
-      marginTop: 90,
+      marginTop: 100,
       marginBottom: 90,
       backgroundColor: colors.tertiary, 
       borderRadius: 10,
-      gap: 50,
+      gap: 30,
     },
 
     sectionTitle: {
@@ -33,11 +33,12 @@ export default (isDark) => {
     itemText: {
       fontSize: 15,
       color: colors.text, 
+      marginTop: 5,
     },
 
     logoContainer: {
       alignItems: 'center',
-      marginVertical: 20,
+      marginTop: -20,
     },
 
     logoImage: {

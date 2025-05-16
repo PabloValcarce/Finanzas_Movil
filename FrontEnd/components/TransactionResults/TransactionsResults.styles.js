@@ -6,7 +6,7 @@ export default (isDark) => {
 
   return StyleSheet.create({
     container: {
-      marginTop: 20,
+      marginVertical: 20,
     },
     title: {
       fontSize: 24,

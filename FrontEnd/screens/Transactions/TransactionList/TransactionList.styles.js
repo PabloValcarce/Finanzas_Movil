@@ -42,6 +42,7 @@ export const styles = (isDark) => {
     },
     add: {
       flexDirection: 'row',
+      marginBottom: 20,
     },
     headDatePicker: {
       flexDirection: 'column',
@@ -105,7 +106,6 @@ export const styles = (isDark) => {
       backgroundColor: colors.category,
       padding: 12,
       borderRadius: 10,
-      marginVertical: 6,
       marginHorizontal: 10,
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 1 },
