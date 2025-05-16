@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { lightColors, darkColors } from '../../../../styles/colors';
 
-export default (isDark) =>{
+export default (isDark) => {
     const colors = isDark ? darkColors : lightColors;
     return StyleSheet.create({
         container: {
@@ -12,18 +12,25 @@ export default (isDark) =>{
             fontSize: 22,
             fontWeight: 'bold',
             marginBottom: -10,
-            color: colors.text, 
+            color: colors.text,
         },
-        axisColor:{
-            color: colors.text, 
+        axisColor: {
+            color: colors.text,
         },
-        lineColor:{
-            color: colors.graph.line, 
+        lineColor: {
+            color: colors.graph.line,
         },
-        labelColor:{
-            color: colors.text, 
-        }
-        
+        labelColor: {
+            color: colors.text,
+        },
+        noDataText: {
+            textAlign: 'center',
+            marginTop: 20,
+            fontSize: 16,
+            color: colors.text,
+        },
+
+
     });
 }
 

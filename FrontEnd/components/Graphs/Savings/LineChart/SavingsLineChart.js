@@ -13,7 +13,7 @@ function getLastSixMonths() {
         month.setMonth(currentDate.getMonth() - i);
         months.push(month.getMonth() + 1);
     }
-    return months.reverse(); // Ordenamos para que sea desde el mes más reciente
+    return months.reverse();
 }
 
 function SavingsLineChart({ transactions }) {
@@ -45,16 +45,26 @@ function SavingsLineChart({ transactions }) {
     const width = 300;
     const height = 400;
     const padding = 40;
-    const maxValue = Math.max(...balanceByMonth, Math.abs(Math.min(...balanceByMonth)));
-    const scaleY = height / (maxValue * 2) / 2;
+    const maxValue = Math.max(...balanceByMonth.map(v => Math.abs(v)), 0);
+
+    // ⚠️ Evita dividir por 0
+    const scaleY = maxValue === 0 ? 0 : height / (maxValue * 2) / 2;
+
+    if (maxValue === 0) {
+        return (
+            <View style={dynamicStyles.container}>
+                <Text style={dynamicStyles.chartTitle}>{t('Home.Graph.title')}</Text>
+                <Text style={dynamicStyles.noDataText}>{t('Home.Graph.noData')}</Text>
+            </View>
+        );
+    }
 
     const points = balanceByMonth.map((value, index) => {
-        const x = (index / (lastSixMonths.length - 1)) * (width - 2 * padding) + padding +20;
+        const x = (index / (lastSixMonths.length - 1)) * (width - 2 * padding) + padding + 20;
         const y = height / 2 - (value * scaleY);
         return `${x},${y}`;
     }).join(" ");
 
-    // Accede a los colores de los estilos
     const axisColor = dynamicStyles.axisColor.color;
     const lineColor = dynamicStyles.lineColor.color;
     const labelColor = dynamicStyles.labelColor.color;
@@ -63,7 +73,7 @@ function SavingsLineChart({ transactions }) {
         <View style={dynamicStyles.container}>
             <Text style={dynamicStyles.chartTitle}>{t('Home.Graph.title')}</Text>
             <Svg width={width} height={height}>
-                <Line x1={padding} y1={padding} x2={padding} y2={height - padding+10} stroke={axisColor} strokeWidth="1" />
+                <Line x1={padding} y1={padding} x2={padding} y2={height - padding + 10} stroke={axisColor} strokeWidth="1" />
                 <Line x1={padding} y1={height / 2} x2={width - padding + 20} y2={height / 2} stroke={axisColor} strokeWidth="1" />
                 <Polyline points={points} fill="none" stroke={lineColor} strokeWidth="3" />
 
@@ -72,8 +82,8 @@ function SavingsLineChart({ transactions }) {
                     const y = height / 2 - (value * scaleY);
                     return (
                         <G key={index}>
-                            <Circle cx={x+20} cy={y} r="4" fill={lineColor} />
-                            <SvgText x={x+20} y={y - 10} fontSize="12" fill={labelColor} textAnchor="middle">
+                            <Circle cx={x + 20} cy={y} r="4" fill={lineColor} />
+                            <SvgText x={x + 20} y={y - 10} fontSize="12" fill={labelColor} textAnchor="middle">
                                 {value.toFixed(2)}
                             </SvgText>
                         </G>
@@ -84,19 +94,19 @@ function SavingsLineChart({ transactions }) {
                     const x = (index / (lastSixMonths.length - 1)) * (width - 2 * padding) + padding;
                     const monthAbbr = monthsOrder[month - 1].substring(0, 3);
                     return (
-                        <SvgText key={index} x={x+20} y={height / 2 + 15} fontSize="12" fill={labelColor} textAnchor="middle">
+                        <SvgText key={index} x={x + 20} y={height / 2 + 15} fontSize="12" fill={labelColor} textAnchor="middle">
                             {monthAbbr}
                         </SvgText>
                     );
                 })}
 
                 {[maxValue, maxValue / 2, 0, -maxValue / 2, -maxValue].map((value, index) => {
-                    const y = height / 2 - (value * scaleY);  // Calcula correctamente la posición de las etiquetas
+                    const y = height / 2 - (value * scaleY);
                     return (
                         <SvgText
                             key={index}
-                            x={padding - 10}  // Mantén las etiquetas alineadas a la izquierda
-                            y={y}  // Cambia la posición según el valor
+                            x={padding - 10}
+                            y={y}
                             fontSize="12"
                             fill={labelColor}
                             textAnchor="end"

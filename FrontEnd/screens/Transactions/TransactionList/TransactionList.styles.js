@@ -106,6 +106,7 @@ export const styles = (isDark) => {
       padding: 12,
       borderRadius: 10,
       marginVertical: 6,
+      marginHorizontal: 10,
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.1,

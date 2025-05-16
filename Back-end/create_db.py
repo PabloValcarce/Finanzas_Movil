@@ -4,8 +4,8 @@ from datetime import datetime, timedelta, timezone
 from werkzeug.security import generate_password_hash
 
 def initialize_db():
+    
     print("Initializing the database...")
-
     app = create_app()
     with app.app_context():
         db.create_all()

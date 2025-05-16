@@ -152,7 +152,8 @@
     },
     "Home": {
         "Graph": {
-            "title": "Balance mensual"
+            "title": "Balance mensual",
+            "noData": "No hay datos disponibles"
         }
     },
     "DateRangePicker": {

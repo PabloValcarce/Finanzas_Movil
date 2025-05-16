@@ -1,19 +1,17 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTransactions as useTransactionContext } from '../../../context/TransactionContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from 'jwt-decode';
 import { useCategories } from '../../../context/CategoryContext';
 import { useTheme } from '../../../context/ThemeContext';
 
 export const useTransactions = () => {
   const { transactions, loadTransactions, loading } = useTransactionContext();
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
-  const [userId, setUserId] = useState(null);
   const {
+    userId,
     categoriesCombined,
-    categoriesDefault,
-    categoriesPerso,
     loadCombinedCategories,
+    categoriesPerso,
+    loadPersoCategories,
     addCategoryPerso,
     removeCategoryPerso,
   } = useCategories();
@@ -22,20 +20,13 @@ export const useTransactions = () => {
   const [selectedIcon, setSelectedIcon] = useState('smile');
   const { isDark } = useTheme();
 
-  useEffect(() => {
-    const fetchUserId = async () => {
-      const accessToken = await AsyncStorage.getItem('access_token');
-      if (accessToken) {
-        try {
-          const decoded = jwtDecode(accessToken);
-          setUserId(decoded.user_id);
-        } catch (error) {
-          console.error("Error decoding JWT:", error);
-        }
+   useEffect(() => {
+      if (userId) {
+        loadPersoCategories();
+        loadTransactions();
+        loadCombinedCategories();
       }
-    };
-    fetchUserId();
-  }, []);
+    }, [userId]);
 
   const normalizeDate = (date) => {
     if (!date) return null;
@@ -87,6 +78,8 @@ export const useTransactions = () => {
 
   return {
     transactions,
+    categoriesPerso,
+    categoriesCombined,
     filteredTransactions,
     dateRange,
     setDateRange,

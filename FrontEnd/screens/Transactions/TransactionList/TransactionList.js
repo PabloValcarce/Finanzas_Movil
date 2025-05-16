@@ -13,7 +13,6 @@ import AddTransaction from '../../../components/AddTransaction/AddTransaction';
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 import TransactionsResults from '../../../components/TransactionResults/TransactionsResults';
 import { styles } from './TransactionList.styles';
-import { useCategories } from '../../../context/CategoryContext';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconSelector from '../../../components/IconSelector/IconSelector';
 import Dialog from 'react-native-dialog';
@@ -21,6 +20,9 @@ import { useTranslation } from 'react-i18next';
 
 function TransactionsList() {
   const {
+    userId,
+    categoriesPerso,
+    categoriesCombined,
     filteredTransactions,
     dateRange,
     setDateRange,
@@ -39,10 +41,8 @@ function TransactionsList() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isIconModalVisible, setIsIconModalVisible] = useState(false);
-  const { userId, categoriesPerso, loadPersoCategories, categoriesCombined, loadCombinedCategories } = useCategories();
   const { t } = useTranslation();
 
-  console.log(filteredTransactions);
   
   const showConfirmationDialog = (category) => {
     setSelectedCategory(category);
@@ -69,12 +69,7 @@ function TransactionsList() {
     }
   };
 
-  useEffect(() => {
-    if (userId) {
-      loadPersoCategories();
-      loadCombinedCategories();
-    }
-  }, [userId]);
+ 
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
