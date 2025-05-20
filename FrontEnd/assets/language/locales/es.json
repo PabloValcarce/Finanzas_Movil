@@ -137,6 +137,7 @@
         "Menu": {
             "Savings": "Ahorros",
             "Spent": "Gastos",
+            "Budget": "Presupuestos",
             "Transactions": "Transacciones",
             "Settings": "Configuración"
         }
@@ -166,5 +167,26 @@
         "spanish": "Español",
         "french": "Francés",
         "german": "Alemán"
+    },
+    "Budgets":{
+        "NoBudgets":"No hay presupuestos disponibles.",
+        "AddBudget":{
+            "Title":"Añadir presupuesto",
+            "Name":"Nombre",
+            "NamePlaceholder":"Nombre del presupuesto",
+            "Amount":"Cantidad",
+            "Category":"Categoría (opcional)",
+            "CategoryPlaceholder":"Seleccionar categoría",
+            "Cancel":"Cancelar",
+            "Save":"Guardar",
+            "Error":{
+                "Name":"❌ El nombre es obligatorio",
+                "Amount":"❌ El monto debe ser un número positivo",
+                "StartDate":"❌ La fecha de inicio no puede ser posterior a la de fin",
+                "Error":"❌ Error al crear el presupuesto",
+                "Success":"✅ Presupuesto creado con éxito",
+                "Date":"❌ La fecha de fin no puede ser anterior a la de inicio"
+            }
+        }
     }
 }

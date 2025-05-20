@@ -32,6 +32,9 @@ const NavBarTransaction = () => {
           <TouchableOpacity onPress={() => navigation.navigate('Spent')}>
             <Text style={dynamicStyles.menuItem}>{t('Navbar.Menu.Spent')}</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Budget')}>
+            <Text style={dynamicStyles.menuItem}>{t('Navbar.Menu.Budget')}</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('List')}>
             <Text style={dynamicStyles.menuItem}>{t('Navbar.Menu.Transactions')}</Text>
           </TouchableOpacity>

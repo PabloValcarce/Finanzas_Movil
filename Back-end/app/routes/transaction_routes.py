@@ -31,7 +31,7 @@ def handle_transactions(current_user):
 
         category = Category.query.get(category_id)
         if not category:
-            return jsonify({'message': 'Category not found'}), 404
+            return jsonify({'message': 'Category not found'}), 400
 
         next_payment_date = None
         if is_subscription:

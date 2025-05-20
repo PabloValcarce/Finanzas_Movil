@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { styles } from './AddTransaction.styles';
 import { useTranslation } from 'react-i18next';
 
-const AddTransactionLogic = ({ userId,isDark, categoriesCombined}) => {
+const AddTransactionLogic = ({isDark, categoriesCombined}) => {
     const { addTransaction } = useTransactions();
     const { loading } = useCategories();
     const [isDialogVisible, setIsDialogVisible] = useState(false);
@@ -26,7 +26,6 @@ const AddTransactionLogic = ({ userId,isDark, categoriesCombined}) => {
         const newTransaction = {
             description,
             amount,
-            user_id: userId,
             category_id: categoryId,
             is_subscription: isSubscription,
         };       

@@ -3,7 +3,7 @@ import { lightColors, darkColors } from '../../../styles/colors';
 
 const { height } = Dimensions.get('window');
 
-export const styles = (isDark) => {
+export default (isDark) => {
   const colors = isDark ? darkColors : lightColors;
 
   return StyleSheet.create({

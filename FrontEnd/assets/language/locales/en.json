@@ -1,152 +1,177 @@
 {
-    "Savings": {
-        "SavingsSummary": {
-            "title": "Financial Summary",
-            "Earn": "Money Earned",
-            "Spent": "Money Spent",
-            "Saving": "Money Saved",
-            "Subscriptions": "Subscription Spending"
-        },
-        "SavingsCircularChart": {
-            "title": "Spending and Savings Distribution",
-            "subtitle": "Spent",
-            "overspent": "Overspent",
-            "legend": {
-                "Spent": "Spent",
-                "Saving": "Saving",
-                "Subscriptions": "Subscriptions",
-                "OverSpent": "Overspent"
-            },
-            "explanation": {
-                "greaterSpending": "Your expenses exceed your income this month, indicating a financial imbalance.",
-                "normal": "Your income exceeds your expenses."
-            }
-        },
-        "SavingsCards": {
-            "title": "Monthly Saving History",
-            "CardItem": {
-                "TotalSpent": "Total Spent",
-                "Category": "Category with the most spending:",
-                "Subscription": "Active Subscriptions:",
-                "NoSubscription": "No active subscriptions"
-            }
-        }
+  "Savings": {
+    "SavingsSummary": {
+      "title": "Financial Summary",
+      "Earn": "Money Earned",
+      "Spent": "Money Spent",
+      "Saving": "Money Saved",
+      "Subscriptions": "Subscription Spending"
     },
-    "Spent": {
-        "SpentSummary": {
-            "title": "Total Spent",
-            "spent": "Your total spending:",
-            "noSpent": "No transactions available."
-        },
-        "SpentBarChart": {
-            "title": "Spending by Category",
-            "subtitle": "Spent"
-        },
-        "SpentResults": {
-            "noResults": "No results available.",
-            "title": "Spending Details",
-            "table": {
-                "Date": "Date",
-                "Description": "Description",
-                "Category": "Category",
-                "Amount": "Spent"
-            }
-        }
+    "SavingsCircularChart": {
+      "title": "Spending and Savings Distribution",
+      "subtitle": "Spent",
+      "overspent": "Overspent",
+      "legend": {
+        "Spent": "Spent",
+        "Saving": "Saving",
+        "Subscriptions": "Subscriptions",
+        "OverSpent": "Overspent"
+      },
+      "explanation": {
+        "greaterSpending": "Your expenses exceed your income this month, indicating a financial imbalance.",
+        "normal": "Your income exceeds your expenses."
+      }
     },
-    "TransactionsList": {
-        "PersoCategory": {
-            "title": "Custom Categories",
-            "placeholder": "New category",
-            "DeleteConfirmTitle": "Confirm Deletion",
-            "DeleteConfirmText": "Are you sure you want to delete this category?",
-            "DeleteCancelButton": "Cancel",
-            "DeleteConfirmButton": "Delete"
-        },
-        "AddTransaction": {
-            "title": "Add Transaction",
-            "Description": "Description",
-            "Amount": "Amount",
-            "Subscription": "Is it a monthly subscription?",
-            "Category": "Category",
-            "SelectCategory": "Select Category",
-            "Cancel": "Cancel",
-            "Save": "Add"
-        },
-        "TransactionResults": {
-            "title": "Transactions",
-            "noResults": "No transactions available.",
-            "table": {
-                "Description": "Description",
-                "Category": "Category",
-                "Amount": "Spent",
-                "Actions": "Actions"
-            },
-            "Delete": {
-                "Title": "Confirm Deletion",
-                "Text": "Are you sure you want to delete this transaction?",
-                "CancelButton": "Cancel",
-                "ConfirmButton": "Delete"
-            },
-            "Edit": {
-                "Title": "Edit Transaction",
-                "Description": "Description",
-                "Amount": "Amount",
-                "Subscription": "Is it a monthly subscription?",
-                "Category": "Category",
-                "SelectCategory": "Select Category",
-                "CancelButton": "Cancel",
-                "ConfirmButton": "Modify"
-            }
-        }
-    },
-    "Settings": {
-        "Information": {
-            "title": "Information",
-            "Privacy": "Privacy Policy"
-        },
-        "Preferences": {
-            "title": "Preferences",
-            "Language": "Language",
-            "Currency": "Currency",
-            "DarkMode": "Dark Mode"
-        },
-        "Account": {
-            "title": "Account",
-            "LogOut": "Log Out"
-        }
-    },
-    "Navbar": {
-        "Title": "Finance",
-        "Menu": {
-            "Savings": "Savings",
-            "Spent": "Spent",
-            "Transactions": "Transactions",
-            "Settings": "Settings"
-        }
-    },
-    "DashBoard": {
-        "titleLogin": "Log In",
-        "titleRegister": "Register",
-        "Email": "Email",
-        "Password": "Password",
-        "Name": "Name",
-        "ChangeLogin": "Switch to Log In",
-        "ChangeRegister": "Switch to Register"
-    },
-    "Home": {
-        "Graph": {
-            "title": "Monthly Balance"
-        }
-    },
-    "DateRangePicker": {
-        "title": "Date Filter:",
-        "Begin": "Start",
-        "End": "End"
-    },
-    "language": {
-        "english": "English",
-        "spanish": "Spanish",
-        "french": "French",
-        "german": "German"
+    "SavingsCards": {
+      "title": "Monthly Saving History",
+      "CardItem": {
+        "TotalSpent": "Total Spent",
+        "Category": "Category with the most spending:",
+        "Subscription": "Active Subscriptions:",
+        "NoSubscription": "No active subscriptions"
+      }
     }
+  },
+  "Spent": {
+    "SpentSummary": {
+      "title": "Total Spent",
+      "spent": "Your total spending:",
+      "noSpent": "No transactions available."
+    },
+    "SpentBarChart": {
+      "title": "Spending by Category",
+      "subtitle": "Spent"
+    },
+    "SpentResults": {
+      "noResults": "No results available.",
+      "title": "Spending Details",
+      "table": {
+        "Date": "Date",
+        "Description": "Description",
+        "Category": "Category",
+        "Amount": "Spent"
+      }
+    }
+  },
+  "TransactionsList": {
+    "PersonalCategory": {
+      "title": "Custom Categories",
+      "placeholder": "New category",
+      "DeleteConfirmTitle": "Confirm Deletion",
+      "DeleteConfirmText": "Are you sure you want to delete this category?",
+      "DeleteCancelButton": "Cancel",
+      "DeleteConfirmButton": "Delete"
+    },
+    "AddTransaction": {
+      "title": "Add Transaction",
+      "Description": "Description",
+      "Amount": "Amount",
+      "Subscription": "Is it a monthly subscription?",
+      "Category": "Category",
+      "SelectCategory": "Select Category",
+      "Cancel": "Cancel",
+      "Save": "Add"
+    },
+    "TransactionResults": {
+      "title": "Transactions",
+      "noResults": "No transactions available.",
+      "table": {
+        "Description": "Description",
+        "Category": "Category",
+        "Amount": "Spent",
+        "Actions": "Actions"
+      },
+      "Delete": {
+        "Title": "Confirm Deletion",
+        "Text": "Are you sure you want to delete this transaction?",
+        "CancelButton": "Cancel",
+        "ConfirmButton": "Delete"
+      },
+      "Edit": {
+        "Title": "Edit Transaction",
+        "Description": "Description",
+        "Amount": "Amount",
+        "Subscription": "Is it a monthly subscription?",
+        "Category": "Category",
+        "SelectCategory": "Select Category",
+        "CancelButton": "Cancel",
+        "ConfirmButton": "Modify"
+      }
+    }
+  },
+  "Settings": {
+    "Information": {
+      "title": "Information",
+      "Privacy": "Privacy Policy",
+      "Information": "App Information"
+
+    },
+    "Preferences": {
+      "title": "Preferences",
+      "Language": "Language",
+      "Currency": "Currency",
+      "DarkMode": "Dark Mode"
+    },
+    "Account": {
+      "title": "Account",
+      "LogOut": "Log Out"
+    }
+  },
+  "Navbar": {
+    "Title": "Finance",
+    "Menu": {
+      "Savings": "Savings",
+      "Spent": "Spent",
+      "Budget": "Budget",
+      "Transactions": "Transactions",
+      "Settings": "Settings"
+    }
+  },
+  "DashBoard": {
+    "titleLogin": "Log In",
+    "titleRegister": "Register",
+    "Email": "Email",
+    "Password": "Password",
+    "Name": "Name",
+    "ChangeLogin": "Switch to Log In",
+    "ChangeRegister": "Switch to Register"
+  },
+  "Home": {
+    "Graph": {
+      "title": "Monthly Balance"
+    }
+  },
+  "DateRangePicker": {
+    "title": "Date Filter:",
+    "Begin": "Start",
+    "End": "End"
+  },
+  "language": {
+    "english": "English",
+    "spanish": "Spanish",
+    "french": "French",
+    "german": "German"
+  },
+  "Budgets": {
+  "NoBudgets": "No budgets available.",
+  "AddBudget": {
+    "Title": "Add Budget",
+    "Name": "Name",
+    "NamePlaceholder": "Budget name",
+    "Amount": "Amount",
+    "Category": "Category (optional)",
+    "CategoryPlaceholder": "Select category",
+    "Cancel": "Cancel",
+    "Save": "Save",
+    "Error": {
+      "Name": "❌ Name is required",
+      "Amount": "❌ Amount must be a positive number",
+      "StartDate": "❌ Start date cannot be after end date",
+      "Error": "❌ Error creating budget",
+      "Success": "✅ Budget created successfully",
+      "Date": "❌ End date cannot be before start date"
+    }
+  }
+}
+
 }

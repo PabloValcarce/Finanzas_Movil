@@ -84,7 +84,6 @@ export const useTransactions = () => {
     dateRange,
     setDateRange,
     resetDates,
-    userId,
     loading,
     categoriesCombined,
     newCategory,

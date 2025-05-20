@@ -3,7 +3,7 @@ from app.models import db, Budget, Category, Transaction
 from app.middleware import token_required
 from datetime import datetime, timezone
 
-budgets = Blueprint('budgets', __name__)
+budgets_routes = Blueprint('budgets', __name__)
 
 # Helper para parsear fechas ISO
 def parse_date(date_str):
@@ -12,7 +12,7 @@ def parse_date(date_str):
     except Exception:
         return None
 
-@budgets.route('/budgets', methods=['GET', 'POST'])
+@budgets_routes.route('/budgets', methods=['GET', 'POST'])
 @token_required
 def handle_budgets(current_user):
     if request.method == 'GET':
@@ -53,14 +53,14 @@ def handle_budgets(current_user):
 
         return jsonify(new_budget.to_dict()), 201
 
-@budgets.route('/budgets/<int:id>', methods=['PUT'])
+@budgets_routes.route('/budgets/<int:id>', methods=['PUT'])
 @token_required
 def update_budget(current_user, id):
     data = request.get_json()
     budget = Budget.query.get(id)
 
     if not budget or budget.user_id != current_user.id:
-        return jsonify({'message': 'Budget not found or not authorized'}), 404
+        return jsonify({'message': 'Budget not found or not authorized'}), 400
 
     budget.name = data.get('name', budget.name)
     budget.amount = data.get('amount', budget.amount)
@@ -83,25 +83,25 @@ def update_budget(current_user, id):
 
     return jsonify(budget.to_dict())
 
-@budgets.route('/budgets/<int:id>', methods=['DELETE'])
+@budgets_routes.route('/budgets/<int:id>', methods=['DELETE'])
 @token_required
 def delete_budget(current_user, id):
     budget = Budget.query.get(id)
 
     if not budget or budget.user_id != current_user.id:
-        return jsonify({'message': 'Budget not found or not authorized'}), 404
+        return jsonify({'message': 'Budget not found or not authorized'}), 400
 
     db.session.delete(budget)
     db.session.commit()
     return jsonify({'message': 'Budget deleted'})
 
-@budgets.route('/budgets/<int:id>/progress', methods=['GET'])
+@budgets_routes.route('/budgets/<int:id>/progress', methods=['GET'])
 @token_required
 def budget_progress(current_user, id):
     budget = Budget.query.get(id)
 
     if not budget or budget.user_id != current_user.id:
-        return jsonify({'message': 'Budget not found or not authorized'}), 404
+        return jsonify({'message': 'Budget not found or not authorized'}), 400
 
     query = Transaction.query.filter(
         Transaction.user_id == current_user.id,

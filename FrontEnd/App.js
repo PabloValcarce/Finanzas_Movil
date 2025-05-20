@@ -9,6 +9,7 @@ import Savings from './screens/Transactions/Savings/Savings';
 import Spent from './screens/Transactions/Spent/Spent';
 import Settings from './screens/Settings/SettingsHome/Settings';
 import AboutApp from './screens/Settings/AboutApp/AboutApp'; 
+import Budget from './screens/Transactions/Budget/Budget';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
@@ -22,6 +23,7 @@ const AppNavigator = () => {
           <Stack.Screen name="List" component={TransactionsList} />
           <Stack.Screen name="Savings" component={Savings} />
           <Stack.Screen name="Spent" component={Spent} />
+          <Stack.Screen name="Budget" component={Budget} />
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="AboutApp" component={AboutApp} />
         </Stack.Navigator>

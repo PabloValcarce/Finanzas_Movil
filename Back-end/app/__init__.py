@@ -20,11 +20,13 @@ def create_app():
     from app.routes.transaction_routes import transactions
     from app.routes.category_routes import category_routes
     from app.routes.month_summary import month_summary_routes
+    from app.routes.budgets_routes import budgets_routes
     
     app.register_blueprint(main)
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(transactions, url_prefix='/api')
     app.register_blueprint(category_routes, url_prefix='/api')
     app.register_blueprint(month_summary_routes, url_prefix='/api')
+    app.register_blueprint(budgets_routes, url_prefix='/api')
 
     return app

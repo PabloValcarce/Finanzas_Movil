@@ -35,6 +35,12 @@ export const lightColors = {
       textColor: '#000000',
       backgroundColor: '#ffffff',
     }
+  },
+  budgetCard:{
+    backgroundColor: '#ddd',
+    borderColor: '#e0ecf5',
+    shadowColor: '#aaa',
+    amount: '#16a34a',
   }
 };
 
@@ -75,7 +81,14 @@ export const darkColors = {
       textColor: '#FFFFFF',
       backgroundColor: '#1e1e1e',
     }
-  }
+  },
+  budgetCard: {
+  backgroundColor: '#1e1e1e', // fondo oscuro suave
+  borderColor: '#444',        // borde gris oscuro
+  shadowColor: '#000',        // sombra negra sutil
+  amount: '#4ade80',          // verde claro para el monto
+}
+
 
 
 };

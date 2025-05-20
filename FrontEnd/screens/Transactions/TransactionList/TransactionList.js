@@ -12,7 +12,7 @@ import NavBarTransaction from '../../../components/NavBarTransaction/NavBarTrans
 import AddTransaction from '../../../components/AddTransaction/AddTransaction';
 import DateRangePicker from '../../../components/DateRangePicker/DateRangePicker';
 import TransactionsResults from '../../../components/TransactionResults/TransactionsResults';
-import { styles } from './TransactionList.styles';
+import styles from './TransactionList.styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconSelector from '../../../components/IconSelector/IconSelector';
 import Dialog from 'react-native-dialog';
@@ -20,7 +20,6 @@ import { useTranslation } from 'react-i18next';
 
 function TransactionsList() {
   const {
-    userId,
     categoriesPerso,
     categoriesCombined,
     filteredTransactions,
@@ -138,7 +137,6 @@ function TransactionsList() {
             isDark={isDark}
           />
           <AddTransaction
-            userId={userId}
             isDark={isDark}
             categoriesCombined={categoriesCombined}
           />

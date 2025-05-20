@@ -1,152 +1,177 @@
 {
-    "Savings": {
-        "SavingsSummary": {
-            "title": "Résumé financier",
-            "Earn": "Argent gagné",
-            "Spent": "Argent dépensé",
-            "Saving": "Argent économisé",
-            "Subscriptions": "Dépenses des abonnements"
-        },
-        "SavingsCircularChart": {
-            "title": "Répartition des dépenses et des économies",
-            "subtitle": "Dépensé",
-            "overspent": "dépensé",
-            "legend": {
-                "Spent": "Dépense",
-                "Saving": "Revenu",
-                "Subscriptions": "Abonnements",
-                "OverSpent": "Dépenses excessives"
-            },
-            "explanation": {
-                "greaterSpending": "Vos dépenses dépassent vos revenus ce mois-ci, indiquant un déséquilibre financier.",
-                "normal": "Vos revenus sont supérieurs à vos dépenses."
-            }
-        },
-        "SavingsCards": {
-            "title": "Historique des économies mensuelles",
-            "CardItem": {
-                "TotalSpent": "Total dépensé",
-                "Category": "Catégorie la plus dépensée :",
-                "Subscription": "Abonnements actifs :",
-                "NoSubscription": "Aucun abonnement actif"
-            }
-        }
+  "Savings": {
+    "SavingsSummary": {
+      "title": "Résumé financier",
+      "Earn": "Argent gagné",
+      "Spent": "Argent dépensé",
+      "Saving": "Argent économisé",
+      "Subscriptions": "Dépenses d'abonnement"
     },
-    "Spent": {
-        "SpentSummary": {
-            "title": "Total dépensé",
-            "spent": "Vos dépenses totales :",
-            "noSpent": "Aucune transaction disponible."
-        },
-        "SpentBarChart": {
-            "title": "Dépenses par catégorie",
-            "subtitle": "Dépensé"
-        },
-        "SpentResults": {
-            "noResults": "Aucun résultat disponible.",
-            "title": "Détails des dépenses",
-            "table": {
-                "Date": "Date",
-                "Description": "Description",
-                "Category": "Catégorie",
-                "Amount": "Dépense"
-            }
-        }
+    "SavingsCircularChart": {
+      "title": "Répartition des dépenses et des économies",
+      "subtitle": "Dépensé",
+      "overspent": "Trop dépensé",
+      "legend": {
+        "Spent": "Dépensé",
+        "Saving": "Économies",
+        "Subscriptions": "Abonnements",
+        "OverSpent": "Trop dépensé"
+      },
+      "explanation": {
+        "greaterSpending": "Vos dépenses dépassent vos revenus ce mois-ci, indiquant un déséquilibre financier.",
+        "normal": "Vos revenus dépassent vos dépenses."
+      }
     },
-    "TransactionsList": {
-        "PersoCategory": {
-            "title": "Catégories personnalisées",
-            "placeholder": "Nouvelle catégorie",
-            "DeleteConfirmTitle": "Confirmer la suppression",
-            "DeleteConfirmText": "Êtes-vous sûr de vouloir supprimer cette catégorie",
-            "DeleteCancelButton": "Annuler",
-            "DeleteConfirmButton": "Supprimer"
-        },
-        "AddTransaction": {
-            "title": "Ajouter une transaction",
-            "Description": "Description",
-            "Amount": "Montant",
-            "Subscription": "C'est un abonnement mensuel",
-            "Category": "Catégorie",
-            "SelectCategory": "Sélectionner une catégorie",
-            "Cancel": "Annuler",
-            "Save": "Ajouter"
-        },
-        "TransactionResults": {
-            "title": "Transactions",
-            "noResults": "Aucune transaction disponible.",
-            "table": {
-                "Description": "Description",
-                "Category": "Catégorie",
-                "Amount": "Dépense",
-                "Actions": "Actions"
-            },
-            "Delete": {
-                "Title": "Confirmer la suppression",
-                "Text": "Êtes-vous sûr de vouloir supprimer cette transaction ?",
-                "CancelButton": "Annuler",
-                "ConfirmButton": "Supprimer"
-            },
-            "Edit": {
-                "Title": "Modifier la transaction",
-                "Description": "Description",
-                "Amount": "Montant",
-                "Subscription": "C'est un abonnement mensuel",
-                "Category": "Catégorie",
-                "SelectCategory": "Sélectionner une catégorie",
-                "CancelButton": "Annuler",
-                "ConfirmButton": "Modifier"
-            }
-        }
-    },
-    "Settings": {
-        "Information": {
-            "title": "Informations",
-            "Privacy": "Politique de confidentialité"
-        },
-        "Preferences": {
-            "title": "Préférences",
-            "Language": "Langue",
-            "Currency": "Monnaie",
-            "DarkMode": "Mode sombre"
-        },
-        "Account": {
-            "title": "Compte",
-            "LogOut": "Se déconnecter"
-        }
-    },
-    "Navbar": {
-        "Title": "Finances",
-        "Menu": {
-            "Savings": "Économies",
-            "Spent": "Dépenses",
-            "Transactions": "Transactions",
-            "Settings": "Paramètres"
-        }
-    },
-    "DashBoard": {
-        "titleLogin": "Se connecter",
-        "titleRegister": "S'inscrire",
-        "Email": "E-mail",
-        "Password": "Mot de passe",
-        "Name": "Nom",
-        "ChangeLogin": "Passer à la connexion",
-        "ChangeRegister": "Passer à l'inscription"
-    },
-    "Home": {
-        "Graph": {
-            "title": "Solde mensuel"
-        }
-    },
-    "DateRangePicker": {
-        "title": "Filtrer entre les dates :",
-        "Begin": "Début",
-        "End": "Fin"
-    },
-    "language": {
-        "english": "Anglais",
-        "spanish": "Espagnol",
-        "french": "Français",
-        "german": "Allemand"
+    "SavingsCards": {
+      "title": "Historique des économies mensuelles",
+      "CardItem": {
+        "TotalSpent": "Total dépensé",
+        "Category": "Catégorie avec le plus de dépenses :",
+        "Subscription": "Abonnements actifs :",
+        "NoSubscription": "Aucun abonnement actif"
+      }
     }
+  },
+  "Spent": {
+    "SpentSummary": {
+      "title": "Total dépensé",
+      "spent": "Vos dépenses totales :",
+      "noSpent": "Aucune transaction disponible."
+    },
+    "SpentBarChart": {
+      "title": "Dépenses par catégorie",
+      "subtitle": "Dépensé"
+    },
+    "SpentResults": {
+      "noResults": "Aucun résultat disponible.",
+      "title": "Détails des dépenses",
+      "table": {
+        "Date": "Date",
+        "Description": "Description",
+        "Category": "Catégorie",
+        "Amount": "Dépensé"
+      }
+    }
+  },
+  "TransactionsList": {
+    "PersonalCategory": {
+      "title": "Catégories personnalisées",
+      "placeholder": "Nouvelle catégorie",
+      "DeleteConfirmTitle": "Confirmer la suppression",
+      "DeleteConfirmText": "Êtes-vous sûr de vouloir supprimer cette catégorie ?",
+      "DeleteCancelButton": "Annuler",
+      "DeleteConfirmButton": "Supprimer"
+    },
+    "AddTransaction": {
+      "title": "Ajouter une transaction",
+      "Description": "Description",
+      "Amount": "Montant",
+      "Subscription": "S'agit-il d'un abonnement mensuel ?",
+      "Category": "Catégorie",
+      "SelectCategory": "Sélectionner une catégorie",
+      "Cancel": "Annuler",
+      "Save": "Ajouter"
+    },
+    "TransactionResults": {
+      "title": "Transactions",
+      "noResults": "Aucune transaction disponible.",
+      "table": {
+        "Description": "Description",
+        "Category": "Catégorie",
+        "Amount": "Dépensé",
+        "Actions": "Actions"
+      },
+      "Delete": {
+        "Title": "Confirmer la suppression",
+        "Text": "Êtes-vous sûr de vouloir supprimer cette transaction ?",
+        "CancelButton": "Annuler",
+        "ConfirmButton": "Supprimer"
+      },
+      "Edit": {
+        "Title": "Modifier la transaction",
+        "Description": "Description",
+        "Amount": "Montant",
+        "Subscription": "S'agit-il d'un abonnement mensuel ?",
+        "Category": "Catégorie",
+        "SelectCategory": "Sélectionner une catégorie",
+        "CancelButton": "Annuler",
+        "ConfirmButton": "Modifier"
+      }
+    }
+  },
+  "Settings": {
+    "Information": {
+      "title": "Informations",
+      "Privacy": "Politique de confidentialité",
+      "Information": "Informations sur l'application"
+
+    },
+    "Preferences": {
+      "title": "Préférences",
+      "Language": "Langue",
+      "Currency": "Devise",
+      "DarkMode": "Mode sombre"
+    },
+    "Account": {
+      "title": "Compte",
+      "LogOut": "Se déconnecter"
+    }
+  },
+  "Navbar": {
+    "Title": "Finance",
+    "Menu": {
+      "Savings": "Économies",
+      "Spent": "Dépensé",
+      "Budget": "Budget",
+      "Transactions": "Transactions",
+      "Settings": "Paramètres"
+    }
+  },
+  "DashBoard": {
+    "titleLogin": "Connexion",
+    "titleRegister": "Inscription",
+    "Email": "Email",
+    "Password": "Mot de passe",
+    "Name": "Nom",
+    "ChangeLogin": "Passer à la connexion",
+    "ChangeRegister": "Passer à l'inscription"
+  },
+  "Home": {
+    "Graph": {
+      "title": "Solde mensuel"
+    }
+  },
+  "DateRangePicker": {
+    "title": "Filtre de dates :",
+    "Begin": "Début",
+    "End": "Fin"
+  },
+  "language": {
+    "english": "Anglais",
+    "spanish": "Espagnol",
+    "french": "Français",
+    "german": "Allemand"
+  },
+  "Budgets": {
+  "NoBudgets": "Aucun budget disponible.",
+  "AddBudget": {
+    "Title": "Ajouter un budget",
+    "Name": "Nom",
+    "NamePlaceholder": "Nom du budget",
+    "Amount": "Montant",
+    "Category": "Catégorie (optionnelle)",
+    "CategoryPlaceholder": "Sélectionner une catégorie",
+    "Cancel": "Annuler",
+    "Save": "Enregistrer",
+    "Error": {
+      "Name": "❌ Le nom est obligatoire",
+      "Amount": "❌ Le montant doit être un nombre positif",
+      "StartDate": "❌ La date de début ne peut pas être postérieure à la date de fin",
+      "Error": "❌ Erreur lors de la création du budget",
+      "Success": "✅ Budget créé avec succès",
+      "Date": "❌ La date de fin ne peut pas être antérieure à la date de début"
+    }
+  }
+}
+
 }
