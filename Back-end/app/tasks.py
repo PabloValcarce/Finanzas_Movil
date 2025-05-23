@@ -1,6 +1,6 @@
 from datetime import datetime, timezone, timedelta
 from app import db
-from app.models import Transaction
+from app.models import Transaction, Budget
 
 def process_subscriptions():
     """Generates new transactions for active subscriptions whose next payment date has passed."""
@@ -32,5 +32,20 @@ def process_subscriptions():
     db.session.commit()
     print(f"✅ Subscriptions processed: {len(subscriptions)} new transactions created.")
 
+
+def delete_expired_budgets():
+    """Elimina presupuestos cuyo end_date ya pasó."""
+    today = datetime.now(timezone.utc)
+
+    expired_budgets = Budget.query.filter(Budget.end_date < today).all()
+
+    count = len(expired_budgets)
+    for budget in expired_budgets:
+        db.session.delete(budget)
+
+    db.session.commit()
+    print(f"✅ Presupuestos caducados eliminados: {count}")
+    
 if __name__ == "__main__":
     process_subscriptions()
+    delete_expired_budgets()

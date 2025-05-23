@@ -6,9 +6,33 @@ export const styles = (isDark) => {
   const colors = isDark ? darkColors : lightColors;
 
   return StyleSheet.create({
+    
     container: {
+      flex: 1,
       alignItems: 'center',
+      justifyContent: 'center',
     },
+
+    modalOverlay: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      zIndex: 1000,
+    },
+
+    modalContent: {
+      width: '90%',
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 10,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+
     add: {
       backgroundColor: colors.background,
       borderRadius: 8,
@@ -54,5 +78,20 @@ export const styles = (isDark) => {
       fontSize: 16,
       color: colors.secondary,
     },
+    DialogMessagetitle:{
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: colors.text,
+      marginBottom: 10,
+    },
+    DialogMessageContent:{
+      maxHeight: 100,
+      marginVertical: 20,
+    },
+    warningText: { 
+      marginVertical: 20,
+    }
+
   });
 };

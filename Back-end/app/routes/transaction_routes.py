@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Transaction, Category
+from app.models import db, Transaction, Category, Budget
 from app.middleware import token_required
 from datetime import datetime, timedelta, timezone
 
 transactions = Blueprint('transactions', __name__)
+
 
 @transactions.route('/transactions', methods=['GET', 'POST'])
 @token_required
@@ -22,44 +23,87 @@ def handle_transactions(current_user):
 
     if request.method == 'POST':
         data = request.get_json()
+        force = request.args.get('force') == 'true'
 
-        if not data.get('description') or not data.get('amount'):
+        if not data.get('description') or data.get('amount') is None:
             return jsonify({'message': 'Description and amount are required'}), 400
 
+        amount = float(data['amount'])
         category_id = data.get('category_id')
         is_subscription = data.get('is_subscription', False)
+        now = datetime.now(timezone.utc)
 
-        category = Category.query.get(category_id)
-        if not category:
+        category = Category.query.get(category_id) if category_id else None
+        if category_id and not category:
             return jsonify({'message': 'Category not found'}), 400
 
-        next_payment_date = None
-        if is_subscription:
-            today = datetime.now(timezone.utc)
-            next_payment_date = today + timedelta(days=30)
+        if amount < 0 and not force:
+            # Buscar presupuestos generales y específicos activos
+            budgets = Budget.query.filter(
+                Budget.user_id == current_user.id,
+                Budget.start_date <= now,
+                Budget.end_date >= now,
+                ((Budget.category_id == category_id) | (Budget.category_id == None))
+            ).all()
 
-        new_transaction = Transaction(
+            warnings = []
+            exceeds_any = False
+
+            for budget in budgets:
+                remaining = budget.amount - abs(amount)
+
+                warnings.append({
+                    'budget_name': budget.name,
+                    'category_name': budget.category.name if budget.category else None,
+                    'amount': budget.amount,
+                    'remaining': remaining,
+                    'exceeds': remaining < 0
+                })
+
+                if remaining < 0:
+                    exceeds_any = True
+
+            if warnings:
+                return jsonify({
+                    'warnings': warnings,
+                    'exceeds_any_budget': exceeds_any
+                }), 200
+
+        # Crear la transacción si no hay advertencias o si se fuerza
+        transaction = Transaction(
             description=data['description'],
-            amount=data['amount'],
+            amount=amount,
             user_id=current_user.id,
-            category_id=category.id,
+            category_id=category.id if category else None,
             is_subscription=is_subscription,
-            next_payment_date=next_payment_date
+            next_payment_date=now + timedelta(days=30) if is_subscription else None
         )
 
-        db.session.add(new_transaction)
+        db.session.add(transaction)
+
+        # ✅ OPCIONAL: si quieres restar el presupuesto cuando se fuerza
+        if amount < 0 and force:
+            budgets = Budget.query.filter(
+                Budget.user_id == current_user.id,
+                Budget.start_date <= now,
+                Budget.end_date >= now,
+                ((Budget.category_id == category_id) | (Budget.category_id == None))
+            ).all()
+            for budget in budgets:
+                budget.amount -= abs(amount)
+
         db.session.commit()
 
         return jsonify({
-            'id': new_transaction.id,
-            'description': new_transaction.description,
-            'amount': new_transaction.amount,
-            'user_id': new_transaction.user_id,
-            'date': new_transaction.date.isoformat() if new_transaction.date else None,
-            'category': category.name,
-            'is_subscription': new_transaction.is_subscription,
-            'next_payment_date': new_transaction.next_payment_date.isoformat() if new_transaction.next_payment_date else None
+            'id': transaction.id,
+            'description': transaction.description,
+            'amount': transaction.amount,
+            'date': transaction.date.isoformat() if transaction.date else None,
+            'category': category.name if category else None,
+            'is_subscription': transaction.is_subscription,
+            'next_payment_date': transaction.next_payment_date.isoformat() if transaction.next_payment_date else None
         }), 201
+
 
 
 @transactions.route('/transactions/<int:id>', methods=['PUT'])

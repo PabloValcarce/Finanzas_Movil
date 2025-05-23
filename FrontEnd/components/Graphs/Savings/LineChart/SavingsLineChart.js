@@ -68,13 +68,16 @@ function SavingsLineChart({ transactions }) {
     const axisColor = dynamicStyles.axisColor.color;
     const lineColor = dynamicStyles.lineColor.color;
     const labelColor = dynamicStyles.labelColor.color;
+    const xAxisY = height - padding - 50;
+
 
     return (
         <View style={dynamicStyles.container}>
             <Text style={dynamicStyles.chartTitle}>{t('Home.Graph.title')}</Text>
             <Svg width={width} height={height}>
                 <Line x1={padding} y1={padding} x2={padding} y2={height - padding + 10} stroke={axisColor} strokeWidth="1" />
-                <Line x1={padding} y1={height / 2} x2={width - padding + 20} y2={height / 2} stroke={axisColor} strokeWidth="1" />
+                <Line x1={padding} y1={xAxisY} x2={width - padding + 20} y2={xAxisY} stroke={axisColor} strokeWidth="1" />
+
                 <Polyline points={points} fill="none" stroke={lineColor} strokeWidth="3" />
 
                 {balanceByMonth.map((value, index) => {
@@ -94,9 +97,10 @@ function SavingsLineChart({ transactions }) {
                     const x = (index / (lastSixMonths.length - 1)) * (width - 2 * padding) + padding;
                     const monthAbbr = monthsOrder[month - 1].substring(0, 3);
                     return (
-                        <SvgText key={index} x={x + 20} y={height / 2 + 15} fontSize="12" fill={labelColor} textAnchor="middle">
+                        <SvgText key={index} x={x + 20} y={xAxisY + 15} fontSize="12" fill={labelColor} textAnchor="middle">
                             {monthAbbr}
                         </SvgText>
+
                     );
                 })}
 
@@ -113,7 +117,7 @@ function SavingsLineChart({ transactions }) {
                             alignmentBaseline="middle"
                             fontWeight="500"
                         >
-                            {value >= 0 ? `€${value.toFixed(0)}` : `-€${Math.abs(value).toFixed(0)}`}
+                            {value >= 0 ? `${value.toFixed(0)}€` : `-${Math.abs(value).toFixed(0)}€`}
                         </SvgText>
                     );
                 })}

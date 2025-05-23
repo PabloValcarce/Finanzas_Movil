@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect, useCallback } fr
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/api';
 import useAuth from '../utils/useAuth';
+import { useBudgets } from '../context/BudgetContext';
 
 const TransactionContext = createContext();
 
@@ -16,6 +17,7 @@ export const TransactionProvider = ({ children }) => {
   const { checkToken } = useAuth();
   const [totalSubscriptionExpense, setTotalSubscriptionExpense] = useState(0);
   const [recentTransactions, setRecentTransactions] = useState([]);
+  const { loadBudgets } = useBudgets();
 
   const loadTransactions = useCallback(async () => {
     try {
@@ -45,28 +47,46 @@ export const TransactionProvider = ({ children }) => {
   }, []);
 
   // Función para agregar una nueva transacción
-  const addTransaction = async (newTransaction) => {
-    try {
-      const access_token = await AsyncStorage.getItem('access_token');
-      if (!access_token) {
-        console.error('Token not found');
-        setError('Token not found');
-        return;
-      }
+ const addTransaction = async (newTransaction, force = false) => {
+  try {
+    const access_token = await AsyncStorage.getItem('access_token');
+    if (!access_token) {
+      console.error('Token not found');
+      setError('Token not found');
+      return { success: false };
+    }
 
-      await api.post('/api/transactions', newTransaction, {
+    // Incluir parámetro ?force=true si es necesario
+    const res = await api.post(
+      `/api/transactions${force ? '?force=true' : ''}`,
+      newTransaction,
+      {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
-      });
+      }
+    );
 
-      // Luego de agregar la transacción, recargamos las transacciones
-      loadTransactions();
-    } catch (error) {
-      console.error('Error adding transaction:', error);
-      setError('Error adding transaction');
+    // ⚠️ Backend devuelve 200 aunque se exceda el presupuesto
+    if (res.data?.exceeds_budget) {
+      return {
+        success: false,
+        reason: 'overBudget',
+        warning: res.data.warning,
+        budget: res.data.budget,
+        pendingTransaction: newTransaction,
+      };
     }
-  };
+    return { success: true, data: res.data };
+
+  } catch (error) {
+    console.error('Error adding transaction:', error);
+    setError('Error adding transaction');
+    return { success: false };
+  }
+};
+
+
   const deleteTransaction = async (id) => {
     try {
       const access_token = await AsyncStorage.getItem('access_token');
